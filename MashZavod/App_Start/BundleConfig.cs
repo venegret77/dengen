@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
-
+// kek
 namespace MashZavod
 {
     public class BundleConfig
