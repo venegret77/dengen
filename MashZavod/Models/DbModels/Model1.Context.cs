@@ -13,10 +13,10 @@ namespace MashZavod.Models.DbModels
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class database_murom_factoryEntities : DbContext
+    public partial class database_murom_factory2Entities1 : DbContext
     {
-        public database_murom_factoryEntities()
-            : base("name=database_murom_factoryEntities")
+        public database_murom_factory2Entities1()
+            : base("name=database_murom_factory2Entities1")
         {
         }
     
@@ -36,6 +36,7 @@ namespace MashZavod.Models.DbModels
         public virtual DbSet<rank> rank { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tom> tom { get; set; }
+        public virtual DbSet<User_chat> User_chat { get; set; }
         public virtual DbSet<users> users { get; set; }
     }
 }

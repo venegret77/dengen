@@ -4,29 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4aa5c9550cf84ac8b6de82f589ef2353" Name="Diagram1">
-        <EntityTypeShape EntityType="database_murom_factoryModel.access" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.chat" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.doc" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.edit" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.group_rank" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.infoFileDoc" Width="1.5" PointX="4" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.message" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.object" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.rank" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.tom" Width="1.5" PointX="1.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="database_murom_factoryModel.users" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="database_murom_factoryModel.access_to_object" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.access_to_users" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.FK_message_chat" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.object_to_chat" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.doc_to_edit" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.doc_to_infofiledoc" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.object_to_doc" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.group_rank_to_users" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.infofiledoc_to_doc" ManuallyRouted="false" />
-        <AssociationConnector Association="database_murom_factoryModel.rank_to_user" ManuallyRouted="false" />
+      <Diagram DiagramId="527abdfa7d354c1b8d734fbb4e4ca3d2" Name="Diagram1">
+        <EntityTypeShape EntityType="database_murom_factory2Model.access" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.chat" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.doc" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.edit" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.group_rank" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.infoFileDoc" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.message" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.object" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.rank" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.tom" Width="1.5" PointX="3.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.User_chat" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.users" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="database_murom_factory2Model.access_to_object" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.access_to_users" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.FK_message_chat" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.object_to_chat" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.User_chat_to_Chat" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.doc_to_edit" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.doc_to_infofiledoc" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.object_to_doc" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.group_rank_to_users" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.infofiledoc_to_doc" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.rank_to_user" ManuallyRouted="false" />
+        <AssociationConnector Association="database_murom_factory2Model.User_chat_to_Chat_id_user_" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

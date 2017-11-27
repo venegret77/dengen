@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MashZavod.Models.DbModels;
 namespace MashZavod.Controllers
 {
     public class HomeController : Controller
@@ -17,10 +16,10 @@ namespace MashZavod.Controllers
         string res;
         public string Get(int id)
         {
-            database_murom_factoryEntities A = new database_murom_factoryEntities();
-            if (A.users.First().Login == "admin")
-                 res = "ok";
-            return res;
+           // database_murom_factoryEntities A = new database_murom_factoryEntities();
+            //if (A.users.First().Login == "admin")
+                // res = "ok";
+            return "dfgfdgdfg";
         }
        
     }

@@ -12,16 +12,14 @@ namespace MashZavod.Models.DbModels
     using System;
     using System.Collections.Generic;
     
-    public partial class infoFileDoc
+    public partial class User_chat
     {
-        public int id_infoFileDoc { get; set; }
-        public string url { get; set; }
-        public Nullable<int> id_tom { get; set; }
-        public Nullable<int> id_doc { get; set; }
-        public string text_doc { get; set; }
-        public string name_doc { get; set; }
+        public int id_user_chat { get; set; }
+        public Nullable<int> id_chat { get; set; }
+        public Nullable<int> id_user { get; set; }
+        public Nullable<int> @object { get; set; }
     
-        public virtual doc doc { get; set; }
-        public virtual tom tom { get; set; }
+        public virtual chat chat { get; set; }
+        public virtual users users { get; set; }
     }
 }

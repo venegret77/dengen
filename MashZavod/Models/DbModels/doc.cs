@@ -26,7 +26,6 @@ namespace MashZavod.Models.DbModels
         public string description { get; set; }
         public Nullable<System.DateTime> data_of_create { get; set; }
         public Nullable<System.DateTime> date_of_modify { get; set; }
-        public Nullable<int> id_edit { get; set; }
     
         public virtual edit edit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

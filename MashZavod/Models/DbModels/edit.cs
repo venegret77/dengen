@@ -14,18 +14,12 @@ namespace MashZavod.Models.DbModels
     
     public partial class edit
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public edit()
-        {
-            this.doc = new HashSet<doc>();
-        }
-    
         public int id_edit { get; set; }
-        public string edit1 { get; set; }
+        public int id_doc { get; set; }
         public Nullable<System.DateTime> date_of_edit { get; set; }
         public string author { get; set; }
+        public string edit1 { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<doc> doc { get; set; }
+        public virtual doc doc { get; set; }
     }
 }

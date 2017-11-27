@@ -18,15 +18,18 @@ namespace MashZavod.Models.DbModels
         public chat()
         {
             this.message = new HashSet<message>();
+            this.User_chat = new HashSet<User_chat>();
         }
     
         public int id_chat { get; set; }
-        public int id_users { get; set; }
+        public int id_user { get; set; }
         public string name_chat { get; set; }
         public Nullable<System.DateTime> date_of_create { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<message> message { get; set; }
         public virtual @object @object { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_chat> User_chat { get; set; }
     }
 }

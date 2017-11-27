@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MashZavod.Models.DbModels;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -7,7 +9,7 @@ using System.Web.Http;
 
 namespace MashZavod.Controllers
 {
-    [Authorize]
+
     public class ValuesController : ApiController
     {
         // GET api/values
@@ -17,9 +19,10 @@ namespace MashZavod.Controllers
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public List<users> Get(int id)
         {
-            return "value";
+            database_murom_factory2Entities1 database_Murom_Factory2Entities1 = new database_murom_factory2Entities1();
+            return database_Murom_Factory2Entities1.users.ToList();
         }
 
         // POST api/values
