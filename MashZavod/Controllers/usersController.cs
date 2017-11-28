@@ -17,8 +17,7 @@ namespace MashZavod.Controllers
     {
         private database_murom_factory2Entities1 db = new database_murom_factory2Entities1();
 
-        //Регистрация нового пользователя.
-        //Во входных параметрах должен поступать объект типа user
+        
         [HttpPost]
         public System.Web.Mvc.ActionResult Register(users user)
         {
@@ -36,7 +35,7 @@ namespace MashZavod.Controllers
             return null;
         }
 
-        //Вход пользователя
+        
         [HttpPost]
         public System.Web.Mvc.ActionResult Login(string login, string password)
         {
