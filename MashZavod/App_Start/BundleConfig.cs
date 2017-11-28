@@ -17,12 +17,38 @@ namespace MashZavod
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/jquery/jquery.min.js",
+                      "~/Scripts/bootstrap/js/bootstrap.min.js",
+                      "~/Scripts/modernizr/modernizr.js",
+                      "~/Scripts/jquery-cookie/jquery.cookie.js",
+                      "~/Scripts/perfect-scrollbar/perfect-scrollbar.min.js",
+                      "~/Scripts/switchery/switchery.min.js",
+                      "~/Scripts/Chart.js/Chart.min.js",
+                      "~/Scripts/jquery.sparkline/jquery.sparkline.min.js",
+                      "~/Scripts/js/main.js",
+                      "~/Scripts/js/index.js"));
+
+
+
+        
+
+
+
+
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/styles.css",
+                      "~/plugins/styles.css",
+                      "~/Content/theme-1.css",
+                      "~/Content/themify-icons/themify-icons.min.css",
+                      "~/Content/fontawesome/css/font-awesome.min.css",
+
+                      "~/Content/animate.css/animate.min.css",
+                      "~/Content/perfect-scrollbar/perfect-scrollbar.min.css",
+                      "~/Content/switchery/switchery.min.css",
+
+
+                      "~/Content/bootstrap/css/bootstrap.min.css"));
         }
     }
 }
