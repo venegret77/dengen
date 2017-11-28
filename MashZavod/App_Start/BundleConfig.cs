@@ -9,7 +9,7 @@ namespace MashZavod
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        ));
 
             // Используйте версию Modernizr для разработчиков, чтобы учиться работать. Когда вы будете готовы перейти к работе,
             // используйте средство построения на сайте http://modernizr.com, чтобы выбрать только нужные тесты.
@@ -28,27 +28,17 @@ namespace MashZavod
                       "~/Scripts/js/main.js",
                       "~/Scripts/js/index.js"));
 
-
-
-        
-
-
-
-
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/styles.css",
-                      "~/plugins/styles.css",
-                      "~/Content/theme-1.css",
-                      "~/Content/themify-icons/themify-icons.min.css",
+                "~/Content/bootstrap/css/bootstrap.min.css",
                       "~/Content/fontawesome/css/font-awesome.min.css",
-
+                      "~/Content/themify-icons/themify-icons.min.css",
                       "~/Content/animate.css/animate.min.css",
                       "~/Content/perfect-scrollbar/perfect-scrollbar.min.css",
                       "~/Content/switchery/switchery.min.css",
-
-
-                      "~/Content/bootstrap/css/bootstrap.min.css"));
+                      "~/Content/styles.css",
+                      "~/Content/plugins.css",
+                      "~/Content/theme-1.css"
+                      ));
         }
     }
 }
