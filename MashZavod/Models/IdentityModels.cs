@@ -21,7 +21,7 @@ namespace MashZavod.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("database_murom_factoryEntities", throwIfV1Schema: false)
         {
         }
         

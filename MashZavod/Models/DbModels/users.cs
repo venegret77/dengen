@@ -13,6 +13,7 @@ namespace MashZavod.Models.DbModels
     using System.Collections.Generic;
     using System.Runtime.Serialization.Json;
     using System.Runtime.Serialization;
+    using System.ComponentModel.DataAnnotations;
 
     [DataContract]
     public partial class users
@@ -23,6 +24,7 @@ namespace MashZavod.Models.DbModels
             this.access = new HashSet<access>();
         }
 
+        [Key]
         [DataMember]
         public int id_users { get; set; }
         [DataMember]
