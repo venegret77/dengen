@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 namespace MashZavod.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
-        public ActionResult Index()
+        public ActionResult AdminIndex()
         {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Account");
+            if (User.Identity.Name != "Admin")
+                return RedirectToAction("Index", "Home");
             return View();
         }
     }

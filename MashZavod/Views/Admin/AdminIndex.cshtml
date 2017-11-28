@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model MashZavod.Models.DbModels.database_murom_factory2Entities1
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminIndex</title>
+</head>
+<body>
+    @foreach(var elem in Model.users.ToList())
+    {
+        <p>@Html.DisplayForModel(elem)</p>
+    }
+    <div> 
+        <p><a href="Account/Register">Добавить пользователя</a></p>
+    </div>
+</body>
+</html>
