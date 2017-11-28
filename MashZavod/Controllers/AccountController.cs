@@ -57,6 +57,8 @@ namespace MashZavod.Controllers
                             User_chat = null
                         });
 
+                        db.SaveChanges();
+
                         // Проверяем, что пользователь успешно добавился
                         user = db.users.Where(u => u.Login == model.Login && u.Password == model.Password).FirstOrDefault();
                     }
@@ -102,7 +104,6 @@ namespace MashZavod.Controllers
                 if (user != null)
                 {
                     //Файл куки может сохраняться между сеансами браузера
-                    HttpContext.Response.Cookies.Clear();
                     FormsAuthentication.SetAuthCookie(model.Login, false);
                     string name = User.Identity.Name;
                     //Если Логин принадлежит суперпользователю

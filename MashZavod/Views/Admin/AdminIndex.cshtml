@@ -12,12 +12,8 @@
     <title>AdminIndex</title>
 </head>
 <body>
-    @foreach(var elem in Model.users.ToList())
-    {
-        <p>@Html.DisplayForModel(elem)</p>
-    }
     <div> 
-        <p><a href="Account/Register">Добавить пользователя</a></p>
+        <p><a href="../Account/Register">Добавить пользователя</a></p>
     </div>
 </body>
 </html>
