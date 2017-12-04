@@ -10,11 +10,30 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+		<div class="row">
 
     <div class="form-horizontal">
-        @Html.ValidationSummary(true)
+			<div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
 
-        <div class="form-group">
+				<div class="logo margin-top-30">
+					<img src="assets/images/logo.png" alt="Clip-Two"/>
+				</div>
+				<div class="box-login">
+					<form class="form-login" action="index.html">
+						<fieldset>
+							<legend>
+								Sign in to your account
+							</legend>
+							<p>
+								Please enter your name and password to log in.
+							</p>
+							<div class="form-group">
+								<span class="input-icon">
+									<input type="text" class="form-control" name="username" placeholder="Username">
+									<i class="fa fa-user"></i> </span>
+							</div>
+
+							<div class="form-group">
             @Html.LabelFor(model => model.Login, "Введите Login", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Login)
@@ -84,6 +103,15 @@
             </div>
         </div>
     </div>
+
+
+
+						</fieldset>
+					</form>
+
+        @Html.ValidationSummary(true)
+
+        
 }
 
 @section Scripts {
