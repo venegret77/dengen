@@ -12,5 +12,14 @@
         {
 
         }
+
+        public NewsModel(string _Title, string _Link, string _PubDate, string _Description, string _Author)
+        {
+            Title = _Title;
+            Link = _Link;
+            PubDate = _PubDate;
+            Description = _Description;
+            Author = _Author;
+        }
     }
 }
