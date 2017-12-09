@@ -1,7 +1,9 @@
 ﻿using MashZavod.Models;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace MashZavod.Controllers
 {
@@ -15,12 +17,16 @@ namespace MashZavod.Controllers
 
         public ActionResult GetNews()
         {
-            //Объект запроса
-            HttpWebRequest rew = (HttpWebRequest)WebRequest.Create("https://news.rambler.ru/rss/tech/");
-            // Отправить запрос и получить ответ
-            HttpWebResponse resp = (HttpWebResponse)rew.GetResponse();
-            // Получить поток
-            Stream str = resp.GetResponseStream();
+            XDocument feedXML = XDocument.Load("https://news.rambler.ru/rss/tech/");
+
+            var feeds = from feed in feedXML.Descendants("item")
+                        select new
+                        {
+                            Title = feed.Element("title").Value,
+                            Link = feed.Element("link").Value,
+                            Description = feed.Element("description").Value,
+                            PubDate = feed.Element("pubDate").Value
+                        };
             return null;
         }
     }

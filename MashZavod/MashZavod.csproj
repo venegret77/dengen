@@ -358,6 +358,7 @@
     <Content Include="Views\Admin\AdminIndex.cshtml" />
     <Content Include="Views\News\News.cshtml" />
     <Content Include="Views\Shared\nav.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
