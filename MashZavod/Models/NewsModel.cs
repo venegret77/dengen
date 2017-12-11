@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 namespace MashZavod.Models
 {
-    public class NewsModel: IComparer
+    public class NewsModel: IComparable
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -22,9 +23,10 @@ namespace MashZavod.Models
             Description = _Description;
         }
 
-        public int Compare(object x, object y)
+        public int CompareTo(object obj)
         {
-            throw new System.NotImplementedException();
+            NewsModel m = (NewsModel)obj;
+            return -Convert.ToDateTime(PubDate).CompareTo(Convert.ToDateTime(m.PubDate));
         }
     }
 }

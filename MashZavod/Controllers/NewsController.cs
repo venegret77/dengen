@@ -75,6 +75,7 @@ namespace MashZavod.Controllers
             {
                 NewsList.Add(new NewsModel(politic.Title, politic.Link, politic.PubDate, politic.Description));
             }
+            NewsList.Sort();
             ViewBag.listNews = NewsList;
             //Заносим все в единый массив
             //Возвращаем
