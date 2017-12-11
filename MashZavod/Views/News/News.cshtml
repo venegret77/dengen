@@ -1,2 +1,22 @@
 ﻿
-    
+@{
+   
+}
+
+@model MashZavod.Models.DbModels.database_murom_factory2Entities1
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminIndex</title>
+</head>
+<body>
+    <div>
+        @foreach(var elem in ViewBag.listNews)
+        {
+            <p>@elem.Title</p>
+        }
+    </div>
+</body>
+</html>
