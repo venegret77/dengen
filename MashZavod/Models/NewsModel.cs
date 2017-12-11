@@ -1,6 +1,8 @@
-﻿namespace MashZavod.Models
+﻿using System.Collections;
+
+namespace MashZavod.Models
 {
-    public class NewsModel
+    public class NewsModel: IComparer
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -18,6 +20,11 @@
             Link = _Link;
             PubDate = _PubDate;
             Description = _Description;
+        }
+
+        public int Compare(object x, object y)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
