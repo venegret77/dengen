@@ -15,7 +15,7 @@ namespace MashZavod.Controllers
             return View();
         }
 
-        public ActionResult GetNews()
+        public ActionResult News()
         {
             //Технологии
             XDocument TechnXML = XDocument.Load("https://news.yandex.ru/computers.rss");
