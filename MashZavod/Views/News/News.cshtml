@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminIndex</title>
+</head>
+<body>
+    <div>
+        @foreach(var elem in ViewBag.listNews)
+        {
+            <div>
+                <a href="@elem.Link">@elem.Title</a>
+                <p>@elem.Description</p>
+                <p>@elem.PubDate</p>
+            </div>
+        }
+    </div>
+</body>
+</html>
