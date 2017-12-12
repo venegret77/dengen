@@ -36,7 +36,7 @@ namespace MashZavod.Controllers
         }
 
         [HttpPost]
-        public void Index(message model)
+        public void Index(message model)//функция отправки соощения
         {
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
