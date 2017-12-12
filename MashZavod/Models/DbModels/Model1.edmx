@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище database_murom_factory2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище database_murom_factory2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="access">
           <Key>
             <PropertyRef Name="id_access" />
@@ -86,6 +86,13 @@
           <Property Name="id_rank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rank" Type="int" />
         </EntityType>
+        <EntityType Name="SourcesRSS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Link" Type="text" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -95,6 +102,13 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TagsNews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tag" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="tom">
           <Key>
@@ -283,7 +297,9 @@
           <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="object" EntityType="Self.object" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rank" EntityType="Self.rank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourcesRSS" EntityType="Self.SourcesRSS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagsNews" EntityType="Self.TagsNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tom" EntityType="Self.tom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_chat" EntityType="Self.User_chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
@@ -336,8 +352,7 @@
             <End Role="User_chat" EntitySet="User_chat" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="database_murom_factory2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -695,7 +710,25 @@
             <End Role="users" EntitySet="users" />
             <End Role="User_chat" EntitySet="User_chat" />
           </AssociationSet>
+          <EntitySet Name="SourcesRSS" EntityType="database_murom_factory2Model.SourcesRSS" />
+          <EntitySet Name="TagsNews" EntityType="database_murom_factory2Model.TagsNews" />
         </EntityContainer>
+        <EntityType Name="SourcesRSS">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Link" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TagsNews">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Tag" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -836,6 +869,22 @@
                 <ScalarProperty Name="id_group_rank" ColumnName="id_group_rank" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourcesRSS">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.SourcesRSS">
+              <MappingFragment StoreEntitySet="SourcesRSS">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagsNews">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.TagsNews">
+              <MappingFragment StoreEntitySet="TagsNews">
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LingvoNET, Version=1.1.2.0, Culture=neutral, PublicKeyToken=7d49b21a20bef57b, processorArchitecture=MSIL">
+      <HintPath>..\packages\LingvoNET.1.1.2\lib\LingvoNET.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -261,7 +264,13 @@
     <Compile Include="Models\DbModels\rank.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModels\SourcesRSS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DbModels\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DbModels\TagsNews.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModels\tom.cs">
@@ -358,6 +367,8 @@
     <Content Include="Views\Admin\AdminIndex.cshtml" />
     <Content Include="Views\News\News.cshtml" />
     <Content Include="Views\Shared\nav.cshtml" />
+    <Content Include="Views\News\Tags.cshtml" />
+    <Content Include="Views\News\RSS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

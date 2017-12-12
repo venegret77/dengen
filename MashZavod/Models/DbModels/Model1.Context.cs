@@ -37,6 +37,8 @@ namespace MashZavod.Models.DbModels
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tom> tom { get; set; }
         public virtual DbSet<User_chat> User_chat { get; set; }
-        public DbSet<users> users { get; set; }
+        public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<SourcesRSS> SourcesRSS { get; set; }
+        public virtual DbSet<TagsNews> TagsNews { get; set; }
     }
 }
