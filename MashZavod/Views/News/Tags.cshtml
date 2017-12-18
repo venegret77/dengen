@@ -1,1 +1,24 @@
-﻿
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>News</title>
+</head>
+<body>
+
+    using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    <input type="text" value="Добавить" name="Tags" />
+
+    <input type="submit" value="Добавить" />
+
+    }
+  
+</body>
+</html>
+
+

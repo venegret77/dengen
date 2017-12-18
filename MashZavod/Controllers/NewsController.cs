@@ -76,18 +76,42 @@ namespace MashZavod.Controllers
             return nouns;
         }
 
-        public ActionResult Tags()
+        [HttpPost]
+        public ActionResult Tags(TagsNews model)
         {
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
-                //db.TagsNews.Add()
+               var teg = db.TagsNews.Add(new TagsNews()
+                {
+                    Tag = model.Tag
+                });
+
+                db.SaveChanges();
+
+          
+                // Проверяем, что пользователь успешно добавился
+                teg = db.TagsNews.Where(u => u.Tag == model.Tag).FirstOrDefault();
+                if ( teg != null)
+                {
+                    return RedirectToAction("AdminIndex", "Admin");
+
+                }
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
-        public ActionResult RSS()
+        [HttpPost]
+        public ActionResult RSS(SourcesRSS model)
         {
-            return View(); 
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                db.SourcesRSS.Add(new SourcesRSS()
+                {
+                    Link = model.Link
+                });
+                db.SaveChanges();
+            }
+            return View();
         }
     }
 }

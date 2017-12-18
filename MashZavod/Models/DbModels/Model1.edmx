@@ -716,7 +716,6 @@
         <EntityType Name="SourcesRSS">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Link" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -724,7 +723,6 @@
         <EntityType Name="TagsNews">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Tag" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Tag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
