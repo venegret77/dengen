@@ -21,13 +21,15 @@ namespace MashZavod.Controllers
             /*Возвращает историю сообщений*/
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
-                var zaprosik = db.message;
+                var req_message = db.message;
+                var req_chat = db.chat;
 
-
-                foreach (var el in zaprosik)
+                foreach (var el in req_message)
                 {
-                    ListMessage.Add(new BigChatModels { Login = el.id_users.ToString(), Message = el.text_message, Time = el.datetime });
-                }//Login = db.users.Where(u => u.id_users == el.LoginUser)
+                    ListMessage.Add(new BigChatModels { Login = el.id_users.ToString(),
+                        Text_message = el.text_message,
+                        Time_message = (DateTime)el.datetime }); //вопрос с привидением типов у даты (DateTime)el.datetime
+                } 
             }
             ViewBag.Chat = ListMessage;
 
@@ -39,9 +41,11 @@ namespace MashZavod.Controllers
         public void Index(message model)//функция отправки соощения
         {
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
-            {
+            {               
+                //добовляем в бд
                 db.message.Add(model);
                 db.SaveChanges();
+                return;
             }
         }
     }
