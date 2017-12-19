@@ -6,3 +6,9 @@
     <input type="text" placeholder="Введите тег" name="Tag" />
     <input type="submit" value="Добавить" />
     }
+@foreach (var elem in ViewBag.Tags)
+{
+    <div>
+        <p>@elem.Tag  <a href="~/News/TagsDel?id=@elem.ID"> Удолить </a></p>
+    </div>
+}

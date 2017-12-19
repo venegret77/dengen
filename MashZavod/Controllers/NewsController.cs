@@ -12,7 +12,6 @@ namespace MashZavod.Controllers
 {
     public class NewsController : Controller
     {
-        private List<string> tags = new List<string>();
         private List<string> links = new List<string>();
 
         // GET: News
@@ -21,17 +20,34 @@ namespace MashZavod.Controllers
             return View();
         }
 
+        private List<string> GetTags()
+        {
+            List<string> tags = new List<string>();
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                foreach (var tag in db.TagsNews)
+                {
+                    var _tags = FindNoun(tag.Tag);
+                    if (_tags.Count == 0)
+                    {
+                        tags.Add(tag.Tag);
+                    }
+                    else
+                    {
+                        foreach (var _tag in _tags)
+                        {
+                            tags.Add(_tag);
+                        }
+                    }
+                }
+            }
+            return tags;
+        }
+
         public ActionResult News()
         {
             links.Add("https://lenta.ru/rss/news/russia/");
-            tags.Add("Наука");
-            tags.Add("Производства");
-            tags.Add("производство");
-            tags.Add("Техника");
-            tags.Add("Изобретение");
-            tags.Add("Науки");
-            tags.Add("IT");
-            tags.Add("Техники");
+            
             List<NewsModel> NewsList = new List<NewsModel>();
             foreach (var link in links)
             {
@@ -90,12 +106,30 @@ namespace MashZavod.Controllers
             return RedirectToAction("Tags", "News");
         }
 
-        public ActionResult Tags()
+        [HttpGet]
+        public ActionResult TagsDel(int id)
         {
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
-                //Выборка тегов и занесение в глобальный список
+                db.TagsNews.Remove(db.TagsNews.Where(u => u.ID == id).FirstOrDefault());
+                db.SaveChanges();
             }
+             
+            return RedirectToAction("Tags", "News");
+
+        }
+
+        public ActionResult Tags()
+        {
+            List<TagsNews> tags = new List<TagsNews>();
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                foreach (var tag in db.TagsNews)
+                {
+                    tags.Add(tag);
+                }
+            }
+            ViewBag.Tags = tags;
             return View();
         }
 
