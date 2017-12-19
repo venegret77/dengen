@@ -24,14 +24,17 @@
 			</div>
 		</div>
 	</div>
-	@{
-	//string[] str = {"default", "primary", "info", "warning", "danger"};
-	//int color;
-}
 	<div class="col-md-12 margin-bottom-30">
+        @{
+            System.Random rand = new System.Random();
+        }
 	@foreach (var elem in ViewBag.Tags)
-	{
-	  <p>  <a class="btn btn-wide btn-@color" href="~/News/TagsDel?id=@elem.ID"> @elem.Tag </a></p>
+    {
+        string[] str = { "default", "primary", "info", "warning", "danger" };
+        
+        int color = rand.Next(0, 4);
+        string res = str[color];
+	  <p>  <a class="btn btn-wide btn-@res" href="~/News/TagsDel?id=@elem.ID"> @elem.Tag </a></p>
 	}
 </div>
 
