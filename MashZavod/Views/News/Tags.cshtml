@@ -24,11 +24,17 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="col-md-12 margin-bottom-30">
+	@{
+	//string[] str = {"default", "primary", "info", "warning", "danger"};
+	//int color;
+}
+	<div class="col-md-12 margin-bottom-30">
 	@foreach (var elem in ViewBag.Tags)
 	{
-	  <p>  <a class="btn btn-wide btn-primary" href="~/News/TagsDel?id=@elem.ID"> @elem.Tag </a></p>
+	  <p>  <a class="btn btn-wide btn-@color" href="~/News/TagsDel?id=@elem.ID"> @elem.Tag </a></p>
 	}
 </div>
+
+</div>
+
+
