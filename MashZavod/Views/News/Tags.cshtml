@@ -1,30 +1,33 @@
 ﻿@Html.Partial("nav")
 @model MashZavod.Models.DbModels.TagsNews
 
-<div class="col-lg-6 col-md-12">
-	<div class="panel panel-white">
-		<div class="panel-heading">
-			<h5 class="panel-title">Добавить тег</h5>
-		</div>
-		<div class="panel-body">
-			<p class="text-small margin-bottom-20">
-				описание
-			</p>
-			@using (Html.BeginForm())
-			{
-			    @Html.AntiForgeryToken()
-			    @Html.ValidationSummary(true)
-		    }
-				<div class="form-group">
-					<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Введите тег" name="Tag" />
-				</div>
-				<button type="submit" class="btn btn-o btn-primary"> Добавить </button>
+<div class="row">
+	<div class="col-lg-6 col-md-12">
+		<div class="panel panel-white">
+			<div class="panel-heading">
+				<h5 class="panel-title">Добавить тег</h5>
+			</div>
+			<div class="panel-body">
+				<p class="text-small margin-bottom-20">
+					описание
+				</p>
+				@using (Html.BeginForm())
+				{
+				    @Html.AntiForgeryToken()
+				    @Html.ValidationSummary(true)
+			    }
+					<div class="form-group">
+						<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Введите тег" name="Tag" />
+					</div>
+						<input type="submit" class="btn btn-o btn-primary" value="Добавить"/>
+			</div>
 		</div>
 	</div>
 </div>
-@foreach (var elem in ViewBag.Tags)
-{
-    <div>
-        <p>@elem.Tag  <a href="~/News/TagsDel?id=@elem.ID"> Удалить </a></p>
-    </div>
-}
+
+<div class="col-md-12 margin-bottom-30">
+	@foreach (var elem in ViewBag.Tags)
+	{
+	  <p>  <a class="btn btn-wide btn-primary" href="~/News/TagsDel?id=@elem.ID"> @elem.Tag Х </a></p>
+	}
+</div>
