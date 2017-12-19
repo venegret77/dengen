@@ -30,7 +30,7 @@
         <AssociationConnector Association="database_murom_factory2Model.infofiledoc_to_doc" ManuallyRouted="false" />
         <AssociationConnector Association="database_murom_factory2Model.rank_to_user" ManuallyRouted="false" />
         <AssociationConnector Association="database_murom_factory2Model.User_chat_to_Chat_id_user_" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="database_murom_factory2Model.SourcesRSS" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="database_murom_factory2Model.SourcesRSS" Width="1.5" PointX="7.875" PointY="4.625" />
         <EntityTypeShape EntityType="database_murom_factory2Model.TagsNews" Width="1.5" PointX="7.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
