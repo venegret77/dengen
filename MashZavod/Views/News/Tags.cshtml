@@ -1,1 +1,8 @@
-﻿
+﻿@model MashZavod.Models.DbModels.TagsNews
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <input type="text" placeholder="Введите тег" name="Tag" />
+    <input type="submit" value="Добавить" />
+    }
