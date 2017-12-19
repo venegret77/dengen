@@ -116,7 +116,6 @@ namespace MashZavod.Controllers
             }
              
             return RedirectToAction("Tags", "News");
-
         }
 
         public ActionResult Tags()
