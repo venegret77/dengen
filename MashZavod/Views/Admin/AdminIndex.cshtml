@@ -1,57 +1,51 @@
 ﻿@Html.Partial("nav")
 
 @model MashZavod.Models.DbModels.database_murom_factory2Entities1
-						<section id="page-title" class="padding-top-15 padding-bottom-15">
-							<div class="row">
-								<div class="col-sm-7">
-									<h1 class="mainTitle">Dashboard</h1>
-									<span class="mainDescription">overview &amp; stats </span>
+<div class="app-content">
+	<div class="main-content" >
+		<div class="wrap-content container" id="container">
+			<section id="page-title" class="padding-top-15 padding-bottom-15">
+				<div class="row">
+					<div class="col-sm-7">
+						<h1 class="mainTitle">Dashboard</h1>
+						<span class="mainDescription">overview &amp; stats </span>
+					</div>
+					<div class="col-sm-5">
+						<ul class="mini-stats pull-right">
+							<li>
+								<div class="sparkline-1">
+									<span ></span>
 								</div>
-								<div class="col-sm-5">
-									<!-- start: MINI STATS WITH SPARKLINE -->
-									<ul class="mini-stats pull-right">
-										<li>
-											<div class="sparkline-1">
-												<span ></span>
-											</div>
-											<div class="values">
-												<strong class="text-dark">4</strong>
-												<p class="text-small no-margin">
-													Тега
-												</p>
-											</div>
-										</li>
-										<li>
-											<div class="sparkline-2">
-												<span ></span>
-											</div>
-											<div class="values">
-												<strong class="text-dark">5</strong>
-												<p class="text-small no-margin">
-													Пользователей
-												</p>
-											</div>
-										</li>
-										<li>
-											<div class="sparkline-3">
-												<span ></span>
-											</div>
-											<div class="values">
-												<strong class="text-dark">9999</strong>
-												<p class="text-small no-margin">
-													Документов
-												</p>
-											</div>
-										</li>
-									</ul>
-									<!-- end: MINI STATS WITH SPARKLINE -->
+								<div class="values">
+									<strong class="text-dark">4</strong>
+									<p class="text-small no-margin">Тега</p>
 								</div>
-							</div>
-						</section>
-
-    <div> 
-        <p><a href="../Account/Register">Добавить пользователя</a></p>
-        <p><a href="../News/Tags">Добавить теги для парсинга новостей</a></p>
-    </div>
+							</li>
+							<li>
+								<div class="sparkline-2">
+									<span ></span>
+								</div>
+								<div class="values">
+									<strong class="text-dark">5</strong>
+									<p class="text-small no-margin">Пользователей</p>
+								</div>
+							</li>
+							<li>
+								<div class="sparkline-3">
+									<span ></span>
+								</div>
+								<div class="values">
+									<strong class="text-dark">9999</strong>
+									<p class="text-small no-margin">Документов</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+        
 </body>
 </html>
