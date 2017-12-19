@@ -1,14 +1,30 @@
-﻿@model MashZavod.Models.DbModels.TagsNews
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    <input type="text" placeholder="Введите тег" name="Tag" />
-    <input type="submit" value="Добавить" />
-    }
+﻿@Html.Partial("nav")
+@model MashZavod.Models.DbModels.TagsNews
+
+<div class="col-lg-6 col-md-12">
+	<div class="panel panel-white">
+		<div class="panel-heading">
+			<h5 class="panel-title">Добавить тег</h5>
+		</div>
+		<div class="panel-body">
+			<p class="text-small margin-bottom-20">
+				описание
+			</p>
+			@using (Html.BeginForm())
+			{
+			    @Html.AntiForgeryToken()
+			    @Html.ValidationSummary(true)
+		    }
+				<div class="form-group">
+					<input type="text" class="form-control" id="exampleInputPassword1" placeholder="Введите тег" name="Tag" />
+				</div>
+				<button type="submit" class="btn btn-o btn-primary"> Добавить </button>
+		</div>
+	</div>
+</div>
 @foreach (var elem in ViewBag.Tags)
 {
     <div>
-        <p>@elem.Tag  <a href="~/News/TagsDel?id=@elem.ID"> Удолить </a></p>
+        <p>@elem.Tag  <a href="~/News/TagsDel?id=@elem.ID"> Удалить </a></p>
     </div>
 }
