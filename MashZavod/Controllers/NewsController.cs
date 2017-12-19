@@ -81,23 +81,28 @@ namespace MashZavod.Controllers
         {
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
-               var teg = db.TagsNews.Add(new TagsNews()
+                db.TagsNews.Add(new TagsNews()
                 {
                     Tag = model.Tag
                 });
-
                 db.SaveChanges();
-
-          
-                // Проверяем, что пользователь успешно добавился
-                teg = db.TagsNews.Where(u => u.Tag == model.Tag).FirstOrDefault();
-                if ( teg != null)
-                {
-                    return RedirectToAction("AdminIndex", "Admin");
-
-                }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Tags", "News");
+        }
+
+        public ActionResult Tags()
+        {
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                //Выборка тегов и занесение в глобальный список
+            }
+            return View();
+        }
+
+        private bool CheckLinkRSS(string Link)
+        {
+            //Проверка RSS ссылки на корректность
+            return false;
         }
 
         [HttpPost]
@@ -107,10 +112,16 @@ namespace MashZavod.Controllers
             {
                 db.SourcesRSS.Add(new SourcesRSS()
                 {
-                    Link = model.Link
+                    Link = model.Link,
+                    Description = model.Description
                 });
                 db.SaveChanges();
             }
+            return RedirectToAction("RSS", "News");
+        }
+
+        public ActionResult RSS()
+        {
             return View();
         }
     }

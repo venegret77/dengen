@@ -1,16 +1,9 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>News</title>
-</head>
-<body>
-    <form method="post" action="">
-        <input type="text" name="SourcesRSS" />
-        <input type="submit" />
-    </form>
-</body>
-</html>
-
-
+﻿@model MashZavod.Models.DbModels.SourcesRSS
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <input type="text" placeholder="Введите ссылку" name="Link" />
+    <input type="text" placeholder="Введите описание" name="Description" />
+    <input type="submit" value="Добавить" />
+}
