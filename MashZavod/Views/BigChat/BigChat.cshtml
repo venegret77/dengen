@@ -5,12 +5,14 @@
 
 @foreach (var b in ViewBag.Chat)
 {
-    <p>@b.Message</p>
+
+    <p>@b.LoginUs</p>
+    <p>@b.Text_message</p>
+    <p>@b.Time_message</p>
 }
 
 <form method="post" action="">
-    <input type="text" name="message" />
-    
-
+    <input type="text" name="text_message" />
+    <input type="hidden" name="id_chat" value="1"/>
     <input type="submit"/>
 </form>
