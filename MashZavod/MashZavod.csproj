@@ -374,6 +374,7 @@
     <Content Include="Views\News\Tags.cshtml" />
     <Content Include="Views\News\RSS.cshtml" />
     <Content Include="Views\BigChat\BigChat.cshtml" />
+    <Content Include="Views\Shared\Adminnav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
