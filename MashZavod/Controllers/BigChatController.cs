@@ -50,11 +50,12 @@ namespace MashZavod.Controllers
             {
                 model.datetime = DateTime.Now;
                 model.id_users = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
+
                 //добовляем в бд
                 db.message.Add(model);
 
                 db.SaveChanges();
-                return Redirect("BigChat");///поправить путь
+                return RedirectToAction("Index", "BigChat");///поправить путь
             }
         }
     }
