@@ -16,6 +16,8 @@ namespace MashZavod.Models
         [Required]
         public string Text_message { get; set; }//текст сообщения
 
+        public Boolean is_user { get; set; }//ты или я
+
         [Required]
         public int Type_chat { get; set; }//тип чата
 
