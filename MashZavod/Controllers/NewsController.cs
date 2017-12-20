@@ -155,6 +155,15 @@ namespace MashZavod.Controllers
 
         public ActionResult RSS()
         {
+            List<SourcesRSS> _rss = new List<SourcesRSS>();
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                foreach (var rss in db.SourcesRSS)
+                {
+                    _rss.Add(rss);
+                }
+            }
+            ViewBag.Tags = _rss;
             return View();
         }
     }
