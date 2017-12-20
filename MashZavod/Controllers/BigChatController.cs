@@ -40,7 +40,7 @@ namespace MashZavod.Controllers
             ViewBag.Chat = ListMessage;
 
 
-            return View("BigChat");
+            return PartialView("BigChat");
         }
 
         [HttpPost]
