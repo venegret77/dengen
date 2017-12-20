@@ -3,16 +3,56 @@
     ViewBag.Title = "BigChat";
 }
 
-@foreach (var b in ViewBag.Chat)
-{
 
-    <p>@b.LoginUs</p>
-    <p>@b.Text_message</p>
-    <p>@b.Time_message</p>
-}
 
 <form method="post" action="">
     <input type="text" name="text_message" />
     <input type="hidden" name="id_chat" value="1"/>
     <input type="submit"/>
 </form>
+
+<div class="col-xs-12 col-sm-4">
+									<div class="panel panel-white no-radius">
+										<div class="panel-heading border-bottom">
+											<h4 class="panel-title">Chat</h4>
+										</div>
+										<div class="panel-body no-padding">
+											<div class="panel-scroll height-330 perfect-scrollbar" id="chatBox">
+												<ol class="discussion">
+													<li class="messages-date">
+														Sunday, Feb 9, 12:58
+													</li>
+													<li class="self">
+															@foreach (var b in ViewBag.Chat)
+															{
+														<div class="message">
+															<div class="message-name">
+																<p>@b.LoginUs</p>
+																<p>@b.Time_message</p>
+															</div>
+															<div class="message-text">
+																<p>@b.Text_message</p>
+															</div>
+															<div class="message-avatar">
+																<img src="assets/images/avatar-1.jpg" alt="">
+															</div>
+														</div>
+														}
+														
+													</li>
+												</ol>
+											</div>
+										</div>
+										<div class="message-bar">
+											<div class="message-inner">
+												<form method="post" action="">
+													<div class="message-area">
+													<textarea placeholder="Message" name="text_message"></textarea>
+   													<input type="hidden" name="id_chat" value="1"/>
+												</div>
+    											<input class="link" value="Send" type="submit"/>
+    												</form>
+											</div>
+										</div>
+									</div>
+								</div>
