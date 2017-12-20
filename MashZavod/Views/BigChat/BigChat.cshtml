@@ -1,15 +1,12 @@
 ﻿
-@{
-    ViewBag.Title = "BigChat";
-}
+@Html.Partial("nav")
 
 
-
-<form method="post" action="">
+<!--<form method="post" action="">
     <input type="text" name="text_message" />
     <input type="hidden" name="id_chat" value="1"/>
     <input type="submit"/>
-</form>
+</form>-->
 
 <div class="col-xs-12 col-sm-4">
 									<div class="panel panel-white no-radius">
@@ -47,7 +44,7 @@
 											<div class="message-inner">
 												<form method="post" action="">
 													<div class="message-area">
-													<textarea placeholder="Message" name="text_message"></textarea>
+													<input placeholder="Message" name="text_message">
    													<input type="hidden" name="id_chat" value="1"/>
 												</div>
     											<input class="link" value="Send" type="submit"/>
