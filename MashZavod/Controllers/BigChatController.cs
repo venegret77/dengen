@@ -34,17 +34,17 @@ namespace MashZavod.Controllers
                     }
                     ListMessage.Add(new BigChatModels { LoginUs = x,
                         Text_message = el.text_message,
-                        Time_message = (DateTime)el.datetime }); //вопрос с привидением типов у даты (DateTime)el.datetime
+                        Time_message = (DateTime)el.datetime.Value.Date }); //вопрос с привидением типов у даты (DateTime)el.datetime
                 } 
             }
             ViewBag.Chat = ListMessage;
 
 
-            return PartialView("BigChat");
+            return View("BigChat");
         }
 
         [HttpPost]
-        public void Index(message model)//функция отправки соощения
+        public ActionResult Index(message model)//функция отправки соощения
         {
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
@@ -54,7 +54,7 @@ namespace MashZavod.Controllers
                 db.message.Add(model);
 
                 db.SaveChanges();
-                return;
+                return Redirect("BigChat");///поправить путь
             }
         }
     }
