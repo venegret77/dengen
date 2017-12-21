@@ -63,8 +63,9 @@
 
 </style>
 <script type="text/javascript">
-      var block = document.getElementById("panel-body");
-      block.scrollTop = block.scrollHeight;
+      $(window).load(function() {
+  	$("panel-body").animate({ scrollTop: $('panel-body').prop("scrollHeight") }, 1000);
+});
 </script>
 
 <div class="container">
