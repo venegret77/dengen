@@ -1,5 +1,7 @@
 ﻿<link rel="stylesheet" href="/Content/bootstrap/css/bootstrap.min.css">
 
+
+
 <style type="text/css">
 	.chat
 {
@@ -7,6 +9,10 @@
     margin: 0;
     padding: 0;
 }
+    form {
+        margin-bottom: 0;
+        
+    }
 
 .chat li
 {
@@ -37,11 +43,10 @@
     margin-right: 5px;
 }
 
-.panel-body
-{
-    overflow-y: scroll;
-    height: 250px;
-}
+    .panel-body {
+        overflow-y: scroll;
+        height: 250px;
+    }
 
 ::-webkit-scrollbar-track
 {
@@ -60,37 +65,33 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
 }
-
+    .chatik {
+        float:right;
+    }
 </style>
-
-<script type="text/javascript">
-      $(window).load(function() {
-  	$("panel-body").animate({ scrollTop: $('panel-body').prop("scrollHeight") }, 250);
-});
-</script>
-
-<div class="container">
-    <div class="row">
+<div class="chatik">
         <div class="col-md-5">
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <ul class="chat">
-                    	@foreach (var b in ViewBag.Chat)
-						{
-	                        <li class="left clearfix"><span class="chat-img pull-left">
-	                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-	                        </span>
-	                            <div class="chat-body clearfix">
-	                                <div class="header">
-	                                    <strong class="primary-font">@b.LoginUs</strong> <small class="pull-right text-muted">
-	                                        <span class="glyphicon glyphicon-time"></span>@b.Time_message</small>
-	                                </div>
-	                                <p>@b.Text_message</p>
-	                            </div>
-	                        </li>
-                    	}
-                    </ul>
-                </div>
+                        <ul class="chat">
+                            @foreach (var b in ViewBag.Chat)
+                            {
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">@b.LoginUs</strong> <small class="pull-right text-muted">
+                                                <span class="glyphicon glyphicon-time"></span>@b.Time_message
+                                            </small>
+                                        </div>
+                                        <p>@b.Text_message</p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+</div>
                 <form method="post" action="">
 	                <div class="panel-footer">
 	                    <div class="input-group">
@@ -105,7 +106,9 @@
             </div>
         </div>
     </div>
-</div>
-
-<script src="/Scripts/jquery/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 0);
+    });
+</script>
