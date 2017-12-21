@@ -65,7 +65,7 @@
 
 <script type="text/javascript">
       $(window).load(function() {
-  	$("panel-body").animate({ scrollTop: $('panel-body').prop("scrollHeight") }, 1000);
+  	$("main").animate({ scrollTop: $('main').prop("scrollHeight") }, 250);
 });
 </script>
 
@@ -73,6 +73,7 @@
     <div class="row">
         <div class="col-md-5">
             <div class="panel panel-primary">
+            	<main>
                 <div class="panel-body">
                     <ul class="chat">
                     	@foreach (var b in ViewBag.Chat)
@@ -91,6 +92,7 @@
                     	}
                     </ul>
                 </div>
+            </main>
                 <form method="post" action="">
 	                <div class="panel-footer">
 	                    <div class="input-group">
