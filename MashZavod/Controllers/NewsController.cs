@@ -56,20 +56,24 @@ namespace MashZavod.Controllers
             List<NewsModel> NewsList = new List<NewsModel>();
             foreach (var link in links)
             {
-                XDocument newsXML = XDocument.Load(link);
-                var news = from feed in newsXML.Descendants("item")
-                           select new
-                           {
-                               Title = feed.Element("title").Value,
-                               Link = feed.Element("link").Value,
-                               Description = feed.Element("description").Value,
-                               PubDate = feed.Element("pubDate").Value,
-                               Source = link
-                           };
-                foreach (var _news in news)
+                try
                 {
-                    NewsList.Add(new NewsModel(_news.Title, _news.Link, _news.PubDate, _news.Description, _news.Source, tags));
+                    XDocument newsXML = XDocument.Load(link);
+                    var news = from feed in newsXML.Descendants("item")
+                               select new
+                               {
+                                   Title = feed.Element("title").Value,
+                                   Link = feed.Element("link").Value,
+                                   Description = feed.Element("description").Value,
+                                   PubDate = feed.Element("pubDate").Value,
+                                   Source = link
+                               };
+                    foreach (var _news in news)
+                    {
+                        NewsList.Add(new NewsModel(_news.Title, _news.Link, _news.PubDate, _news.Description, _news.Source, tags));
+                    }
                 }
+                catch { }
             }
             NewsList.RemoveAll(u => u.Relevance == 0);
             NewsList.Sort();
@@ -147,16 +151,32 @@ namespace MashZavod.Controllers
         [HttpPost]
         public ActionResult RSS(SourcesRSS model)
         {
-            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            try
             {
-                db.SourcesRSS.Add(new SourcesRSS()
+                XDocument newsXML = XDocument.Load(model.Link);
+                var news = from feed in newsXML.Descendants("item")
+                           select new
+                           {
+                               Title = feed.Element("title").Value,
+                               Link = feed.Element("link").Value,
+                               Description = feed.Element("description").Value,
+                               PubDate = feed.Element("pubDate").Value
+                           };
+                using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
                 {
-                    Link = model.Link,
-                    Description = model.Description
-                });
-                db.SaveChanges();
+                    db.SourcesRSS.Add(new SourcesRSS()
+                    {
+                        Link = model.Link,
+                        Description = model.Description
+                    });
+                    db.SaveChanges();
+                }
+                return RedirectToAction("RSS", "News");
             }
-            return RedirectToAction("RSS", "News");
+            catch
+            {
+                return RedirectToAction("RSS", "News");
+            }
         }
 
         public ActionResult RSS()
