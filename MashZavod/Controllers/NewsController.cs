@@ -12,8 +12,6 @@ namespace MashZavod.Controllers
 {
     public class NewsController : Controller
     {
-        private List<string> links = new List<string>();
-
         // GET: News
         public ActionResult Index()
         {
@@ -46,8 +44,15 @@ namespace MashZavod.Controllers
 
         public ActionResult News()
         {
-            links.Add("https://lenta.ru/rss/news/russia/");
-            
+            List<string> links = new List<string>();
+            List<string> tags = GetTags();
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                foreach (var rss in db.SourcesRSS)
+                {
+                    links.Add(rss.Link);
+                }
+            }
             List<NewsModel> NewsList = new List<NewsModel>();
             foreach (var link in links)
             {
@@ -58,13 +63,15 @@ namespace MashZavod.Controllers
                                Title = feed.Element("title").Value,
                                Link = feed.Element("link").Value,
                                Description = feed.Element("description").Value,
-                               PubDate = feed.Element("pubDate").Value
+                               PubDate = feed.Element("pubDate").Value,
+                               Source = link
                            };
                 foreach (var _news in news)
                 {
-                    NewsList.Add(new NewsModel(_news.Title, _news.Link, _news.PubDate, _news.Description));
+                    NewsList.Add(new NewsModel(_news.Title, _news.Link, _news.PubDate, _news.Description, _news.Source, tags));
                 }
             }
+            NewsList.RemoveAll(u => u.Relevance == 0);
             NewsList.Sort();
             ViewBag.listNews = NewsList.Distinct();
             return View();
@@ -114,7 +121,6 @@ namespace MashZavod.Controllers
                 db.TagsNews.Remove(db.TagsNews.Where(u => u.ID == id).FirstOrDefault());
                 db.SaveChanges();
             }
-             
             return RedirectToAction("Tags", "News");
         }
 
@@ -163,8 +169,19 @@ namespace MashZavod.Controllers
                     _rss.Add(rss);
                 }
             }
-            ViewBag.Tags = _rss;
+            ViewBag.RSS = _rss;
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult RSSDel(int id)
+        {
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                db.SourcesRSS.Remove(db.SourcesRSS.Where(u => u.ID == id).FirstOrDefault());
+                db.SaveChanges();
+            }
+            return RedirectToAction("RSS", "News");
         }
     }
 }

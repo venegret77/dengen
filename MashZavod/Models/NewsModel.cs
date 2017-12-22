@@ -10,6 +10,7 @@ namespace MashZavod.Models
         public string Description { get; set; }
         public string PubDate { get; set; }
         public string Link { get; set; }
+        public string Source { get; set; }
         public int Relevance { get; set; }
 
         public NewsModel()
@@ -17,26 +18,19 @@ namespace MashZavod.Models
 
         }
 
-        public NewsModel(string _Title, string _Link, string _PubDate, string _Description)
+        public NewsModel(string _Title, string _Link, string _PubDate, string _Description, string _Source, List<string> tags)
         {
             Title = _Title;
             Link = _Link;
             PubDate = _PubDate;
             Description = _Description;
-        }
-
-        public NewsModel(string _Title, string _Link, string _PubDate, string _Description, List<string> tags)
-        {
-            Title = _Title;
-            Link = _Link;
-            PubDate = _PubDate;
-            Description = _Description;
+            Source = _Source;
             Relevance = CalcRelevance(tags);
         }
 
         public int CalcRelevance(List<string> tags)
         {
-            string _Description = Description.ToLower();
+            string _Description = Description.ToLower() + Title.ToLower();
             int i = 0;
             foreach (var tag in tags)
                 if (_Description.Contains(tag.ToLower()))

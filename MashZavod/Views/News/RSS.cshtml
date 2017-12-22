@@ -28,13 +28,13 @@
         @{
             System.Random rand = new System.Random();
         }
-        @foreach (var elem in ViewBag.Tags)
+        @foreach (var elem in ViewBag.RSS)
         {
             string[] str = { "default", "primary", "info", "warning", "danger" };
 
             int color = rand.Next(0, 4);
             string res = str[color];
-            <p>  <a class="btn btn-wide btn-@res" href="~/News/TagsDel?id=@elem.ID"> @elem.Link </a></p>}
+            <p>  <a title="@elem.Description" class="btn btn-wide btn-@res" href="~/News/RSSDel?id=@elem.ID"> @elem.Link </a></p>}
     </div>
    </div>
 </div>
