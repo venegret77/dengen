@@ -23,7 +23,6 @@ namespace MashZavod.Controllers
             {
                 var req_message = db.message;
                 
-
                 foreach (var el in req_message)
                 {
                     var y = db.users.FirstOrDefault(u=>u.id_users==el.id_users);
@@ -34,12 +33,10 @@ namespace MashZavod.Controllers
                     }
                     ListMessage.Add(new BigChatModels { LoginUs = x,
                         Text_message = el.text_message,
-                        Time_message = (DateTime)el.datetime.Value.Date }); //вопрос с привидением типов у даты (DateTime)el.datetime
+                        Time_message = (DateTime)el.datetime }); //вопрос с привидением типов у даты (DateTime)el.datetime
                 } 
             }
             ViewBag.Chat = ListMessage;
-
-
             return PartialView("BigChat");
         }
 
@@ -52,9 +49,8 @@ namespace MashZavod.Controllers
                 model.id_users = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
                 //добовляем в бд
                 db.message.Add(model);
-
                 db.SaveChanges();
-                return Redirect("BigChat");///поправить путь
+                return RedirectToAction("Index", "BigChat");///поправить путь
             }
         }
     }
