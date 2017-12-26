@@ -2,77 +2,137 @@
 @{
     ViewBag.Title = "Поручения";
 }
-
+@Html.ValidationSummary(true)
 @Html.Partial("nav")
+<div class="main-content">
+    <div class="wrap-content container" id="container">
+        <section id="page-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="mainTitle">Поручения</h1>
+                </div>
+            </div>
+        </section>
+ 
+        <div class="container-fluid container-fullw bg-white">
+            <div class="row">
+                <div class="col-md-14">
+                    <div class="col-lg-7 col-md-7">
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Добавить новое поручение</h5>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" class="form-inline" method="post" action="/Mission/Add">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                Login
+                                            </div>
+                                            <input type="text" placeholder=" " name="Login" class="form-control">
+                                        </div>
+                                    </div><br /><br />
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                Поручение
+                                            </div>
+                                            <input type="text" placeholder=" " name="Text" class="form-control">
+                                        </div>
+                                    </div><br /><br />
+                                    <input class="btn btn-success" type="submit"  value="Добавить" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<!DOCTYPE html>
+            <div class="col-md-12">
+                <table class="table table-hover" id="sample-table-1">
+                    <thead>
+                        <tr>
+                            <th>Поручение</th>
+                            <th>Автор</th>
+                            <th>Дата создания</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.MissionViewModel != null)
+                        {
+                            if (ViewBag.MissionViewModel.IsInMissionModels)
+                            {
+                                foreach (var elem in ViewBag.MissionViewModel.InMissionModels)
+                                {
+                                    <tr>
+                                        <td>@elem.Text</td>
+                                        <td>@elem.Login</td>
+                                        <td>@elem.DateMission</td>
+                                        <td ><i class="fa fa-cog"></i> <a href="Mission/HideMission?id=@elem.Id">Выполнено</a></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            { 
+                                <tr> <td> (Поручения отсутствуют) </td> </tr>
+                            }
+                           }
+                    </tbody>
+                </table>
+            </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        <h1>
-            Список поручений
-        </h1>
-        @Html.ValidationSummary(true)
-        @if (ViewBag.MissionViewModel != null)
-        {
-            if (ViewBag.MissionViewModel.IsInMissionModels)
-            {
-                foreach (var elem in ViewBag.MissionViewModel.InMissionModels)
-                {
-                    <h3>@elem.Text</h3>
-                    <h4>@elem.Login<br />@elem.DateMission</h4>
-                    <a href="Mission/HideMission?id=@elem.Id">Скрыть</a>
-                    <br />
-                }
-            }
-            else
-            {
-                <h2>(Поручения отсутствуют)</h2>
-            }
-        }
-        <h1>
-            Мои поручения
-        </h1>
-        @if (ViewBag.MissionViewModel != null)
-        {
-            if (ViewBag.MissionViewModel.IsOutMissionModels)
-            {
-                foreach (var elem in ViewBag.MissionViewModel.OutMissionModels)
-                {
-                    <h3>@elem.Text</h3>
-                    <h4>@elem.Login<br />@elem.DateMission</h4>
-                    if (elem.Done)
-                    {
-                        <h4>Поручение выполнено</h4>
-                        <a href="Mission/NoDoneMission?id=@elem.Id">Поручение считать невыполненным</a>
-                        <a href="Mission/DoneMission?id=@elem.Id">Поручение считать выполненным</a>
-                    }
-                    else
-                    {
-                        <h4>Поручение еще не выполнено</h4>
-                    }
-                    <br />
-                }
-            }
-            else
-            {
-                <h2>(Исходящие поручения отсутствуют)</h2>
-            }
-        }
-        <h2>Добавить новое поручение</h2>
-        <form method="post" action="/Mission/Add">
-            <label>Login получаателя поручения</label>
-            <input type="text" name="Login" /><br />
-            <label>Текст поручения</label>
-            <input type="text" name="Text" />
-            <input type="submit" value="Отправить" />
-        </form>
-
+            <div class="col-md-12">
+                <table class="table table-hover" id="sample-table-1">
+                    <thead>
+                        <tr>
+                            <th >Поручение</th>
+                            <th>Кому</th>
+                            <th >Дата создания</th>
+                            <th>Статус</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @if (ViewBag.MissionViewModel != null)
+                        {
+                            if (ViewBag.MissionViewModel.IsOutMissionModels)
+                             {
+                                foreach (var elem in ViewBag.MissionViewModel.OutMissionModels)
+                                {
+                                    <tr>
+                                        <td >@elem.Text</td>
+                                        <td >@elem.Login</td>
+                                        <td>@elem.DateMission</td>
+                                      @if (elem.Done)
+                                        {
+                                            <td>Поручение выполнено</td>
+                                            <td><a href="Mission/NoDoneMission?id=@elem.Id">Поручение считать невыполненным</a></td>
+                                            <td><a href="Mission/DoneMission?id=@elem.Id">Поручение считать выполненным</a></td>
+                                      }
+                                      else
+                                      {
+                                            <td> Поручение еще не выполнено </td>
+                                      }
+                                            </tr >
+                               }
+                           }
+                           else
+                           {
+<tr> <td> (Поручения отсутствуют) </td> </tr>
+                            }
+                           }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+
+
+
+
+
+
+                       
+  
