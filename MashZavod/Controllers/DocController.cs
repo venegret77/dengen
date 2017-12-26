@@ -48,8 +48,7 @@ namespace MashZavod.Controllers
 
                 modelDoc.data_of_create = DateTime.Now;
                 // modelDoc.date_of_modify = DateTime.Now;
-                /*изменить при переименовании*/
-                modelDoc.url = Server.MapPath("~/Files/" + System.IO.Path.GetFileName(upload.FileName));
+                modelDoc.url = Server.MapPath("~/Files/" + modelDoc.name_doc);
                 modelDoc.text_doc = ExtractText(modelDoc.url);
                 //получаем описание файла
                 if ((modelDoc.description == String.Empty || modelDoc.description==null) && modelDoc.text_doc != null)

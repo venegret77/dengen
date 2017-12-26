@@ -411,7 +411,6 @@
     <Content Include="Views\Doc\ViewDoc.cshtml" />
     <Content Include="Views\Doc\ViewReceivedDoc.cshtml" />
     <Content Include="Views\Doc\ViewSentDoc.cshtml" />
-    <Content Include="Views\Doc\InfoDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

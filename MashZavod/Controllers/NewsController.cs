@@ -167,7 +167,7 @@ namespace MashZavod.Controllers
                     db.SourcesRSS.Add(new SourcesRSS()
                     {
                         Link = model.Link,
-                        Description = model.Description
+                        //Description = model.Description
                     });
                     db.SaveChanges();
                 }
