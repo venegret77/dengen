@@ -48,7 +48,8 @@ namespace MashZavod.Controllers
 
                 modelDoc.data_of_create = DateTime.Now;
                 // modelDoc.date_of_modify = DateTime.Now;
-                modelDoc.url = Server.MapPath("~/Files/" + modelDoc.name_doc);
+                //изменить при добавлении переименования документа
+                modelDoc.url = Server.MapPath("~/Files/" + System.IO.Path.GetFileName(upload.FileName));
                 modelDoc.text_doc = ExtractText(modelDoc.url);
                 //получаем описание файла
                 if ((modelDoc.description == String.Empty || modelDoc.description==null) && modelDoc.text_doc != null)
@@ -112,16 +113,21 @@ namespace MashZavod.Controllers
 
 
         //скачивание документа с сервера на клиент
-        [HttpPost]
-        public ActionResult DowloadDoc(doc modelDoc)
+        [HttpGet]
+        public ActionResult DowloadDoc(int id)
         {
             //infoFileDoc modelInfoDoc = modelDoc.infoFileDoc.Last();
             // Путь к файлу
+            doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
+            if (modelDoc==null)
+            {
+                return RedirectToAction("ViewDoc", "Doc");
+            }
             string file_path = modelDoc.url;// Server.MapPath("~/Files/PDFIcon.pdf");
             // Тип файла
             string file_type = String.Empty;
             //получение типа файла MIME
-            switch (System.IO.Path.GetExtension(modelDoc.name_doc))
+            switch (System.IO.Path.GetExtension(modelDoc.url))
             {
                 case ".pdf":
                     {
@@ -142,7 +148,7 @@ namespace MashZavod.Controllers
        //     string file_type = "application/pdf";
             // Имя файла - необязательно
             string file_name = modelDoc.name_doc; //"PDFIcon.pdf";
-            return File(file_path, file_type, file_name);
+            return File(file_path, file_type,file_name);
 
 
           //  return View();

@@ -24,7 +24,7 @@
         </table>
         <table>
             <tr>
-                <!--   <td><p>Название</p></td>-->
+                <td><p>Название</p></td>
                 <!-- <td><p>Получатель</p></td>-->
                 <td><p>Описание</p></td>
                 <td><p>Дата создание</p></td>
@@ -34,6 +34,7 @@
             @foreach (var b in ViewBag.listDoc)
             {
                 <tr>
+                    <td><input type="text" name="name_doc" readonly value=@b.name_doc /></td>
                     <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
                     <!-- <td><p>@b.recipient</p></td>-->
                     <td><textarea rows="1" cols="50" maxlength="150" name="description">@b.description</textarea>
