@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--Форма вывода всех полученных документов-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Просмотр документов</title>
+</head>
+<body>
+    <div>
+        <h3>Просмотр полученных документов</h3>
+        <p><a href="/Doc/AddDoc">Добавить документ</a></p>
+        <table>
+            <tr>
+                <td><p><a href="/Doc/ViewDoc">Все</p></td>
+                <td><p><a href="/Doc/ViewSentDoc">Отправленные</a></p></td>
+                <td><p><a href="/Doc/ViewReceivedDoc">Полученные</a></p></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <!--   <td><p>Название</p></td>-->
+                <!-- <td><p>Автор</p></td> -->
+                <td><p>Описание</p></td>
+                <td><p>Дата создание</p></td>
+                <td><p>Дата изменения</p></td>
+                <td></td>
+            </tr>
+            @foreach (var b in ViewBag.listDoc)
+            {
+                <tr>
+                    <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
+                    <!-- <td><p>@b.author</p></td>-->
+                    <td><textarea rows="1" cols="50" maxlength="150" name="description">@b.description</textarea>
+                    <td><input type="text" name="data_of_create" readonly value=@b.data_of_create /></td>
+                    <td><input type="text" name="date_of_modify" readonly value=@b.date_of_modify /></td>
+                    <td><p><a href="/Doc/DowloadDoc">Скачать</a></p></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LingvoNET, Version=1.1.2.0, Culture=neutral, PublicKeyToken=7d49b21a20bef57b, processorArchitecture=MSIL">
       <HintPath>..\packages\LingvoNET.1.1.2\lib\LingvoNET.dll</HintPath>
     </Reference>
@@ -53,6 +57,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -213,6 +222,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BigChatController.cs" />
+    <Compile Include="Controllers\DocController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MissionController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -395,10 +405,17 @@
     <Content Include="Views\Shared\BigChat.cshtml" />
     <Content Include="Views\Shared\Adminnav.cshtml" />
     <Content Include="Views\Mission\Index.cshtml" />
+    <Content Include="Views\Doc\AddDoc.cshtml" />
+    <Content Include="Views\Doc\DeleteDoc.cshtml" />
+    <Content Include="Views\Doc\EditDoc.cshtml" />
+    <Content Include="Views\Doc\ViewDoc.cshtml" />
+    <Content Include="Views\Doc\ViewReceivedDoc.cshtml" />
+    <Content Include="Views\Doc\ViewSentDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
+    <Folder Include="Files\" />
     <Folder Include="Views\BigChat\" />
   </ItemGroup>
   <ItemGroup>
