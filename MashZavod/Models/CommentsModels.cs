@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace MashZavod.Models
 {
-    public class BigChatModels
+    public class CommentsModels
     {
         [Required]
         public string LoginUs { get; set; }//логин
@@ -15,17 +14,5 @@ namespace MashZavod.Models
 
         [Required]
         public string Text_message { get; set; }//текст сообщения
-        /*
-        public Boolean is_user { get; set; }//ты или я
-
-        [Required]
-        public int Type_chat { get; set; }//тип чата
-
-        [Required]
-        public string Name_chat { get; set; }//название чата
-
-        [Required]
-        public DateTime Time_create { get; set; }//дата создания чата
-        */
     }
 }

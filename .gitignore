@@ -260,3 +260,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/MashZavod/Files/ФИТ Очная Экзамены 07-12-2017 10_30_02.doc
