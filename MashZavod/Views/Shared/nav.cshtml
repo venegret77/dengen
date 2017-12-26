@@ -1,4 +1,8 @@
-﻿<div id="app">
+﻿@{
+    Layout = null;
+}
+
+<div id="app">
     <div class="sidebar app-aside" id="sidebar">
         <div class="sidebar-container perfect-scrollbar">
             <nav>
@@ -6,32 +10,79 @@
                     <span>Навигация</span>
                 </div>
                 <ul class="main-navigation-menu">
-                    <li class="active open">
-                        <a href="index.html">
+                    <li class="open">
+                        <a href="../Home/Index">
                             <div class="item-content">
                                 <div class="item-media">
                                     <i class="ti-home"></i>
                                 </div>
                                 <div class="item-inner">
-                                    <span class="title"> ТУТ НАКИДАТЬ ГИПЕРСЫЛОК </span>
+                                    <span class="title">Главная</span>
                                 </div>
                             </div>
                         </a>
                     </li>
-
-                    <li class="active open">
-                        <a href="chat.chtml">
+                    <li class="open">
+                        <a href="../News/News">
                             <div class="item-content">
                                 <div class="item-media">
                                     <i class="ti-home"></i>
                                 </div>
                                 <div class="item-inner">
-                                    <span class="title">Чат </span>
+                                    <span class="title">Новости</span>
                                 </div>
                             </div>
                         </a>
                     </li>
-
+                    <li class="open">
+                        <a href="../News/Tags">
+                            <!--///////////////////////////////////////////////////-->
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <span class="title">Напоминания</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="open">
+                        <a href="../Mission">
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <span class="title">Поручения</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="open">
+                        <a href="../BigChat">
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <span class="title">Общий чат</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="open">
+                        <a href="../Account/Logout">
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <span class="title">Выйти</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
                 <div class="navbar-title">
                     <span>Меню для админа</span>
@@ -59,4 +110,3 @@
             </nav>
         </div>
     </div>
-    

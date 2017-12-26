@@ -18,6 +18,13 @@ namespace MashZavod.Models.DbModels
         public users()
         {
             this.access = new HashSet<access>();
+            this.Comments = new HashSet<Comments>();
+            this.doc = new HashSet<doc>();
+            this.doc1 = new HashSet<doc>();
+            this.assignment = new HashSet<assignment>();
+            this.assignment1 = new HashSet<assignment>();
+            this.remider = new HashSet<remider>();
+            this.remider1 = new HashSet<remider>();
         }
     
         public int id_users { get; set; }
@@ -34,8 +41,24 @@ namespace MashZavod.Models.DbModels
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<access> access { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comments> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<doc> doc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<doc> doc1 { get; set; }
         public virtual group_rank group_rank { get; set; }
         public virtual rank rank { get; set; }
         public virtual User_chat User_chat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<assignment> assignment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<assignment> assignment1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<remider> remider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<remider> remider1 { get; set; }
+        public virtual users users1 { get; set; }
+        public virtual users users2 { get; set; }
     }
 }

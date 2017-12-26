@@ -17,19 +17,33 @@ namespace MashZavod.Models.DbModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public doc()
         {
+            this.Comments = new HashSet<Comments>();
             this.infoFileDoc = new HashSet<infoFileDoc>();
+            this.remider = new HashSet<remider>();
         }
     
         public int id_doc { get; set; }
-        public string author { get; set; }
-        public string recipient { get; set; }
+        public Nullable<int> author { get; set; }
+        public Nullable<int> recipient { get; set; }
         public string description { get; set; }
         public Nullable<System.DateTime> data_of_create { get; set; }
         public Nullable<System.DateTime> date_of_modify { get; set; }
+        public string url { get; set; }
+        public Nullable<int> id_tom { get; set; }
+        public string text_doc { get; set; }
+        public string name_doc { get; set; }
+        public string state { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comments> Comments { get; set; }
         public virtual edit edit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<infoFileDoc> infoFileDoc { get; set; }
+        public virtual tom tom { get; set; }
+        public virtual users users { get; set; }
+        public virtual users users1 { get; set; }
         public virtual @object @object { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<remider> remider { get; set; }
     }
 }

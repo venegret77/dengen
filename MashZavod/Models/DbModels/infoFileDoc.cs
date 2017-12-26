@@ -20,6 +20,7 @@ namespace MashZavod.Models.DbModels
         public Nullable<int> id_doc { get; set; }
         public string text_doc { get; set; }
         public string name_doc { get; set; }
+        public string state { get; set; }
     
         public virtual doc doc { get; set; }
         public virtual tom tom { get; set; }

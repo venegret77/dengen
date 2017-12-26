@@ -12,9 +12,15 @@ namespace MashZavod.Models.DbModels
     using System;
     using System.Collections.Generic;
     
-    public partial class SourcesRSS
+    public partial class Comments
     {
-        public int ID { get; set; }
-        public string Link { get; set; }
+        public int id_comments { get; set; }
+        public Nullable<int> id_doc { get; set; }
+        public Nullable<int> id_user { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
+        public string text_comm { get; set; }
+    
+        public virtual doc doc { get; set; }
+        public virtual users users { get; set; }
     }
 }

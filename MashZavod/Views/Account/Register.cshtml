@@ -1,62 +1,74 @@
 ﻿@model MashZavod.Models.AccountRegisterModel
 @{
+    Layout = null;
     ViewBag.Title = "Регистрация";
 }
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
         @Html.ValidationSummary(true)
         <div class="row">
-			<div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-				<div class="logo margin-top-30">
-					<img src = "assets/images/logo.png" alt="Логотип"/>
-				</div>
-				<div class="box-register">
-					<form class="form-register">
-						<fieldset>
-							<legend>
-								Создание нового пользователя
+            <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                <div class="box-register">
+                    <form class="form-register">
+                        <fieldset>
+                            <legend>
+                                Создание нового пользователя
                             </legend>
-
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Login" placeholder="Логин">
+                                    <input type="text" class="form-control" name="Login" placeholder="Логин">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Password" placeholder="Пароль">
+                                    <input type="password" class="form-control" name="Password" placeholder="Пароль">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Surname" placeholder="Фамилия">
+                                    <input type="text" class="form-control" name="Surname" placeholder="Фамилия">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Name" placeholder="Имя">
+                                    <input type="text" class="form-control" name="Name" placeholder="Имя">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Patronymic" placeholder="Отчество">
+                                    <input type="text" class="form-control" name="Patronymic" placeholder="Отчество">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Position" placeholder="Должность">
+                                    <input type="text" class="form-control" name="Position" placeholder="Должность">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
@@ -70,27 +82,21 @@
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="email" class="form-control" name="Phone" placeholder="Телефон">
+                                    <input type="number" class="form-control" name="Phone" placeholder="Телефон">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
-
-							<div class="form-actions">
-								<button type = "submit" class="btn btn-primary pull-right">
-									Создать <i class="fa fa-arrow-circle-right"></i>
-								</button>
-							</div>
-						</fieldset>
-					</form>
-					<!-- start: COPYRIGHT -->
-				
-					<!-- end: COPYRIGHT -->
-				</div>
-				<!-- end: REGISTER BOX -->
-			</div>
-		</div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary pull-right">
+                                    Создать
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

@@ -25,14 +25,7 @@
                     Index.init();
                 });
             </script>
-            <script>
-                var x = new XMLHttpRequest();
-                x.open("GET", "/BigChat/Index", true);
-                x.onload = function () {
-                    alert(x.responseText);
-                }
-                x.send(null);
-            </script>
+
           
         </footer>
 
@@ -41,3 +34,11 @@
         @RenderSection("scripts", required: false)
 </body>
 </html>
+<!--            <script>
+                var x = new XMLHttpRequest();
+                x.open("GET", "/BigChat/Index", true);
+                x.onload = function () {
+                    alert(x.responseText);
+                }
+                x.send(null);
+            </script>-->

@@ -14,6 +14,19 @@
           <Property Name="access" Type="int" />
           <Property Name="id_object" Type="int" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "database_murom_factory2.dbo.assignment" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="assignment">
+          <Key>
+            <PropertyRef Name="id_assignment" />
+          </Key>
+          <Property Name="id_assignment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_author" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="text" Type="varchar" MaxLength="500" />
+          <Property Name="done" Type="varchar" MaxLength="50" />
+          <Property Name="visible" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="chat">
           <Key>
             <PropertyRef Name="id_chat" />
@@ -23,16 +36,31 @@
           <Property Name="name_chat" Type="varchar" MaxLength="50" />
           <Property Name="date_of_create" Type="date" />
         </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id_comments" />
+          </Key>
+          <Property Name="id_comments" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_doc" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="text_comm" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="doc">
           <Key>
             <PropertyRef Name="id_doc" />
           </Key>
           <Property Name="id_doc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="author" Type="varchar" MaxLength="50" />
-          <Property Name="recipient" Type="varchar" MaxLength="50" />
+          <Property Name="author" Type="int" />
+          <Property Name="recipient" Type="int" />
           <Property Name="description" Type="varchar" MaxLength="150" />
           <Property Name="data_of_create" Type="date" />
           <Property Name="date_of_modify" Type="date" />
+          <Property Name="url" Type="varchar(max)" />
+          <Property Name="id_tom" Type="int" />
+          <Property Name="text_doc" Type="varchar(max)" />
+          <Property Name="name_doc" Type="varchar(max)" />
+          <Property Name="state" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="edit">
           <Key>
@@ -61,6 +89,7 @@
           <Property Name="id_doc" Type="int" />
           <Property Name="text_doc" Type="varchar" MaxLength="8000" />
           <Property Name="name_doc" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="message">
           <Key>
@@ -69,8 +98,21 @@
           <Property Name="id_message" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_users" Type="int" />
           <Property Name="id_chat" Type="int" />
-          <Property Name="text_message" Type="varchar" MaxLength="500" />
-          <Property Name="datetime" Type="date" />
+          <Property Name="text_message" Type="varchar(max)" />
+          <Property Name="datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Missions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSender" Type="int" Nullable="false" />
+          <Property Name="IdRecipient" Type="int" Nullable="false" />
+          <Property Name="IdDocument" Type="int" Nullable="false" />
+          <Property Name="Text" Type="varchar(max)" Nullable="false" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+          <Property Name="DateMission" Type="datetime" Nullable="false" />
+          <Property Name="Done" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="object">
           <Key>
@@ -86,13 +128,39 @@
           <Property Name="id_rank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rank" Type="int" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "database_murom_factory2.dbo.remider" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="remider">
+          <Key>
+            <PropertyRef Name="id_remider" />
+          </Key>
+          <Property Name="id_remider" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_author" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="id_doc" Type="int" />
+          <Property Name="text" Type="text" />
+          <Property Name="visible" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reminders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSender" Type="int" Nullable="false" />
+          <Property Name="IdRecipient" Type="int" Nullable="false" />
+          <Property Name="IdDocument" Type="int" Nullable="false" />
+          <Property Name="Text" Type="varchar(max)" Nullable="false" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+          <Property Name="DateReminder" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "database_murom_factory2.dbo.SourcesRSS" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="SourcesRSS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Link" Type="text" Nullable="false" />
-          <Property Name="Description" Type="text" />
+          <Property Name="Link" Type="text" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -168,6 +236,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ass_to_user">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="assignment" Type="Self.assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="assignment">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ass_to_user(author)">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="assignment" Type="Self.assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="assignment">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="doc_to_edit">
           <End Role="doc" Type="Self.doc" Multiplicity="1" />
           <End Role="edit" Type="Self.edit" Multiplicity="0..1" />
@@ -189,6 +281,66 @@
             </Principal>
             <Dependent Role="infoFileDoc">
               <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_doc">
+          <End Role="doc" Type="Self.doc" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doc">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_doc_tom">
+          <End Role="tom" Type="Self.tom" Multiplicity="0..1" />
+          <End Role="doc" Type="Self.doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tom">
+              <PropertyRef Name="id_tom" />
+            </Principal>
+            <Dependent Role="doc">
+              <PropertyRef Name="id_tom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_doc_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="doc" Type="Self.doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="doc">
+              <PropertyRef Name="author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_doc_users1">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="doc" Type="Self.doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="doc">
+              <PropertyRef Name="recipient" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -261,6 +413,42 @@
             </Principal>
             <Dependent Role="users">
               <PropertyRef Name="id_rank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="remider_to_doc">
+          <End Role="doc" Type="Self.doc" Multiplicity="0..1" />
+          <End Role="remider" Type="Self.remider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doc">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="remider">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="remider_to_users(author)">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="remider" Type="Self.remider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="remider">
+              <PropertyRef Name="id_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="remider_to_users(user)">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="remider" Type="Self.remider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="remider">
+              <PropertyRef Name="id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,22 +476,93 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="users_to_remider">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="users1" Type="Self.users" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="users1">
+              <PropertyRef Name="id_users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище database_murom_factory2ModelContainer">
           <EntitySet Name="access" EntityType="Self.access" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="chat" EntityType="Self.chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="doc" EntityType="Self.doc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="edit" EntityType="Self.edit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="group_rank" EntityType="Self.group_rank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="infoFileDoc" EntityType="Self.infoFileDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Missions" EntityType="Self.Missions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="object" EntityType="Self.object" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rank" EntityType="Self.rank" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SourcesRSS" EntityType="Self.SourcesRSS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reminders" EntityType="Self.Reminders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TagsNews" EntityType="Self.TagsNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tom" EntityType="Self.tom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_chat" EntityType="Self.User_chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="assignment" EntityType="Self.assignment" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [assignment].[id_assignment] AS [id_assignment], 
+    [assignment].[id_author] AS [id_author], 
+    [assignment].[id_user] AS [id_user], 
+    [assignment].[text] AS [text], 
+    [assignment].[done] AS [done], 
+    [assignment].[visible] AS [visible]
+    FROM [dbo].[assignment] AS [assignment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="remider" EntityType="Self.remider" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [remider].[id_remider] AS [id_remider], 
+    [remider].[id_author] AS [id_author], 
+    [remider].[id_user] AS [id_user], 
+    [remider].[id_doc] AS [id_doc], 
+    [remider].[text] AS [text], 
+    [remider].[visible] AS [visible]
+    FROM [dbo].[remider] AS [remider]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SourcesRSS" EntityType="Self.SourcesRSS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SourcesRSS].[ID] AS [ID], 
+    [SourcesRSS].[Link] AS [Link]
+    FROM [dbo].[SourcesRSS] AS [SourcesRSS]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="access_to_object" Association="Self.access_to_object">
             <End Role="object" EntitySet="object" />
             <End Role="access" EntitySet="access" />
@@ -312,6 +571,14 @@
             <End Role="users" EntitySet="users" />
             <End Role="access" EntitySet="access" />
           </AssociationSet>
+          <AssociationSet Name="ass_to_user" Association="Self.ass_to_user">
+            <End Role="users" EntitySet="users" />
+            <End Role="assignment" EntitySet="assignment" />
+          </AssociationSet>
+          <AssociationSet Name="ass_to_user(author)" Association="Self.ass_to_user(author)">
+            <End Role="users" EntitySet="users" />
+            <End Role="assignment" EntitySet="assignment" />
+          </AssociationSet>
           <AssociationSet Name="doc_to_edit" Association="Self.doc_to_edit">
             <End Role="doc" EntitySet="doc" />
             <End Role="edit" EntitySet="edit" />
@@ -319,6 +586,26 @@
           <AssociationSet Name="doc_to_infofiledoc" Association="Self.doc_to_infofiledoc">
             <End Role="doc" EntitySet="doc" />
             <End Role="infoFileDoc" EntitySet="infoFileDoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_doc" Association="Self.FK_Comments_doc">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_users" Association="Self.FK_Comments_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_doc_tom" Association="Self.FK_doc_tom">
+            <End Role="tom" EntitySet="tom" />
+            <End Role="doc" EntitySet="doc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_doc_users" Association="Self.FK_doc_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="doc" EntitySet="doc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_doc_users1" Association="Self.FK_doc_users1">
+            <End Role="users" EntitySet="users" />
+            <End Role="doc" EntitySet="doc" />
           </AssociationSet>
           <AssociationSet Name="FK_message_chat" Association="Self.FK_message_chat">
             <End Role="chat" EntitySet="chat" />
@@ -344,6 +631,18 @@
             <End Role="rank" EntitySet="rank" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
+          <AssociationSet Name="remider_to_doc" Association="Self.remider_to_doc">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="remider" EntitySet="remider" />
+          </AssociationSet>
+          <AssociationSet Name="remider_to_users(author)" Association="Self.remider_to_users(author)">
+            <End Role="users" EntitySet="users" />
+            <End Role="remider" EntitySet="remider" />
+          </AssociationSet>
+          <AssociationSet Name="remider_to_users(user)" Association="Self.remider_to_users(user)">
+            <End Role="users" EntitySet="users" />
+            <End Role="remider" EntitySet="remider" />
+          </AssociationSet>
           <AssociationSet Name="User_chat_to_Chat" Association="Self.User_chat_to_Chat">
             <End Role="chat" EntitySet="chat" />
             <End Role="User_chat" EntitySet="User_chat" />
@@ -352,11 +651,159 @@
             <End Role="users" EntitySet="users" />
             <End Role="User_chat" EntitySet="User_chat" />
           </AssociationSet>
+          <AssociationSet Name="users_to_remider" Association="Self.users_to_remider">
+            <End Role="users" EntitySet="users" />
+            <End Role="users1" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="database_murom_factory2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="database_murom_factory2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="access" EntityType="database_murom_factory2Model.access" />
+          <EntitySet Name="chat" EntityType="database_murom_factory2Model.chat" />
+          <EntitySet Name="Comments" EntityType="database_murom_factory2Model.Comments" />
+          <EntitySet Name="doc" EntityType="database_murom_factory2Model.doc" />
+          <EntitySet Name="edit" EntityType="database_murom_factory2Model.edit" />
+          <EntitySet Name="group_rank" EntityType="database_murom_factory2Model.group_rank" />
+          <EntitySet Name="infoFileDoc" EntityType="database_murom_factory2Model.infoFileDoc" />
+          <EntitySet Name="message" EntityType="database_murom_factory2Model.message" />
+          <EntitySet Name="Missions" EntityType="database_murom_factory2Model.Missions" />
+          <EntitySet Name="object" EntityType="database_murom_factory2Model.object" />
+          <EntitySet Name="rank" EntityType="database_murom_factory2Model.rank" />
+          <EntitySet Name="Reminders" EntityType="database_murom_factory2Model.Reminders" />
+          <EntitySet Name="sysdiagrams" EntityType="database_murom_factory2Model.sysdiagrams" />
+          <EntitySet Name="tom" EntityType="database_murom_factory2Model.tom" />
+          <EntitySet Name="User_chat" EntityType="database_murom_factory2Model.User_chat" />
+          <EntitySet Name="users" EntityType="database_murom_factory2Model.users" />
+          <EntitySet Name="assignment" EntityType="database_murom_factory2Model.assignment" />
+          <EntitySet Name="remider" EntityType="database_murom_factory2Model.remider" />
+          <EntitySet Name="SourcesRSS" EntityType="database_murom_factory2Model.SourcesRSS" />
+          <EntitySet Name="TagsNews" EntityType="database_murom_factory2Model.TagsNews" />
+          <AssociationSet Name="access_to_object" Association="database_murom_factory2Model.access_to_object">
+            <End Role="object" EntitySet="object" />
+            <End Role="access" EntitySet="access" />
+          </AssociationSet>
+          <AssociationSet Name="access_to_users" Association="database_murom_factory2Model.access_to_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="access" EntitySet="access" />
+          </AssociationSet>
+          <AssociationSet Name="FK_message_chat" Association="database_murom_factory2Model.FK_message_chat">
+            <End Role="chat" EntitySet="chat" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="object_to_chat" Association="database_murom_factory2Model.object_to_chat">
+            <End Role="chat" EntitySet="chat" />
+            <End Role="object" EntitySet="object" />
+          </AssociationSet>
+          <AssociationSet Name="User_chat_to_Chat" Association="database_murom_factory2Model.User_chat_to_Chat">
+            <End Role="chat" EntitySet="chat" />
+            <End Role="User_chat" EntitySet="User_chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_doc" Association="database_murom_factory2Model.FK_Comments_doc">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_users" Association="database_murom_factory2Model.FK_Comments_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="doc_to_edit" Association="database_murom_factory2Model.doc_to_edit">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="edit" EntitySet="edit" />
+          </AssociationSet>
+          <AssociationSet Name="doc_to_infofiledoc" Association="database_murom_factory2Model.doc_to_infofiledoc">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="infoFileDoc" EntitySet="infoFileDoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_doc_tom" Association="database_murom_factory2Model.FK_doc_tom">
+            <End Role="tom" EntitySet="tom" />
+            <End Role="doc" EntitySet="doc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_doc_users" Association="database_murom_factory2Model.FK_doc_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="doc" EntitySet="doc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_doc_users1" Association="database_murom_factory2Model.FK_doc_users1">
+            <End Role="users" EntitySet="users" />
+            <End Role="doc" EntitySet="doc" />
+          </AssociationSet>
+          <AssociationSet Name="object_to_doc" Association="database_murom_factory2Model.object_to_doc">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="object" EntitySet="object" />
+          </AssociationSet>
+          <AssociationSet Name="remider_to_doc" Association="database_murom_factory2Model.remider_to_doc">
+            <End Role="doc" EntitySet="doc" />
+            <End Role="remider" EntitySet="remider" />
+          </AssociationSet>
+          <AssociationSet Name="group_rank_to_users" Association="database_murom_factory2Model.group_rank_to_users">
+            <End Role="group_rank" EntitySet="group_rank" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="infofiledoc_to_doc" Association="database_murom_factory2Model.infofiledoc_to_doc">
+            <End Role="tom" EntitySet="tom" />
+            <End Role="infoFileDoc" EntitySet="infoFileDoc" />
+          </AssociationSet>
+          <AssociationSet Name="rank_to_user" Association="database_murom_factory2Model.rank_to_user">
+            <End Role="rank" EntitySet="rank" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="User_chat_to_Chat_id_user_" Association="database_murom_factory2Model.User_chat_to_Chat_id_user_">
+            <End Role="users" EntitySet="users" />
+            <End Role="User_chat" EntitySet="User_chat" />
+          </AssociationSet>
+          <AssociationSet Name="ass_to_user" Association="database_murom_factory2Model.ass_to_user">
+            <End Role="users" EntitySet="users" />
+            <End Role="assignment" EntitySet="assignment" />
+          </AssociationSet>
+          <AssociationSet Name="ass_to_user_author_" Association="database_murom_factory2Model.ass_to_user_author_">
+            <End Role="users" EntitySet="users" />
+            <End Role="assignment" EntitySet="assignment" />
+          </AssociationSet>
+          <AssociationSet Name="remider_to_users_author_" Association="database_murom_factory2Model.remider_to_users_author_">
+            <End Role="users" EntitySet="users" />
+            <End Role="remider" EntitySet="remider" />
+          </AssociationSet>
+          <AssociationSet Name="remider_to_users_user_" Association="database_murom_factory2Model.remider_to_users_user_">
+            <End Role="users" EntitySet="users" />
+            <End Role="remider" EntitySet="remider" />
+          </AssociationSet>
+          <AssociationSet Name="users_to_remider" Association="database_murom_factory2Model.users_to_remider">
+            <End Role="users" EntitySet="users" />
+            <End Role="users1" EntitySet="users" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
         <EntityType Name="access">
           <Key>
             <PropertyRef Name="id_access" />
@@ -365,8 +812,8 @@
           <Property Name="id_users" Type="Int32" />
           <Property Name="access1" Type="Int32" />
           <Property Name="id_object" Type="Int32" />
-          <NavigationProperty Name="object" Relationship="Self.access_to_object" FromRole="access" ToRole="object" />
-          <NavigationProperty Name="users" Relationship="Self.access_to_users" FromRole="access" ToRole="users" />
+          <NavigationProperty Name="object" Relationship="database_murom_factory2Model.access_to_object" FromRole="access" ToRole="object" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.access_to_users" FromRole="access" ToRole="users" />
         </EntityType>
         <EntityType Name="chat">
           <Key>
@@ -376,23 +823,45 @@
           <Property Name="id_user" Type="Int32" Nullable="false" />
           <Property Name="name_chat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date_of_create" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="message" Relationship="Self.FK_message_chat" FromRole="chat" ToRole="message" />
-          <NavigationProperty Name="object" Relationship="Self.object_to_chat" FromRole="chat" ToRole="object" />
-          <NavigationProperty Name="User_chat" Relationship="Self.User_chat_to_Chat" FromRole="chat" ToRole="User_chat" />
+          <NavigationProperty Name="message" Relationship="database_murom_factory2Model.FK_message_chat" FromRole="chat" ToRole="message" />
+          <NavigationProperty Name="object" Relationship="database_murom_factory2Model.object_to_chat" FromRole="chat" ToRole="object" />
+          <NavigationProperty Name="User_chat" Relationship="database_murom_factory2Model.User_chat_to_Chat" FromRole="chat" ToRole="User_chat" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id_comments" />
+          </Key>
+          <Property Name="id_comments" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_doc" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="text_comm" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.FK_Comments_doc" FromRole="Comments" ToRole="doc" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.FK_Comments_users" FromRole="Comments" ToRole="users" />
         </EntityType>
         <EntityType Name="doc">
           <Key>
             <PropertyRef Name="id_doc" />
           </Key>
           <Property Name="id_doc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="recipient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="author" Type="Int32" />
+          <Property Name="recipient" Type="Int32" />
           <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="data_of_create" Type="DateTime" Precision="0" />
           <Property Name="date_of_modify" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="edit" Relationship="Self.doc_to_edit" FromRole="doc" ToRole="edit" />
-          <NavigationProperty Name="infoFileDoc" Relationship="Self.doc_to_infofiledoc" FromRole="doc" ToRole="infoFileDoc" />
-          <NavigationProperty Name="object" Relationship="Self.object_to_doc" FromRole="doc" ToRole="object" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_tom" Type="Int32" />
+          <Property Name="text_doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name_doc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="database_murom_factory2Model.FK_Comments_doc" FromRole="doc" ToRole="Comments" />
+          <NavigationProperty Name="edit" Relationship="database_murom_factory2Model.doc_to_edit" FromRole="doc" ToRole="edit" />
+          <NavigationProperty Name="infoFileDoc" Relationship="database_murom_factory2Model.doc_to_infofiledoc" FromRole="doc" ToRole="infoFileDoc" />
+          <NavigationProperty Name="tom" Relationship="database_murom_factory2Model.FK_doc_tom" FromRole="doc" ToRole="tom" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.FK_doc_users" FromRole="doc" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="database_murom_factory2Model.FK_doc_users1" FromRole="doc" ToRole="users" />
+          <NavigationProperty Name="object" Relationship="database_murom_factory2Model.object_to_doc" FromRole="doc" ToRole="object" />
+          <NavigationProperty Name="remider" Relationship="database_murom_factory2Model.remider_to_doc" FromRole="doc" ToRole="remider" />
         </EntityType>
         <EntityType Name="edit">
           <Key>
@@ -403,7 +872,7 @@
           <Property Name="date_of_edit" Type="DateTime" Precision="0" />
           <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="edit1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="doc" Relationship="Self.doc_to_edit" FromRole="edit" ToRole="doc" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.doc_to_edit" FromRole="edit" ToRole="doc" />
         </EntityType>
         <EntityType Name="group_rank">
           <Key>
@@ -411,7 +880,7 @@
           </Key>
           <Property Name="id_group_rank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="groupRank" Type="Int32" />
-          <NavigationProperty Name="users" Relationship="Self.group_rank_to_users" FromRole="group_rank" ToRole="users" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.group_rank_to_users" FromRole="group_rank" ToRole="users" />
         </EntityType>
         <EntityType Name="infoFileDoc">
           <Key>
@@ -423,8 +892,9 @@
           <Property Name="id_doc" Type="Int32" />
           <Property Name="text_doc" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="name_doc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="doc" Relationship="Self.doc_to_infofiledoc" FromRole="infoFileDoc" ToRole="doc" />
-          <NavigationProperty Name="tom" Relationship="Self.infofiledoc_to_doc" FromRole="infoFileDoc" ToRole="tom" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.doc_to_infofiledoc" FromRole="infoFileDoc" ToRole="doc" />
+          <NavigationProperty Name="tom" Relationship="database_murom_factory2Model.infofiledoc_to_doc" FromRole="infoFileDoc" ToRole="tom" />
         </EntityType>
         <EntityType Name="message">
           <Key>
@@ -433,9 +903,22 @@
           <Property Name="id_message" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_users" Type="Int32" />
           <Property Name="id_chat" Type="Int32" />
-          <Property Name="text_message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="datetime" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="chat" Relationship="Self.FK_message_chat" FromRole="message" ToRole="chat" />
+          <Property Name="text_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="chat" Relationship="database_murom_factory2Model.FK_message_chat" FromRole="message" ToRole="chat" />
+        </EntityType>
+        <EntityType Name="Missions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSender" Type="Int32" Nullable="false" />
+          <Property Name="IdRecipient" Type="Int32" Nullable="false" />
+          <Property Name="IdDocument" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
+          <Property Name="DateMission" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="object">
           <Key>
@@ -443,9 +926,9 @@
           </Key>
           <Property Name="id_object" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="type" Type="Int32" />
-          <NavigationProperty Name="access" Relationship="Self.access_to_object" FromRole="object" ToRole="access" />
-          <NavigationProperty Name="chat" Relationship="Self.object_to_chat" FromRole="object" ToRole="chat" />
-          <NavigationProperty Name="doc" Relationship="Self.object_to_doc" FromRole="object" ToRole="doc" />
+          <NavigationProperty Name="access" Relationship="database_murom_factory2Model.access_to_object" FromRole="object" ToRole="access" />
+          <NavigationProperty Name="chat" Relationship="database_murom_factory2Model.object_to_chat" FromRole="object" ToRole="chat" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.object_to_doc" FromRole="object" ToRole="doc" />
         </EntityType>
         <EntityType Name="rank">
           <Key>
@@ -453,13 +936,25 @@
           </Key>
           <Property Name="id_rank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="rank1" Type="Int32" />
-          <NavigationProperty Name="users" Relationship="Self.rank_to_user" FromRole="rank" ToRole="users" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.rank_to_user" FromRole="rank" ToRole="users" />
+        </EntityType>
+        <EntityType Name="Reminders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSender" Type="Int32" Nullable="false" />
+          <Property Name="IdRecipient" Type="Int32" Nullable="false" />
+          <Property Name="IdDocument" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
+          <Property Name="DateReminder" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -472,7 +967,8 @@
           <Property Name="id_tom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_tom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="infoFileDoc" Relationship="Self.infofiledoc_to_doc" FromRole="tom" ToRole="infoFileDoc" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.FK_doc_tom" FromRole="tom" ToRole="doc" />
+          <NavigationProperty Name="infoFileDoc" Relationship="database_murom_factory2Model.infofiledoc_to_doc" FromRole="tom" ToRole="infoFileDoc" />
         </EntityType>
         <EntityType Name="User_chat">
           <Key>
@@ -482,8 +978,8 @@
           <Property Name="id_chat" Type="Int32" />
           <Property Name="id_user" Type="Int32" />
           <Property Name="object" Type="Int32" />
-          <NavigationProperty Name="chat" Relationship="Self.User_chat_to_Chat" FromRole="User_chat" ToRole="chat" />
-          <NavigationProperty Name="users" Relationship="Self.User_chat_to_Chat_id_user_" FromRole="User_chat" ToRole="users" />
+          <NavigationProperty Name="chat" Relationship="database_murom_factory2Model.User_chat_to_Chat" FromRole="User_chat" ToRole="chat" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.User_chat_to_Chat_id_user_" FromRole="User_chat" ToRole="users" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -500,14 +996,64 @@
           <Property Name="id_group_rank" Type="Int32" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="access" Relationship="Self.access_to_users" FromRole="users" ToRole="access" />
-          <NavigationProperty Name="group_rank" Relationship="Self.group_rank_to_users" FromRole="users" ToRole="group_rank" />
-          <NavigationProperty Name="rank" Relationship="Self.rank_to_user" FromRole="users" ToRole="rank" />
-          <NavigationProperty Name="User_chat" Relationship="Self.User_chat_to_Chat_id_user_" FromRole="users" ToRole="User_chat" />
+          <NavigationProperty Name="access" Relationship="database_murom_factory2Model.access_to_users" FromRole="users" ToRole="access" />
+          <NavigationProperty Name="Comments" Relationship="database_murom_factory2Model.FK_Comments_users" FromRole="users" ToRole="Comments" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.FK_doc_users" FromRole="users" ToRole="doc" />
+          <NavigationProperty Name="doc1" Relationship="database_murom_factory2Model.FK_doc_users1" FromRole="users" ToRole="doc" />
+          <NavigationProperty Name="group_rank" Relationship="database_murom_factory2Model.group_rank_to_users" FromRole="users" ToRole="group_rank" />
+          <NavigationProperty Name="rank" Relationship="database_murom_factory2Model.rank_to_user" FromRole="users" ToRole="rank" />
+          <NavigationProperty Name="User_chat" Relationship="database_murom_factory2Model.User_chat_to_Chat_id_user_" FromRole="users" ToRole="User_chat" />
+          <NavigationProperty Name="assignment" Relationship="database_murom_factory2Model.ass_to_user" FromRole="users" ToRole="assignment" />
+          <NavigationProperty Name="assignment1" Relationship="database_murom_factory2Model.ass_to_user_author_" FromRole="users" ToRole="assignment" />
+          <NavigationProperty Name="remider" Relationship="database_murom_factory2Model.remider_to_users_author_" FromRole="users" ToRole="remider" />
+          <NavigationProperty Name="remider1" Relationship="database_murom_factory2Model.remider_to_users_user_" FromRole="users" ToRole="remider" />
+          <NavigationProperty Name="users1" Relationship="database_murom_factory2Model.users_to_remider" FromRole="users" ToRole="users1" />
+          <NavigationProperty Name="users2" Relationship="database_murom_factory2Model.users_to_remider" FromRole="users1" ToRole="users" />
+        </EntityType>
+        <EntityType Name="assignment">
+          <Key>
+            <PropertyRef Name="id_assignment" />
+          </Key>
+          <Property Name="id_assignment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_author" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="text" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="done" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="visible" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.ass_to_user" FromRole="assignment" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="database_murom_factory2Model.ass_to_user_author_" FromRole="assignment" ToRole="users" />
+        </EntityType>
+        <EntityType Name="remider">
+          <Key>
+            <PropertyRef Name="id_remider" />
+          </Key>
+          <Property Name="id_remider" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_author" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="id_doc" Type="Int32" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="visible" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="doc" Relationship="database_murom_factory2Model.remider_to_doc" FromRole="remider" ToRole="doc" />
+          <NavigationProperty Name="users" Relationship="database_murom_factory2Model.remider_to_users_author_" FromRole="remider" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="database_murom_factory2Model.remider_to_users_user_" FromRole="remider" ToRole="users" />
+        </EntityType>
+        <EntityType Name="SourcesRSS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TagsNews">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="access_to_object">
-          <End Role="object" Type="Self.object" Multiplicity="0..1" />
-          <End Role="access" Type="Self.access" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.object" Role="object" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.access" Role="access" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="object">
               <PropertyRef Name="id_object" />
@@ -518,8 +1064,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="access_to_users">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
-          <End Role="access" Type="Self.access" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.access" Role="access" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="users">
               <PropertyRef Name="id_users" />
@@ -530,8 +1076,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_message_chat">
-          <End Role="chat" Type="Self.chat" Multiplicity="0..1" />
-          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.chat" Role="chat" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.message" Role="message" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="chat">
               <PropertyRef Name="id_chat" />
@@ -542,8 +1088,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="object_to_chat">
-          <End Role="chat" Type="Self.chat" Multiplicity="1" />
-          <End Role="object" Type="Self.object" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.chat" Role="chat" Multiplicity="1" />
+          <End Type="database_murom_factory2Model.object" Role="object" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="chat">
               <PropertyRef Name="id_chat" />
@@ -554,8 +1100,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="User_chat_to_Chat">
-          <End Role="chat" Type="Self.chat" Multiplicity="0..1" />
-          <End Role="User_chat" Type="Self.User_chat" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.chat" Role="chat" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.User_chat" Role="User_chat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="chat">
               <PropertyRef Name="id_chat" />
@@ -565,9 +1111,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Comments_doc">
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doc">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_users">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="doc_to_edit">
-          <End Role="doc" Type="Self.doc" Multiplicity="1" />
-          <End Role="edit" Type="Self.edit" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="1" />
+          <End Type="database_murom_factory2Model.edit" Role="edit" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="doc">
               <PropertyRef Name="id_doc" />
@@ -578,8 +1148,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="doc_to_infofiledoc">
-          <End Role="doc" Type="Self.doc" Multiplicity="0..1" />
-          <End Role="infoFileDoc" Type="Self.infoFileDoc" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.infoFileDoc" Role="infoFileDoc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="doc">
               <PropertyRef Name="id_doc" />
@@ -589,9 +1159,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_doc_tom">
+          <End Type="database_murom_factory2Model.tom" Role="tom" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tom">
+              <PropertyRef Name="id_tom" />
+            </Principal>
+            <Dependent Role="doc">
+              <PropertyRef Name="id_tom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_doc_users">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="doc">
+              <PropertyRef Name="author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_doc_users1">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="doc">
+              <PropertyRef Name="recipient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="object_to_doc">
-          <End Role="doc" Type="Self.doc" Multiplicity="1" />
-          <End Role="object" Type="Self.object" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="1" />
+          <End Type="database_murom_factory2Model.object" Role="object" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="doc">
               <PropertyRef Name="id_doc" />
@@ -601,9 +1207,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="remider_to_doc">
+          <End Type="database_murom_factory2Model.doc" Role="doc" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.remider" Role="remider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doc">
+              <PropertyRef Name="id_doc" />
+            </Principal>
+            <Dependent Role="remider">
+              <PropertyRef Name="id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="group_rank_to_users">
-          <End Role="group_rank" Type="Self.group_rank" Multiplicity="0..1" />
-          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.group_rank" Role="group_rank" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="group_rank">
               <PropertyRef Name="id_group_rank" />
@@ -614,8 +1232,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="infofiledoc_to_doc">
-          <End Role="tom" Type="Self.tom" Multiplicity="0..1" />
-          <End Role="infoFileDoc" Type="Self.infoFileDoc" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.tom" Role="tom" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.infoFileDoc" Role="infoFileDoc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tom">
               <PropertyRef Name="id_tom" />
@@ -626,8 +1244,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="rank_to_user">
-          <End Role="rank" Type="Self.rank" Multiplicity="0..1" />
-          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <End Type="database_murom_factory2Model.rank" Role="rank" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rank">
               <PropertyRef Name="id_rank" />
@@ -638,8 +1256,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="User_chat_to_Chat_id_user_">
-          <End Role="users" Type="Self.users" Multiplicity="1" />
-          <End Role="User_chat" Type="Self.User_chat" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="1" />
+          <End Type="database_murom_factory2Model.User_chat" Role="User_chat" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="users">
               <PropertyRef Name="id_users" />
@@ -649,86 +1267,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="database_murom_factory2Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="access" EntityType="Self.access" />
-          <EntitySet Name="chat" EntityType="Self.chat" />
-          <EntitySet Name="doc" EntityType="Self.doc" />
-          <EntitySet Name="edit" EntityType="Self.edit" />
-          <EntitySet Name="group_rank" EntityType="Self.group_rank" />
-          <EntitySet Name="infoFileDoc" EntityType="Self.infoFileDoc" />
-          <EntitySet Name="message" EntityType="Self.message" />
-          <EntitySet Name="object" EntityType="Self.object" />
-          <EntitySet Name="rank" EntityType="Self.rank" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="tom" EntityType="Self.tom" />
-          <EntitySet Name="User_chat" EntityType="Self.User_chat" />
-          <EntitySet Name="users" EntityType="Self.users" />
-          <AssociationSet Name="access_to_object" Association="Self.access_to_object">
-            <End Role="object" EntitySet="object" />
-            <End Role="access" EntitySet="access" />
-          </AssociationSet>
-          <AssociationSet Name="access_to_users" Association="Self.access_to_users">
-            <End Role="users" EntitySet="users" />
-            <End Role="access" EntitySet="access" />
-          </AssociationSet>
-          <AssociationSet Name="FK_message_chat" Association="Self.FK_message_chat">
-            <End Role="chat" EntitySet="chat" />
-            <End Role="message" EntitySet="message" />
-          </AssociationSet>
-          <AssociationSet Name="object_to_chat" Association="Self.object_to_chat">
-            <End Role="chat" EntitySet="chat" />
-            <End Role="object" EntitySet="object" />
-          </AssociationSet>
-          <AssociationSet Name="User_chat_to_Chat" Association="Self.User_chat_to_Chat">
-            <End Role="chat" EntitySet="chat" />
-            <End Role="User_chat" EntitySet="User_chat" />
-          </AssociationSet>
-          <AssociationSet Name="doc_to_edit" Association="Self.doc_to_edit">
-            <End Role="doc" EntitySet="doc" />
-            <End Role="edit" EntitySet="edit" />
-          </AssociationSet>
-          <AssociationSet Name="doc_to_infofiledoc" Association="Self.doc_to_infofiledoc">
-            <End Role="doc" EntitySet="doc" />
-            <End Role="infoFileDoc" EntitySet="infoFileDoc" />
-          </AssociationSet>
-          <AssociationSet Name="object_to_doc" Association="Self.object_to_doc">
-            <End Role="doc" EntitySet="doc" />
-            <End Role="object" EntitySet="object" />
-          </AssociationSet>
-          <AssociationSet Name="group_rank_to_users" Association="Self.group_rank_to_users">
-            <End Role="group_rank" EntitySet="group_rank" />
-            <End Role="users" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="infofiledoc_to_doc" Association="Self.infofiledoc_to_doc">
-            <End Role="tom" EntitySet="tom" />
-            <End Role="infoFileDoc" EntitySet="infoFileDoc" />
-          </AssociationSet>
-          <AssociationSet Name="rank_to_user" Association="Self.rank_to_user">
-            <End Role="rank" EntitySet="rank" />
-            <End Role="users" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="User_chat_to_Chat_id_user_" Association="Self.User_chat_to_Chat_id_user_">
-            <End Role="users" EntitySet="users" />
-            <End Role="User_chat" EntitySet="User_chat" />
-          </AssociationSet>
-          <EntitySet Name="SourcesRSS" EntityType="database_murom_factory2Model.SourcesRSS" />
-          <EntitySet Name="TagsNews" EntityType="database_murom_factory2Model.TagsNews" />
-        </EntityContainer>
-        <EntityType Name="SourcesRSS">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TagsNews">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Tag" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
+        <Association Name="ass_to_user">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.assignment" Role="assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="assignment">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ass_to_user_author_">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.assignment" Role="assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="assignment">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="remider_to_users_author_">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.remider" Role="remider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="remider">
+              <PropertyRef Name="id_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="remider_to_users_user_">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="0..1" />
+          <End Type="database_murom_factory2Model.remider" Role="remider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="remider">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_to_remider">
+          <End Type="database_murom_factory2Model.users" Role="users" Multiplicity="1" />
+          <End Type="database_murom_factory2Model.users" Role="users1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id_users" />
+            </Principal>
+            <Dependent Role="users1">
+              <PropertyRef Name="id_users" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -738,144 +1336,211 @@
           <EntitySetMapping Name="access">
             <EntityTypeMapping TypeName="database_murom_factory2Model.access">
               <MappingFragment StoreEntitySet="access">
-                <ScalarProperty Name="id_access" ColumnName="id_access" />
-                <ScalarProperty Name="id_users" ColumnName="id_users" />
-                <ScalarProperty Name="access1" ColumnName="access" />
                 <ScalarProperty Name="id_object" ColumnName="id_object" />
+                <ScalarProperty Name="access1" ColumnName="access" />
+                <ScalarProperty Name="id_users" ColumnName="id_users" />
+                <ScalarProperty Name="id_access" ColumnName="id_access" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="chat">
             <EntityTypeMapping TypeName="database_murom_factory2Model.chat">
               <MappingFragment StoreEntitySet="chat">
-                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="name_chat" ColumnName="name_chat" />
                 <ScalarProperty Name="date_of_create" ColumnName="date_of_create" />
+                <ScalarProperty Name="name_chat" ColumnName="name_chat" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="text_comm" ColumnName="text_comm" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="id_comments" ColumnName="id_comments" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="doc">
             <EntityTypeMapping TypeName="database_murom_factory2Model.doc">
               <MappingFragment StoreEntitySet="doc">
-                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
-                <ScalarProperty Name="author" ColumnName="author" />
-                <ScalarProperty Name="recipient" ColumnName="recipient" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="data_of_create" ColumnName="data_of_create" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="name_doc" ColumnName="name_doc" />
+                <ScalarProperty Name="text_doc" ColumnName="text_doc" />
+                <ScalarProperty Name="id_tom" ColumnName="id_tom" />
+                <ScalarProperty Name="url" ColumnName="url" />
                 <ScalarProperty Name="date_of_modify" ColumnName="date_of_modify" />
+                <ScalarProperty Name="data_of_create" ColumnName="data_of_create" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="recipient" ColumnName="recipient" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="edit">
             <EntityTypeMapping TypeName="database_murom_factory2Model.edit">
               <MappingFragment StoreEntitySet="edit">
-                <ScalarProperty Name="id_edit" ColumnName="id_edit" />
-                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
-                <ScalarProperty Name="date_of_edit" ColumnName="date_of_edit" />
-                <ScalarProperty Name="author" ColumnName="author" />
                 <ScalarProperty Name="edit1" ColumnName="edit" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="date_of_edit" ColumnName="date_of_edit" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="id_edit" ColumnName="id_edit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="group_rank">
             <EntityTypeMapping TypeName="database_murom_factory2Model.group_rank">
               <MappingFragment StoreEntitySet="group_rank">
-                <ScalarProperty Name="id_group_rank" ColumnName="id_group_rank" />
                 <ScalarProperty Name="groupRank" ColumnName="groupRank" />
+                <ScalarProperty Name="id_group_rank" ColumnName="id_group_rank" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="infoFileDoc">
             <EntityTypeMapping TypeName="database_murom_factory2Model.infoFileDoc">
               <MappingFragment StoreEntitySet="infoFileDoc">
-                <ScalarProperty Name="id_infoFileDoc" ColumnName="id_infoFileDoc" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="id_tom" ColumnName="id_tom" />
-                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
-                <ScalarProperty Name="text_doc" ColumnName="text_doc" />
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="name_doc" ColumnName="name_doc" />
+                <ScalarProperty Name="text_doc" ColumnName="text_doc" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="id_tom" ColumnName="id_tom" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="id_infoFileDoc" ColumnName="id_infoFileDoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="message">
             <EntityTypeMapping TypeName="database_murom_factory2Model.message">
               <MappingFragment StoreEntitySet="message">
-                <ScalarProperty Name="id_message" ColumnName="id_message" />
-                <ScalarProperty Name="id_users" ColumnName="id_users" />
-                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
-                <ScalarProperty Name="text_message" ColumnName="text_message" />
                 <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="text_message" ColumnName="text_message" />
+                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+                <ScalarProperty Name="id_users" ColumnName="id_users" />
+                <ScalarProperty Name="id_message" ColumnName="id_message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Missions">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.Missions">
+              <MappingFragment StoreEntitySet="Missions">
+                <ScalarProperty Name="Done" ColumnName="Done" />
+                <ScalarProperty Name="DateMission" ColumnName="DateMission" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
+                <ScalarProperty Name="IdRecipient" ColumnName="IdRecipient" />
+                <ScalarProperty Name="IdSender" ColumnName="IdSender" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="object">
             <EntityTypeMapping TypeName="database_murom_factory2Model.object">
               <MappingFragment StoreEntitySet="object">
-                <ScalarProperty Name="id_object" ColumnName="id_object" />
                 <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id_object" ColumnName="id_object" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rank">
             <EntityTypeMapping TypeName="database_murom_factory2Model.rank">
               <MappingFragment StoreEntitySet="rank">
-                <ScalarProperty Name="id_rank" ColumnName="id_rank" />
                 <ScalarProperty Name="rank1" ColumnName="rank" />
+                <ScalarProperty Name="id_rank" ColumnName="id_rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reminders">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.Reminders">
+              <MappingFragment StoreEntitySet="Reminders">
+                <ScalarProperty Name="DateReminder" ColumnName="DateReminder" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
+                <ScalarProperty Name="IdRecipient" ColumnName="IdRecipient" />
+                <ScalarProperty Name="IdSender" ColumnName="IdSender" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="database_murom_factory2Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tom">
             <EntityTypeMapping TypeName="database_murom_factory2Model.tom">
               <MappingFragment StoreEntitySet="tom">
-                <ScalarProperty Name="id_tom" ColumnName="id_tom" />
-                <ScalarProperty Name="name_tom" ColumnName="name_tom" />
                 <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="name_tom" ColumnName="name_tom" />
+                <ScalarProperty Name="id_tom" ColumnName="id_tom" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_chat">
             <EntityTypeMapping TypeName="database_murom_factory2Model.User_chat">
               <MappingFragment StoreEntitySet="User_chat">
-                <ScalarProperty Name="id_user_chat" ColumnName="id_user_chat" />
-                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="object" ColumnName="object" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_chat" ColumnName="id_chat" />
+                <ScalarProperty Name="id_user_chat" ColumnName="id_user_chat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="database_murom_factory2Model.users">
               <MappingFragment StoreEntitySet="users">
-                <ScalarProperty Name="id_users" ColumnName="id_users" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="id_rank" ColumnName="id_rank" />
-                <ScalarProperty Name="id_group_rank" ColumnName="id_group_rank" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="id_group_rank" ColumnName="id_group_rank" />
+                <ScalarProperty Name="id_rank" ColumnName="id_rank" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="id_users" ColumnName="id_users" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="assignment">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.assignment">
+              <MappingFragment StoreEntitySet="assignment">
+                <ScalarProperty Name="visible" ColumnName="visible" />
+                <ScalarProperty Name="done" ColumnName="done" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_author" ColumnName="id_author" />
+                <ScalarProperty Name="id_assignment" ColumnName="id_assignment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="remider">
+            <EntityTypeMapping TypeName="database_murom_factory2Model.remider">
+              <MappingFragment StoreEntitySet="remider">
+                <ScalarProperty Name="visible" ColumnName="visible" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="id_doc" ColumnName="id_doc" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_author" ColumnName="id_author" />
+                <ScalarProperty Name="id_remider" ColumnName="id_remider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SourcesRSS">
             <EntityTypeMapping TypeName="database_murom_factory2Model.SourcesRSS">
               <MappingFragment StoreEntitySet="SourcesRSS">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -889,6 +1554,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище database_murom_factory2Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище database_murom_factory2Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище database_murom_factory2Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище database_murom_factory2Model.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище database_murom_factory2Model.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище database_murom_factory2Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище database_murom_factory2Model.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

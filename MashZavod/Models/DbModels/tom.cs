@@ -17,6 +17,7 @@ namespace MashZavod.Models.DbModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tom()
         {
+            this.doc = new HashSet<doc>();
             this.infoFileDoc = new HashSet<infoFileDoc>();
         }
     
@@ -24,6 +25,8 @@ namespace MashZavod.Models.DbModels
         public string name_tom { get; set; }
         public string url { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<doc> doc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<infoFileDoc> infoFileDoc { get; set; }
     }

@@ -12,9 +12,15 @@ namespace MashZavod.Models.DbModels
     using System;
     using System.Collections.Generic;
     
-    public partial class SourcesRSS
+    public partial class Missions
     {
-        public int ID { get; set; }
-        public string Link { get; set; }
+        public int Id { get; set; }
+        public int IdSender { get; set; }
+        public int IdRecipient { get; set; }
+        public int IdDocument { get; set; }
+        public string Text { get; set; }
+        public bool Visible { get; set; }
+        public System.DateTime DateMission { get; set; }
+        public bool Done { get; set; }
     }
 }

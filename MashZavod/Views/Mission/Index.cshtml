@@ -1,0 +1,78 @@
+﻿@model MashZavod.Models.MissionsModels.MissionModelAdd
+@{
+    ViewBag.Title = "Поручения";
+}
+
+@Html.Partial("nav")
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h1>
+            Список поручений
+        </h1>
+        @Html.ValidationSummary(true)
+        @if (ViewBag.MissionViewModel != null)
+        {
+            if (ViewBag.MissionViewModel.IsInMissionModels)
+            {
+                foreach (var elem in ViewBag.MissionViewModel.InMissionModels)
+                {
+                    <h3>@elem.Text</h3>
+                    <h4>@elem.Login<br />@elem.DateMission</h4>
+                    <a href="Mission/HideMission?id=@elem.Id">Скрыть</a>
+                    <br />
+                }
+            }
+            else
+            {
+                <h2>(Поручения отсутствуют)</h2>
+            }
+        }
+        <h1>
+            Мои поручения
+        </h1>
+        @if (ViewBag.MissionViewModel != null)
+        {
+            if (ViewBag.MissionViewModel.IsOutMissionModels)
+            {
+                foreach (var elem in ViewBag.MissionViewModel.OutMissionModels)
+                {
+                    <h3>@elem.Text</h3>
+                    <h4>@elem.Login<br />@elem.DateMission</h4>
+                    if (elem.Done)
+                    {
+                        <h4>Поручение выполнено</h4>
+                        <a href="Mission/NoDoneMission?id=@elem.Id">Поручение считать невыполненным</a>
+                        <a href="Mission/DoneMission?id=@elem.Id">Поручение считать выполненным</a>
+                    }
+                    else
+                    {
+                        <h4>Поручение еще не выполнено</h4>
+                    }
+                    <br />
+                }
+            }
+            else
+            {
+                <h2>(Исходящие поручения отсутствуют)</h2>
+            }
+        }
+        <h2>Добавить новое поручение</h2>
+        <form method="post" action="/Mission/Add">
+            <label>Login получаателя поручения</label>
+            <input type="text" name="Login" /><br />
+            <label>Текст поручения</label>
+            <input type="text" name="Text" />
+            <input type="submit" value="Отправить" />
+        </form>
+
+    </div>
+</body>
+</html>
