@@ -153,14 +153,13 @@
           <Property Name="Visible" Type="bit" Nullable="false" />
           <Property Name="DateReminder" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "database_murom_factory2.dbo.SourcesRSS" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="SourcesRSS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Link" Type="text" />
+          <Property Name="Link" Type="text" Nullable="false" />
+          <Property Name="Description" Type="text" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -532,6 +531,7 @@
           <EntitySet Name="object" EntityType="Self.object" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rank" EntityType="Self.rank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reminders" EntityType="Self.Reminders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourcesRSS" EntityType="Self.SourcesRSS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TagsNews" EntityType="Self.TagsNews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tom" EntityType="Self.tom" Schema="dbo" store:Type="Tables" />
@@ -556,12 +556,6 @@
     [remider].[text] AS [text], 
     [remider].[visible] AS [visible]
     FROM [dbo].[remider] AS [remider]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SourcesRSS" EntityType="Self.SourcesRSS" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SourcesRSS].[ID] AS [ID], 
-    [SourcesRSS].[Link] AS [Link]
-    FROM [dbo].[SourcesRSS] AS [SourcesRSS]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="access_to_object" Association="Self.access_to_object">
             <End Role="object" EntitySet="object" />
@@ -1042,7 +1036,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TagsNews">
           <Key>
@@ -1541,6 +1536,7 @@
           <EntitySetMapping Name="SourcesRSS">
             <EntityTypeMapping TypeName="database_murom_factory2Model.SourcesRSS">
               <MappingFragment StoreEntitySet="SourcesRSS">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
