@@ -45,8 +45,8 @@
                     <td><input type="text" name="data_of_create" readonly value=@b.data_of_create /></td>
                     <td><input type="text" name="date_of_modify" readonly value=@b.date_of_modify /></td>
                     <td><p><a href="/Doc/DowloadDoc?id=@b.id_doc">Скачать</a></p></td>
-                    <td><p><a href="/Doc/DeleteDoc">Удалить</a></p></td>
-                    <td><p><a href="/Doc/EditDoc">Изменить</a></p></td>
+                    <td><p><a href="/Doc/DeleteDoc?id=@b.id_doc">Удалить</a></p></td>
+                    <td><p><a href="/Doc/EditDoc?id=@b.id_doc">Изменить</a></p></td>
                 </tr>
             }
         </table>
