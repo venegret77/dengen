@@ -154,6 +154,35 @@ namespace MashZavod.Controllers
           //  return View();
         }
 
+        [HttpGet]
+        public ActionResult DeleteDoc(int id) //удаление файла
+        {
+            doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
+            if (modelDoc == null)
+            {
+                return RedirectToAction("ViewDoc", "Doc");
+            }
+
+            System.IO.File.Delete(modelDoc.url); 
+            /*удалить все данные из других таблиц, которые связаны с doc*/
+            db.doc.Remove(modelDoc);
+            db.SaveChanges();
+            return RedirectToAction("ViewDoc", "Doc");
+        }
+
+        [HttpGet]
+        public ActionResult EditDoc(int id)
+        {
+            doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
+            if (modelDoc == null)
+            {
+                return RedirectToAction("ViewDoc", "Doc");
+            }
+
+
+            return View();
+        }
+
         /*просмотр списка отправленных документов*/
         public ActionResult ViewSentDoc()
         {
