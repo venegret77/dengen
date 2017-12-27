@@ -30,11 +30,16 @@ namespace MashZavod.Models
 
         public int CalcRelevance(List<string> tags)
         {
-            string _Description = Description.ToLower() + Title.ToLower();
+            string _Description = Description.ToLower();
+            string _Title = Title.ToLower();
             int i = 0;
             foreach (var tag in tags)
+            {
                 if (_Description.Contains(tag.ToLower()))
                     i++;
+                if (_Title.Contains(tag.ToLower()))
+                    i++;
+            }
             return i;
         }
 

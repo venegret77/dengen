@@ -16,5 +16,6 @@ namespace MashZavod.Models.DbModels
     {
         public int ID { get; set; }
         public string Link { get; set; }
+        public string Description { get; set; }
     }
 }
