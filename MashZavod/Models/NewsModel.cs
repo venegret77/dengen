@@ -40,18 +40,10 @@ namespace MashZavod.Models
                 _tag = " " + tag.ToLower() + " ";
                 if (_Description.Contains(_tag))
                 {
-                    x1 = _Description.IndexOf(_tag);
-                    x2 = x1 + _tag.Length + 1;
-                    Description = Description.Insert(x1, "<b>");
-                    Description = Description.Insert(x2, "</b>");
                     i++;
                 }
                 if (_Title.Contains(_tag))
                 {
-                    x1 = _Title.IndexOf(_tag);
-                    x2 = x1 + _tag.Length + 1;
-                    Title = Title.Insert(x1, "<b>");
-                    Title = Title.Insert(x2, "</b>");
                     i++;
                 }
             }

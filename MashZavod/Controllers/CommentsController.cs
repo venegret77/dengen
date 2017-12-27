@@ -43,7 +43,7 @@ namespace MashZavod.Controllers
         [HttpPost]
         public ActionResult Index(Comments model)
         {
-            List<CommentsModels> ListMessage = new List<CommentsModels>();
+        /*    List<CommentsModels> ListMessage = new List<CommentsModels>();
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
                 model.date = DateTime.Now;
@@ -62,7 +62,7 @@ namespace MashZavod.Controllers
                     });
                 }
             }
-            ViewBag.Comments = ListMessage;
+            ViewBag.Comments = ListMessage;*/
             return PartialView();//////////////////////////////////////////////////////////////////////////////////////
         }
     }
