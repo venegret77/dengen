@@ -1,0 +1,88 @@
+﻿@model MashZavod.Models.RemindersModels.ReminderModelAdd
+@{
+    ViewBag.Title = "Напоминания";
+}
+
+@Html.Partial("nav")
+@Html.ValidationSummary(true)
+
+<div class="main-content">
+    <div class="wrap-content container" id="container">
+        <section id="page-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="mainTitle">@ViewBag.Title</h1>
+                </div>
+            </div>
+        </section>
+
+        <div class="container-fluid container-fullw bg-white">
+            <div class="row">
+                <div class="col-md-14">
+                    <div class="col-lg-7 col-md-7">
+                        <div class="panel panel-white">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">Добавить новое напоминание</h5>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" class="form-inline" method="post" action="/Reminder/Add">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                Login
+                                            </div>
+                                            <input type="text" placeholder=" " name="Login" class="form-control">
+                                        </div>
+                                    </div><br /><br />
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                Напоминание
+                                            </div>
+                                            <input type="text" placeholder=" " name="Text" class="form-control">
+                                        </div>
+                                    </div><br /><br />
+                                    <input class="btn btn-success" type="submit" value="Добавить" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <table class="table table-hover" id="sample-table-1">
+                    <thead>
+                        <tr>
+                            <th>Текст напоминания</th>
+                            <th>Автор</th>
+                            <th>Дата создания</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.ReminderViewModel != null)
+                        {
+                            if (ViewBag.ReminderViewModel.IsReminderModels)
+                            {
+                                foreach (var elem in ViewBag.ReminderViewModel.ReminderModels)
+                                {
+                                    <tr>
+                                        <td>@elem.Text</td>
+                                        <td>@elem.Login</td>
+                                        <td>@elem.DateReminder</td>
+                                        <td><i class="fa fa-cog"></i> <a href="Reminder/HideReminder?id=@elem.Id">Скрыть</a></td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr> <td> (Напоминания отсутствуют) </td> </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

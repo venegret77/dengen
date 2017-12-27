@@ -1,0 +1,49 @@
+﻿
+<div class="chatik">
+    <div class="col-md-5">
+        <div class="panel panel-primary">
+            <div class="panel-body" id="results">
+                @{ 
+                    string path = "GetPartial?id=" + ViewBag.Id;
+                }
+                @Html.Action(path)
+            </div>
+            <form action="/Comments/Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="form0" method="post">
+                <div class="panel-footer">
+                    <div class="input-group">
+                        //Comments model
+                        <input id="btn-input" placeholder="Message" class="form-control input-sm" name="text_comm">
+                        <input type="hidden" name="id_doc" value="@ViewBag.Id" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="ActionLink" href="/Comments/GetPartial" style="visibility:hidden;">ActionLink</a>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script type="text/javascript">
+    function refresh() {
+        $("#ActionLink").click();
+        setTimeout(refresh, 3000);
+    }
+
+    Scroll()
+    setTimeout(refresh, 3000)
+
+    function Scroll() {
+        var win = $('#results');
+        var height = win[0].scrollHeight;
+        win.scrollTop(height);
+    }
+
+    $(function () {
+        $('#btn-chat').bind('click', function () {
+            Scroll()
+        });
+    });
+</script>
