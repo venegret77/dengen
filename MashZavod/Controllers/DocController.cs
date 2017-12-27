@@ -432,6 +432,11 @@ namespace MashZavod.Controllers
                                     }*/
 
 
-
+        [HttpGet]
+        public ActionResult GetDocInfo(int id)
+        {
+            ViewBag.Id = id;
+            return View("DocDetails");
+        }
     }
 }

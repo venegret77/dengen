@@ -1,82 +1,72 @@
 ﻿<link rel="stylesheet" href="/Content/bootstrap/css/bootstrap.min.css">
 
 <style type="text/css">
-	.chat
-{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-    form {
-        margin-bottom: 0;
-        
+    .chat {
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
 
-.chat li
-{
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
-}
+        .chat li {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dotted #B3A9A9;
+        }
 
-.chat li.left .chat-body
-{
-    margin-left: 60px;
-}
+            .chat li.left .chat-body {
+                margin-left: 60px;
+            }
 
-.chat li.right .chat-body
-{
-    margin-right: 60px;
-}
+            .chat li.right .chat-body {
+                margin-right: 60px;
+            }
 
 
-.chat li .chat-body p
-{
-    margin: 0;
-    color: #777777;
-}
+            .chat li .chat-body p {
+                margin: 0;
+                color: #777777;
+            }
 
-.panel .slidedown .glyphicon, .chat .glyphicon
-{
-    margin-right: 5px;
-}
+        .panel .slidedown .glyphicon, .chat .glyphicon {
+            margin-right: 5px;
+        }
 
     .panel-body {
         overflow-y: scroll;
         height: 250px;
     }
 
-::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
-}
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
 
-::-webkit-scrollbar
-{
-    width: 12px;
-    background-color: #F5F5F5;
-}
+    ::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
 
-::-webkit-scrollbar-thumb
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-}
-    .chatik {
-        float:right;
-        position:absolute;
-        top: 300px;
-        left: 300px;
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+
+    .panel-primary {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 350px;
+    }
+
+    #collapseOne {
+        visibility: visible;
     }
 </style>
-<div class="chatik">
-        <div class="col-md-5">
-            <div class="panel panel-primary">
+        <div class="panel panel-primary">
                 <div class="panel-body" id="results">
                     @Html.Action("GetPartial")
                 </div>
-                <form action="/BigChat/Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="form0" method="post">
+                <form action="/BigChat/Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="rt" method="post">
                     <div class="panel-footer">
                         <div class="input-group">
                             <input id="btn-input" placeholder="Message" class="form-control input-sm" name="text_message">
@@ -88,39 +78,28 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="ActionLink" href="/BigChat/GetPartial" style="visibility:hidden;">ActionLink</a>
+        <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="ActionLink" href="/BigChat/GetPartial" style="visibility:hidden;">ActionLink</a>
 
-<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-<script type="text/javascript">
+        <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+        <script type="text/javascript">
 
-    function refresh() {
-        $("#ActionLink").click();
-       // document.getElementById("ActionLink").click();
-        setTimeout(refresh, 3000);
-    }
+            function refresh() {
+                $("#ActionLink").click();
+                setTimeout(refresh, 3000);
+            }
 
-    Scroll()
-    setTimeout(refresh, 3000)
-
-    function Scroll() {
-        var win = $('#results');
-        var height = win[0].scrollHeight;
-        win.scrollTop(height);
-    }
-
-    $(function () {
-        $('#btn-chat').bind('click', function () {
             Scroll()
-        });
-    });
+            setTimeout(refresh, 3000)
 
-    /*$(window).load(function () {
-        $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 0);
-    });
+            function Scroll() {
+                var win = $('#results');
+                var height = win[0].scrollHeight;
+                win.scrollTop(height);
+            }
 
-    setInterval(function () {
-        $("#results").load("GetPartial");
-    }, 1000);*/
-</script>
+            $(function () {
+                $('#btn-chat').bind('click', function () {
+                    Scroll();
+                });
+            });
+        </script>

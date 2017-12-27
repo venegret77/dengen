@@ -1501,7 +1501,6 @@ ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
 }
 @media (min-width: 992px) {
   .main-content {
-    margin-top: 65px;
     margin-left: 260px;
   }
   .app-navbar-fixed .main-content {
@@ -1520,7 +1519,7 @@ ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
 }
 @media (max-width: 991px) {
   .main-content {
-    padding-top: 65px;
+    /*padding-top: 65px;*/
   }
 }
 

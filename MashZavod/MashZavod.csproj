@@ -412,7 +412,6 @@
     <Content Include="Views\Shared\Adminnav.cshtml" />
     <Content Include="Views\Mission\Index.cshtml" />
     <Content Include="Views\Doc\AddDoc.cshtml" />
-    <Content Include="Views\Doc\DeleteDoc.cshtml" />
     <Content Include="Views\Doc\EditDoc.cshtml" />
     <Content Include="Views\Doc\ViewDoc.cshtml" />
     <Content Include="Views\Doc\ViewReceivedDoc.cshtml" />
@@ -420,8 +419,9 @@
     <Content Include="Views\Reminder\Index.cshtml" />
     <Content Include="Views\Reminder\ReminderPart.cshtml" />
     <Content Include="Views\BigChat\ChatPartial.cshtml" />
-    <Content Include="Views\CommDoc\Commets.cshtml" />
-    <Content Include="Views\CommDoc\CommPartial.cshtml" />
+    <Content Include="Views\Shared\Commets.cshtml" />
+    <Content Include="Views\Shared\CommPartial.cshtml" />
+    <Content Include="Views\Doc\DocDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

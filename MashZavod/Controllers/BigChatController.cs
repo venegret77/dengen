@@ -28,16 +28,9 @@ namespace MashZavod.Controllers
                 //Набрости
                 //******************************************
                 int count = db.message.Count();
-                List<message> req_message = null;
-                if (count < 50)
-                    req_message = db.message.ToList();
-                else
-                    req_message = db.message.Skip(count - 50).ToList();
+                List<message> req_message = db.message.ToList();
 
-                //********************************************
-                //var req_message = db.message;
-
-                foreach (var el in req_message)
+                foreach (var el in req_message.Skip(count - 50))
                 {
                     var y = db.users.FirstOrDefault(u => u.id_users == el.id_users);
                     var x = "";
@@ -72,18 +65,10 @@ namespace MashZavod.Controllers
             List<BigChatModels> ListMessage = new List<BigChatModels>();
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
-                //Набрости
-                //******************************************
                 int count = db.message.Count();
-                List<message> req_message = null;
-                if (count < 50)
-                    req_message = db.message.ToList();
-                else
-                    req_message = db.message.Skip(count - 50).ToList();
+                List<message> req_message = db.message.ToList();
 
-                //********************************************
-
-                foreach (var el in req_message)
+                foreach (var el in req_message.Skip(count - 50))
                 {
                     var y = db.users.FirstOrDefault(u => u.id_users == el.id_users);
                     var x = "";
