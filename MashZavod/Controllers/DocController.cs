@@ -157,6 +157,7 @@ namespace MashZavod.Controllers
         }
         //открываем форму
         //  [HttpGet]
+        //форма обновления данных
         public ActionResult EditDoc(int id)
         {
             doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
@@ -178,7 +179,7 @@ namespace MashZavod.Controllers
           {
               return View();
           }*/
-
+          //обновление данных
         [HttpPost]
         public ActionResult Reload(doc modelDoc, users recipient)
         {
@@ -292,33 +293,34 @@ namespace MashZavod.Controllers
             ViewBag.listDoc = docList;
             return View();
         }
-
+        //поиск документов в названиях и тексте
         [HttpPost]
         public ActionResult Search(string searchText)
         {
-           // string textSearch = Request.Form["searchText.Value"];
-            List<doc> docList = new List<doc>();
-            // List<string> nameList = new List<string>();
-            //if ()
-            int y = 0;
-            users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
-            if (us != null)
-                y = us.id_users;// db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
-            var req_doc = db.doc;//.f(u=>u.author==y || u.recipient== y);
-            foreach (var el in req_doc)
+            //обработка пустого запроса
+            if (searchText != null && searchText != String.Empty && searchText!="") 
             {
-                if ((el.author == y || el.recipient == y || el.recipient == null) && (el.text_doc.Contains(searchText)|| el.name_doc.Contains(searchText)))
+                List<doc> docList = new List<doc>();
+                int y = 0;
+                users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
+                if (us != null)
+                    y = us.id_users;
+                var req_doc = db.doc;
+                /*колхозный вариант поиска. IndexOf(string,StringComparison) не выдает нужный результат*/
+                foreach (var el in req_doc)
                 {
-                    docList.Add(el);
-                    //     nameList.Add(el.infoFileDoc.ElementAtOrDefault(0).name_doc);
+                    string text = el.text_doc.ToLower();
+                    string name = el.name_doc.ToLower();
+                    searchText = searchText.ToLower();
+                    //добавление в выводимый список документов
+                    if ((el.author == y || el.recipient == y || el.recipient == null) && (text.Contains(searchText) || name.Contains(searchText)))
+                    {
+                        docList.Add(el);
+                    }
                 }
-            }
-            ViewBag.listDoc = docList;
-            //  ViewBag.listName = nameList;
-            // nameList.e
-            // return View();
+                ViewBag.listDoc = docList;
+            }        
             return View("SearchDoc");
-            //return RedirectToAction("SearchResult?searchText="+ searchText, "Doc");
 
         }
 
