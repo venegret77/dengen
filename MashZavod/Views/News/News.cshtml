@@ -5,6 +5,10 @@
                 <div class="col-sm-8">
                     <h1 class="mainTitle ng-scope">Новости</h1>
                 </div>
+                @foreach (var elem in ViewBag.Tags)
+                {
+                    <div>@elem.Tag</div>
+                }
             </div>
 	    </section>
         <div class="container-fluid container-fullw bg-white ng-scope">
@@ -24,8 +28,8 @@
                                                         <span class="day text-bold">1</span>
                                                     </div>
                                                     <div class="inline-block">
-                                                        <span class="block week-day text-extra-large">куе</span>
-                                                        <span class="block month text-large text-light">november 2014</span>
+                                                        <span class="block week-day text-extra-large">@elem.PubDate.DayOfWeek</span>
+                                                        <span class="block month text-large text-light">@elem.PubDate</span>
                                                     </div>
                                                 </div>
                                             </div>

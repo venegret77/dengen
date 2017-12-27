@@ -8,7 +8,7 @@ namespace MashZavod.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string PubDate { get; set; }
+        public DateTime PubDate { get; set; }
         public string Link { get; set; }
         public string Source { get; set; }
         public int Relevance { get; set; }
@@ -22,7 +22,7 @@ namespace MashZavod.Models
         {
             Title = _Title;
             Link = _Link;
-            PubDate = _PubDate;
+            PubDate = Convert.ToDateTime(_PubDate);
             Description = _Description;
             Source = _Source;
             Relevance = CalcRelevance(tags);

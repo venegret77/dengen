@@ -78,6 +78,15 @@ namespace MashZavod.Controllers
             NewsList.RemoveAll(u => u.Relevance == 0);
             NewsList.Sort();
             ViewBag.listNews = NewsList.Distinct();
+            List<TagsNews> _tags = new List<TagsNews>();
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                foreach (var tag in db.TagsNews)
+                {
+                    _tags.Add(tag);
+                }
+            }
+            ViewBag.Tags = _tags;
             return View();
         }
 
