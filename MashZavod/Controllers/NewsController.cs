@@ -106,15 +106,14 @@ namespace MashZavod.Controllers
         [HttpPost]
         public ActionResult Tags(TagsNews model)
         {
-            if (!model.Tag.Contains(" "))
-                using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                db.TagsNews.Add(new TagsNews()
                 {
-                    db.TagsNews.Add(new TagsNews()
-                    {
-                        Tag = model.Tag
-                    });
-                    db.SaveChanges();
-                }
+                    Tag = model.Tag
+                });
+                db.SaveChanges();
+            }
             return RedirectToAction("Tags", "News");
         }
 
