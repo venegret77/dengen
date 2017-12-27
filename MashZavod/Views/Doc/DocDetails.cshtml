@@ -1,16 +1,4 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>DocDetails</title>
-</head>
-<body>
+﻿@Html.ValidationSummary(true)
     <!--блок информации о документа из таблицы doc-->
     <div> 
 
@@ -19,9 +7,7 @@
     <div>
 
     </div>
-    <!--блок комментариев-->
+    @Html.Action("Index", "Comments", new { id = ViewBag.Id })
     <div>
 
     </div>
-</body>
-</html>

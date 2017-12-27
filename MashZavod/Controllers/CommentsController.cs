@@ -10,16 +10,17 @@ namespace MashZavod.Controllers
 {
     public class CommentsController : Controller
     {
-        // GET: Comments
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(int id)
         {
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login", "Account");
-            return View();//////////////////////////////////////////////////////////////////////////////////////
+            ViewBag.Id = id;
+            return View("Commets");
         }
 
         [HttpGet]
-        public ActionResult GetPartial(int id)
+        public ActionResult GP(int id)
         {
             List<CommentsModels> ListMessage = new List<CommentsModels>();
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
@@ -35,15 +36,16 @@ namespace MashZavod.Controllers
                     });
                 }
             }
+            ViewBag.Id = id;
             ViewBag.Comments = ListMessage;
-            return PartialView();//////////////////////////////////////////////////////////////////////////////////////
+            return PartialView("CommPartial");
         }
 
         //Post: comments
         [HttpPost]
-        public ActionResult Index(Comments model)
+        public ActionResult Indexw(Comments model)
         {
-        /*    List<CommentsModels> ListMessage = new List<CommentsModels>();
+            List<CommentsModels> ListMessage = new List<CommentsModels>();
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
                 model.date = DateTime.Now;
@@ -62,8 +64,8 @@ namespace MashZavod.Controllers
                     });
                 }
             }
-            ViewBag.Comments = ListMessage;*/
-            return PartialView();//////////////////////////////////////////////////////////////////////////////////////
+            ViewBag.Comments = ListMessage;
+            return PartialView("CommPartial");
         }
     }
 }
