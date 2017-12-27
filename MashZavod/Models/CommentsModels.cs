@@ -10,9 +10,9 @@ namespace MashZavod.Models
         public string LoginUs { get; set; }//логин
 
         [Required]
-        public DateTime Time_message;//дата отправки сообщения(должна быть точность до милисекунд)
+        public DateTime Time_comments;//дата отправки сообщения(должна быть точность до милисекунд)
 
         [Required]
-        public string Text_message { get; set; }//текст сообщения
+        public string Text_comments { get; set; }//текст сообщения
     }
 }

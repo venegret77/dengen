@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MissionController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ReminderController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -317,6 +318,9 @@
     <Compile Include="Models\MissionsModels\MissionModelAdd.cs" />
     <Compile Include="Models\MissionsModels\MissionViewModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\RemindersModels\ReminderModel.cs" />
+    <Compile Include="Models\RemindersModels\ReminderModelAdd.cs" />
+    <Compile Include="Models\RemindersModels\ReminderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -404,7 +408,7 @@
     <Content Include="Views\Shared\nav.cshtml" />
     <Content Include="Views\News\Tags.cshtml" />
     <Content Include="Views\News\RSS.cshtml" />
-    <Content Include="Views\Shared\BigChat.cshtml" />
+    <Content Include="Views\BigChat\BigChat.cshtml" />
     <Content Include="Views\Shared\Adminnav.cshtml" />
     <Content Include="Views\Mission\Index.cshtml" />
     <Content Include="Views\Doc\AddDoc.cshtml" />
@@ -413,13 +417,16 @@
     <Content Include="Views\Doc\ViewDoc.cshtml" />
     <Content Include="Views\Doc\ViewReceivedDoc.cshtml" />
     <Content Include="Views\Doc\ViewSentDoc.cshtml" />
+    <Content Include="Views\Reminder\Index.cshtml" />
+    <Content Include="Views\Reminder\ReminderPart.cshtml" />
+    <Content Include="Views\BigChat\ChatPartial.cshtml" />
+    <Content Include="Views\CommDoc\Commets.cshtml" />
+    <Content Include="Views\CommDoc\CommPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
     <Folder Include="Files\" />
-    <Folder Include="Views\BigChat\" />
-    <Folder Include="Views\Comments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
