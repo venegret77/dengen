@@ -51,7 +51,7 @@ namespace MashZavod.Controllers
                 db.Comments.Add(model);
                 db.SaveChanges();
 
-                List<Comments> listComments = db.Comments.Where(u => u.id_doc == id).ToList();
+                List<Comments> listComments = db.Comments.Where(u => u.id_doc == model.id_doc).ToList();
                 foreach (var elem in listComments)
                 {
                     ListMessage.Add(new CommentsModels
