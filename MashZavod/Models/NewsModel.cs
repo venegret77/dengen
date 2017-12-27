@@ -31,7 +31,6 @@ namespace MashZavod.Models
         public int CalcRelevance(List<string> tags)
         {
             int i = 0;
-            int x1 = 0, x2 = 0;
             string _tag, _Description, _Title;
             foreach (var tag in tags)
             {
