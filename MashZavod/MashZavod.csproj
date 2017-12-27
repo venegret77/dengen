@@ -422,6 +422,7 @@
     <Content Include="Views\Shared\Commets.cshtml" />
     <Content Include="Views\Shared\CommPartial.cshtml" />
     <Content Include="Views\Doc\DocDetails.cshtml" />
+    <Content Include="Views\Doc\SearchDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

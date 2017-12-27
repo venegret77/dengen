@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--Форма вывода всех полученных документов-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Поиск</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Search", "Doc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <p> Введите запрос: </p>
+            <input type="text" maxlength="50" placeholder="Поиск" name="searchText" />
+            <input type = "submit" value = "Найти" />
+        }
+    </div>   
+    <div>
+@if (ViewBag.listDoc != null)
+{
+        <h3>Результаты поиска</h3>
+        <table>
+            <tr>
+                <td><p>Название</p></td>
+                <!-- <td><p>Получатель</p></td>-->
+                <td><p>Описание</p></td>
+                <td><p>Дата создание</p></td>
+                <td><p>Дата изменения</p></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            @foreach (var b in ViewBag.listDoc)
+                {
+                <tr>
+                    <td><input type="text" name="name_doc" readonly value=@b.name_doc /></td>
+                    <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
+                    <!-- <td><p>@b.recipient</p></td>-->
+                    <td><textarea rows="1" cols="50" maxlength="150" name="description">@b.description</textarea>
+                    <td><input type="text" name="data_of_create" readonly value=@b.data_of_create /></td>
+                    <td><input type="text" name="date_of_modify" readonly value=@b.date_of_modify /></td>
+                    <td><p><a href="/Doc/DowloadDoc?id=@b.id_doc">Скачать</a></p></td>
+                    <td><p><a href="/Doc/DeleteDoc">Удалить</a></p></td>
+                    <td><p><a href="/Doc/EditDoc">Изменить</a></p></td>
+                </tr>
+                }            
+        </table>
+}
+    </div> 
+</body>
+</html>
