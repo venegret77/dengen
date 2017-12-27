@@ -1,22 +1,54 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>News</title>
-</head>
-<body>
-    <div>
-        @foreach(var elem in ViewBag.listNews)
-        {
-            <div>
-                <a href="@elem.Link">@elem.Title</a>
-                <p>@elem.Description</p>
-                <p>@elem.PubDate Релевантность - @elem.Relevance</p>
-                <a href="@elem.Source">@elem.Source</a>
+﻿<div ui-view="" class="wrap-content container fade-in-up ng-scope" id="container" style="">
+    <div ui-view="" class="fade-in-up ng-scope">
+        <section id="page-title" class="ng-scope">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="mainTitle ng-scope">Новости</h1>
+                </div>
             </div>
-            <br>
-        }
+	    </section>
+        <div class="container-fluid container-fullw bg-white ng-scope">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="timeline">
+                        <div class="timeline">
+                            <div class="spine"></div>
+                            <ul class="columns">
+                                 @foreach (var elem in ViewBag.listNews)
+                                {
+                                    <li>
+                                        <div class="timeline_element partition-white">
+                                            <div class="timeline_date">
+                                                <div>
+                                                    <div class="inline-block">
+                                                        <span class="day text-bold">1</span>
+                                                    </div>
+                                                    <div class="inline-block">
+                                                        <span class="block week-day text-extra-large">куе</span>
+                                                        <span class="block month text-large text-light">november 2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <div class="timeline_title">
+                                                    <i class="fa fa-check fa-2x pull-left fa-border"></i>
+                                                    <h4 class="light-text no-margin padding-5">@elem.Title</h4>
+                                                </div>
+                                                <div class="timeline_content">
+                                                    @elem.Description
+                                                </div>
+                                                <div class="readmore">
+                                                <a href="@elem.Link" class="btn btn-primary btn-o btn-wide">
+                                                    Узнать больше<i class="fa fa-arrow-circle-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
