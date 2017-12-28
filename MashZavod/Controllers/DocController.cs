@@ -282,24 +282,19 @@ namespace MashZavod.Controllers
         public ActionResult ViewDoc()
         {
             List<doc> docList = new List<doc>();
-            // List<string> nameList = new List<string>();
-            //if ()
             int y = 0;
             users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
             if (us != null)
-                y = us.id_users;// db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
-            var req_doc = db.doc;//.f(u=>u.author==y || u.recipient== y);
+                y = us.id_users;
+            var req_doc = db.doc;
             foreach (var el in req_doc)
             {
                 if (el.author == y || el.recipient == y || el.recipient == null)
                 {
                     docList.Add(el);
-                    //     nameList.Add(el.infoFileDoc.ElementAtOrDefault(0).name_doc);
                 }
             }
             ViewBag.listDoc = docList;
-            //  ViewBag.listName = nameList;
-            // nameList.e
             return View();
         }
 
@@ -335,12 +330,11 @@ namespace MashZavod.Controllers
             ViewBag.listDoc = docList;
             return View();
         }
-        //поиск документов в названиях и тексте
-        [HttpPost]
-        public ActionResult Search(string searchText)
+        //поиск документов в названиях и тексте        
+        public ActionResult SearchDoc(string searchText)
         {
             //обработка пустого запроса
-            if (searchText != null && searchText != String.Empty && searchText!="") 
+            if (searchText != null && searchText != String.Empty && searchText != "")
             {
                 List<doc> docList = new List<doc>();
                 int y = 0;
@@ -361,38 +355,11 @@ namespace MashZavod.Controllers
                     }
                 }
                 ViewBag.listDoc = docList;
-            }        
-            return RedirectToAction("SearchDoc","Doc"); //проверить, чтобы работало
-
-        }
-
-        public ActionResult SearchDoc()
-        {
-
-            return View();
-        }
-       /* public ActionResult SearchResult()
-        {
-            string searchText = Request.QueryString["searchText"];
-            List<doc> listDoc = new List<doc>();
-            // List<string> nameList = new List<string>();
-            //if ()
-            int y = 0;
-            users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
-            if (us != null)
-                y = us.id_users;// db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
-            var req_doc = db.doc;//.f(u=>u.author==y || u.recipient== y);
-            foreach (var el in req_doc)
-            {
-                if ((el.author == y || el.recipient == y || el.recipient == null) && (el.text_doc.Contains(searchText) || el.name_doc.Contains(searchText)))
-                {
-                    listDoc.Add(el);
-                    //     nameList.Add(el.infoFileDoc.ElementAtOrDefault(0).name_doc);
-                }
             }
-            ViewBag.listDoc = listDoc;
             return View();
-        }*/
+        }
+      
+
         public string ExtractText(string path) //извлечение текста
         {
             switch (System.IO.Path.GetExtension(path))
