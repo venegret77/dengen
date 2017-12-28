@@ -30,10 +30,6 @@ namespace MashZavod.Controllers
         {
             if (upload != null)
             {
-                /*
-                как-то сделать переименование файла при добавлении на сервер, 
-                если что-то введено и добавление ему соответствующего расширения
-                */
                 // получаем имя файла
                 if (modelDoc.name_doc == String.Empty || modelDoc.name_doc == null) //пользователь не задал название файла
                 {
@@ -49,11 +45,35 @@ namespace MashZavod.Controllers
                 {
                     modelDoc.recipient = db.users.FirstOrDefault(u => u.Login == recipient.Login).id_users;
                 }
-
+                /* попытаться доделать, чтобы при сохранении одинакового файла он не стирался*/
+                List<string> fileNames = new List<string>();
+                var fnames = db.doc;
+                foreach (var el in fnames)
+                {
+                    fileNames.Add(System.IO.Path.GetFileName(el.url));
+                }
+                if (fileNames.Contains(upload.FileName))
+                {
+                    int num = 1;
+                    string fn = System.IO.Path.GetFileNameWithoutExtension(upload.FileName);
+                    string ext = System.IO.Path.GetExtension(upload.FileName);
+                   while (fileNames.Contains(fn+num+ext))
+                    {
+                        num++;
+                    }
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Files/" + fn + num + ext));
+                }
+                else
+                {
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
+                }
+                
                 // сохраняем файл в папку Files в проекте
-                upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
+             //   upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
                 /*заменить на id пользователя*/
-                modelDoc.author = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;// +" "+ db.users.FirstOrDefault(u => u.Login == User.Identity.Name).Name + " " + db.users.FirstOrDefault(u => u.Login == User.Identity.Name).Patronymic;
+                modelDoc.author = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
 
                 modelDoc.data_of_create = DateTime.Now;
                 // modelDoc.date_of_modify = DateTime.Now;
@@ -109,7 +129,7 @@ namespace MashZavod.Controllers
             ViewBag.document = modelDoc;
             return RedirectToAction("Bufer", "Doc");
         }
-        //временное отображение
+        //отображение отдельного документа
         [HttpGet]
         public ActionResult DocDetails(int id)
         {
@@ -185,11 +205,31 @@ namespace MashZavod.Controllers
         [HttpGet]
         public ActionResult DeleteDoc(int id)
         {
+            
             doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
             if (modelDoc == null)
             {
                 return RedirectToAction("ViewDoc", "Doc");
             }
+
+
+         //   List<Comments> commentList = new List<Comments>();
+          //  int y = 0;
+           // users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
+          //  if (us != null)
+           //     y = us.id_users;
+            var req_doc = db.Comments;
+            foreach (var el in req_doc)
+            {
+                if (el.id_doc == modelDoc.id_doc)
+                {
+                    db.Comments.Remove(el);
+               //     commentList.Add(el);
+                }
+            }
+          //  req_doc = db.edit;
+
+
 
             System.IO.File.Delete(modelDoc.url);
             /*удалить все данные из других таблиц, которые связаны с doc*/
