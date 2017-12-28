@@ -72,7 +72,7 @@ namespace MashZavod.Controllers
                 modelDoc.author = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
 
                 modelDoc.data_of_create = DateTime.Now;
-                // modelDoc.date_of_modify = DateTime.Now;
+                modelDoc.date_of_modify = DateTime.Now;
                 //изменить при добавлении переименования документа
                 modelDoc.url = Server.MapPath("~/Files/" + System.IO.Path.GetFileName(upload.FileName));
                 modelDoc.text_doc = ExtractText(modelDoc.url);
@@ -92,8 +92,6 @@ namespace MashZavod.Controllers
                         modelDoc.description = new string(textchar);
                     }
                 }
-                /*при привязки одной модели к другой происходит вылет*/
-
                 /*добавление в бд и сохранение*/
                 db.doc.Add(modelDoc);
                 modelDoc.id_doc = modelDoc.id_doc;
@@ -134,20 +132,12 @@ namespace MashZavod.Controllers
             }
             else
              recip = db.users.FirstOrDefault(u => u.id_users == docum.recipient).Login;
-            /*if (recip == "" || recip == string.Empty || recip == null)
-            {
-                recip = "Общедоступный";
-            }*/
             string sent = db.users.FirstOrDefault(u => u.id_users == docum.author).Login;
             ViewBag.author = sent;
             ViewBag.recipient = recip;
             ViewBag.document = docum;
-            return View();//RedirectToAction("Bufer", "Doc");
-        }
-        /*public ActionResult Bufer()
-        {
             return View();
-        }*/
+        }
         //скачивание документа с сервера на клиент
         [HttpGet]
         public ActionResult DowloadDoc(int id)
@@ -180,13 +170,8 @@ namespace MashZavod.Controllers
                         break;
                     }
             }
-            //     string file_type = "application/pdf";
-            // Имя файла - необязательно
-            string file_name = modelDoc.name_doc; //"PDFIcon.pdf";
+            string file_name = modelDoc.name_doc;
             return File(file_path, file_type, file_name);
-
-
-            //  return View();
         }
         //удаление файла
         [HttpGet]
@@ -212,8 +197,6 @@ namespace MashZavod.Controllers
             db.SaveChanges();
             return RedirectToAction("ViewDoc", "Doc");
         }
-        //открываем форму
-        //  [HttpGet]
         //форма обновления данных
         public ActionResult EditDoc(int id)
         {
@@ -227,80 +210,72 @@ namespace MashZavod.Controllers
             if (modelDoc.recipient != null)
             {
                 ViewBag.logUser = db.users.FirstOrDefault(u => u.id_users == modelDoc.recipient).Login;
-            }
-
-            //  ViewBag
+            }            
             return View();
         }
-        /*  public ActionResult EditDoc()
-          {
-              return View();
-          }*/
           //обновление данных
         [HttpPost]
-        public ActionResult Reload(doc modelDoc, users recipient)
+        public ActionResult Reload(int id_doc,string name_doc, string description, users recipient)
         {
-            if (modelDoc == null)
+            if (id_doc==null || id_doc==0)
             {
                 return RedirectToAction("ViewDoc", "Doc");
             }
-          //  doc defaultDoc = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc);
-            string nd = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).name_doc;
-            string desc = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).description;
-            string tx = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).text_doc;
-            string url = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).url;
-            int aut = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).author.Value;
-            int rec = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).recipient.Value;
-            DateTime create = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).data_of_create.Value;
-            if (modelDoc.name_doc == null)
+            doc defaultDoc = db.doc.FirstOrDefault(u => u.id_doc == id_doc);
+            if (defaultDoc == null)
             {
-                modelDoc.name_doc = System.IO.Path.GetFileName(url);
+                return RedirectToAction("ViewDoc", "Doc");
             }
-            modelDoc.text_doc = tx;
-            modelDoc.url = url;
-            modelDoc.author = aut;
-            modelDoc.data_of_create = create;
-            modelDoc.date_of_modify = DateTime.Now;
-            modelDoc.recipient = rec;
-            if ((modelDoc.description == String.Empty || modelDoc.description == null) && tx != null)
+            //название документа
+            if (defaultDoc.name_doc!=name_doc)
             {
-                if (tx.Length >= 150)
+                if (name_doc==null)
                 {
-                    char[] textchar = new char[150];
-                    tx.CopyTo(0, textchar, 0, 150);
-                    modelDoc.description = new string(textchar);
+                    defaultDoc.name_doc =System.IO.Path.GetFileName(defaultDoc.url);
                 }
                 else
-                {
-                    char[] textchar = new char[tx.Length];
-                    tx.CopyTo(0, textchar, 0, tx.Length);
-                    modelDoc.description = new string(textchar);
-                }
+                defaultDoc.name_doc = name_doc + System.IO.Path.GetExtension(defaultDoc.url);
             }
+            //описание
+            if (defaultDoc.description != description )
+            {
+                if (description == null)
+                {
+
+                    if (defaultDoc.text_doc.Length >= 150)
+                    {
+                        char[] textchar = new char[150];
+                        defaultDoc.text_doc.CopyTo(0, textchar, 0, 150);
+                        defaultDoc.description = new string(textchar);
+                    }
+                    else
+                    {
+                        char[] textchar = new char[defaultDoc.text_doc.Length];
+                        defaultDoc.text_doc.CopyTo(0, textchar, 0, defaultDoc.text_doc.Length);
+                        defaultDoc.description = new string(textchar);
+                    }                    
+                }
+                else
+                    defaultDoc.description = description;
+            }
+
+           //получатель
             if (db.users.FirstOrDefault(u => u.Login == recipient.Login) != null)
             {
                 recipient.id_users = db.users.FirstOrDefault(u => u.Login == recipient.Login).id_users;
-                if (recipient.id_users != modelDoc.recipient && recipient.id_users != 0)
+                if (recipient.id_users != defaultDoc.recipient && (recipient.id_users !=0))
                 {
-                    modelDoc.recipient = recipient.id_users;
+                    defaultDoc.recipient = recipient.id_users;
                 }                
             }
+            else if (recipient.Login==null)
+            {
+                defaultDoc.recipient = 0;
+            }
+            defaultDoc.date_of_modify = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("ViewDoc", "Doc");
-        }
-
-        /* [HttpPost]
-         public ActionResult EditDoc(int id)
-         {
-             doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
-             if (modelDoc == null)
-             {
-                 return RedirectToAction("ViewDoc", "Doc");
-             }
-             ViewBag 
-            // ViewBag
-             return View();
-         }*/
+        }       
 
         //отображение формы показа всех доступных документов
         public ActionResult ViewDoc()
