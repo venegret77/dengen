@@ -129,6 +129,8 @@ namespace MashZavod.Controllers
         [HttpGet]
         public ActionResult TagsDel(int id)
         {
+            if (User.Identity.Name != "Admin")
+                return RedirectToAction("Index", "Home");
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
                 db.TagsNews.Remove(db.TagsNews.Where(u => u.ID == id).FirstOrDefault());
@@ -139,6 +141,8 @@ namespace MashZavod.Controllers
 
         public ActionResult Tags()
         {
+            if (User.Identity.Name != "Admin")
+                return RedirectToAction("Index", "Home");
             List<TagsNews> tags = new List<TagsNews>();
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
@@ -154,6 +158,8 @@ namespace MashZavod.Controllers
         [HttpPost]
         public ActionResult RSS(SourcesRSS model)
         {
+            if (User.Identity.Name != "Admin")
+                return RedirectToAction("Index", "Home");
             try
             {
                 XDocument newsXML = XDocument.Load(model.Link);
@@ -184,6 +190,8 @@ namespace MashZavod.Controllers
 
         public ActionResult RSS()
         {
+            if (User.Identity.Name != "Admin")
+                return RedirectToAction("Index", "Home");
             List<SourcesRSS> _rss = new List<SourcesRSS>();
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
@@ -199,6 +207,8 @@ namespace MashZavod.Controllers
         [HttpGet]
         public ActionResult RSSDel(int id)
         {
+            if (User.Identity.Name != "Admin")
+                return RedirectToAction("Index", "Home");
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
             {
                 db.SourcesRSS.Remove(db.SourcesRSS.Where(u => u.ID == id).FirstOrDefault());
