@@ -30,10 +30,6 @@ namespace MashZavod.Controllers
         {
             if (upload != null)
             {
-                /*
-                как-то сделать переименование файла при добавлении на сервер, 
-                если что-то введено и добавление ему соответствующего расширения
-                */
                 // получаем имя файла
                 if (modelDoc.name_doc == String.Empty || modelDoc.name_doc == null) //пользователь не задал название файла
                 {
@@ -49,11 +45,35 @@ namespace MashZavod.Controllers
                 {
                     modelDoc.recipient = db.users.FirstOrDefault(u => u.Login == recipient.Login).id_users;
                 }
-
+                /* попытаться доделать, чтобы при сохранении одинакового файла он не стирался*/
+                List<string> fileNames = new List<string>();
+                var fnames = db.doc;
+                foreach (var el in fnames)
+                {
+                    fileNames.Add(System.IO.Path.GetFileName(el.url));
+                }
+                if (fileNames.Contains(upload.FileName))
+                {
+                    int num = 1;
+                    string fn = System.IO.Path.GetFileNameWithoutExtension(upload.FileName);
+                    string ext = System.IO.Path.GetExtension(upload.FileName);
+                   while (fileNames.Contains(fn+num+ext))
+                    {
+                        num++;
+                    }
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Files/" + fn + num + ext));
+                }
+                else
+                {
+                    // сохраняем файл в папку Files в проекте
+                    upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
+                }
+                
                 // сохраняем файл в папку Files в проекте
-                upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
+             //   upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
                 /*заменить на id пользователя*/
-                modelDoc.author = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;// +" "+ db.users.FirstOrDefault(u => u.Login == User.Identity.Name).Name + " " + db.users.FirstOrDefault(u => u.Login == User.Identity.Name).Patronymic;
+                modelDoc.author = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
 
                 modelDoc.data_of_create = DateTime.Now;
                 // modelDoc.date_of_modify = DateTime.Now;
