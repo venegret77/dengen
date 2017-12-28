@@ -1,41 +1,44 @@
-﻿@Html.Partial("nav")
-<!--  <form method="post" action="">-->
-<div class="main-content">
-    <div class="wrap-content container" id="container">
-        <section id="page-title">
-            <div class="row">
-                @using (Html.BeginForm("Reload", "Doc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+﻿
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Редактирование документа</title>
+</head>
+<body>
+    <div>
+        <h3>Загрузка файла</h3>
+        <!--  <form method="post" action="">-->
+        @using (Html.BeginForm("Reload", "Doc", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
-                {
-                    <table>
-                        <tr>
-                            <!-- добавление файла -->
-                            <td><p>Выберите файл для загрузки: </p></td>
-                            <td><input type="file" name="upload" accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></td>
-                        </tr>
-                        <tr>
-                            <!--ввод названия документа (если пустое, берется название файла)-->
-                            <td><p>Введите название документа (не более 50 символов): </p></td>
-                            <td><input type="text" maxlength="50" placeholder="Название документа" name="name_doc" /> </td>
-                        </tr>
-                        <tr>
-                            <!--ввод описания документа (если пустое, берется первые 150 или меньше (если документ короткий) символов)-->
-                            <td><p>Введите описание документа (не более 150 символов):</p></td>
-                            <td>
-                                <textarea rows="5" cols="50" maxlength="150" placeholder="Описание документа" name="description"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p>Получатель</p></td>
-                            <td>
-                                <input type="text" maxlength="50" placeholder="Логин получателя или подразделения" name="Login" />
-                            </td>
+        {
 
-                        </tr>
-                        <tr><td><input type="submit" value="Загрузить" /> </td><td></td></tr>
-                    </table>
-                }
-            </div>
-            </section>
+            <input type="hidden" name="id_doc" value=@ViewBag.docEdit.id_doc />
+            <table>
+                <tr>
+                    <!--ввод названия документа (если пустое, берется название файла)-->
+                    <td><p>Введите название документа (не более 50 символов): </p></td>
+                    <td><input type="text" maxlength="50" placeholder="Название документа" name="name_doc" value=@ViewBag.docEdit.name_doc /></td>
+                </tr>
+                <tr>
+                    <!--ввод описания документа (если пустое, берется первые 150 или меньше (если документ короткий) символов)-->
+                    <td><p>Введите описание документа (не более 150 символов):</p></td>
+                    <td>
+                        <textarea rows="5" cols="50" maxlength="150" placeholder="Описание документа" name="description">@ViewBag.docEdit.description</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p>Получатель</p></td>
+                    <td>
+                        <input type="text" maxlength="50" placeholder="Логин получателя или подразделения" name="Login" value=@ViewBag.logUser />
+                    </td>
+
+                </tr>
+                <tr><td><input type="submit" value="Загрузить" /> </td><td></td></tr>
+            </table>
+        }
     </div>
-</div>
+</body>
+</html>
+
+
+
