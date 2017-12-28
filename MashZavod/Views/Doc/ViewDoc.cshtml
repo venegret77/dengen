@@ -34,11 +34,8 @@
                                      <tbody>
                                          @foreach (var b in ViewBag.listDoc)
                                          {
-                                            <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
-                                    <!-- <td><p>@b.author</p></td>-->
-                                    <!-- <td><p>@b.recipient</p></td>-->
                                              <tr>
-                                                 <td class="center"><a href="#">@b.name_doc</a></td>
+                                                 <td class="center"><a href="/Doc/DocDetails?id=@b.id_doc">@b.name_doc</a></td>
                                                  <td class="hidden-xs">@b.description</td>
                                                  <td>@b.data_of_create</td>
                                                  <td>@b.date_of_modify</td>

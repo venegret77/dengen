@@ -96,20 +96,62 @@ namespace MashZavod.Controllers
 
             return RedirectToAction("AddDoc");
         }
-
-
-        //скачивание документа с сервера на клиент
+        //показ информации об отдельной документе
         [HttpGet]
-        public ActionResult DowloadDoc(int id)
+        public ActionResult Details (int id)
         {
-            //infoFileDoc modelInfoDoc = modelDoc.infoFileDoc.Last();
             // Путь к файлу
             doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
             if (modelDoc == null)
             {
                 return RedirectToAction("ViewDoc", "Doc");
             }
-            string file_path = modelDoc.url;// Server.MapPath("~/Files/PDFIcon.pdf");
+            ViewBag.document = modelDoc;
+            return RedirectToAction("Bufer", "Doc");
+        }
+        //временное отображение
+        [HttpGet]
+        public ActionResult DocDetails(int id)
+        {
+
+            if (id == 0)
+            {
+                return RedirectToAction("ViewDoc", "Doc");
+            }
+
+            doc docum = db.doc.FirstOrDefault(u => u.id_doc == id);
+            string recip;
+            if (docum.recipient==null || docum.recipient==0)
+            {
+                recip = "Общедоступный";
+            }
+            else
+             recip = db.users.FirstOrDefault(u => u.id_users == docum.recipient).Login;
+            /*if (recip == "" || recip == string.Empty || recip == null)
+            {
+                recip = "Общедоступный";
+            }*/
+            string sent = db.users.FirstOrDefault(u => u.id_users == docum.author).Login;
+            ViewBag.author = sent;
+            ViewBag.recipient = recip;
+            ViewBag.document = docum;
+            return View();//RedirectToAction("Bufer", "Doc");
+        }
+        /*public ActionResult Bufer()
+        {
+            return View();
+        }*/
+        //скачивание документа с сервера на клиент
+        [HttpGet]
+        public ActionResult DowloadDoc(int id)
+        {
+            // Путь к файлу
+            doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
+            if (modelDoc == null)
+            {
+                return RedirectToAction("ViewDoc", "Doc");
+            }
+            string file_path = modelDoc.url;
             // Тип файла
             string file_type = String.Empty;
             //получение типа файла MIME
@@ -320,7 +362,7 @@ namespace MashZavod.Controllers
                 }
                 ViewBag.listDoc = docList;
             }        
-            return View("SearchDoc");
+            return RedirectToAction("SearchDoc","Doc"); //проверить, чтобы работало
 
         }
 

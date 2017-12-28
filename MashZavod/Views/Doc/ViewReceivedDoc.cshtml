@@ -1,53 +1,55 @@
-﻿
+﻿@Html.Partial("nav")
 
-@{
-    Layout = null;
-}
+<div class="main-content">
+    <div class="wrap-content container" id="container">
+        <section id="page-title">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="mainTitle">Список полученных документов</h1>
+                    <span class="mainDescription">описание</span>
+                </div>
+            </div>
+        </section>
 
-<!DOCTYPE html>
-<!--Форма вывода всех полученных документов-->
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Просмотр документов</title>
-</head>
-<body>
-    <div>
-        <h3>Просмотр полученных документов</h3>
-        <p><a href="/Doc/AddDoc">Добавить документ</a></p>
-        <table>
-            <tr>
-                <td><p><a href="/Doc/ViewDoc">Все</a></p></td>
-                <td><p><a href="/Doc/ViewSentDoc">Отправленные</a></p></td>
-                <td><p><a href="/Doc/ViewReceivedDoc">Полученные</a></p></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                 <td><p>Название</p></td>
-                <!-- <td><p>Автор</p></td> -->
-                <td><p>Описание</p></td>
-                <td><p>Дата создание</p></td>
-                <td><p>Дата изменения</p></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            @foreach (var b in ViewBag.listDoc)
-            {
-                <tr>
-                    <td><input type="text" name="name_doc" readonly value=@b.name_doc /></td>
-                    <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
-                    <!-- <td><p>@b.author</p></td>-->
-                    <td><textarea rows="1" cols="50" maxlength="150" name="description">@b.description</textarea>
-                    <td><input type="text" name="data_of_create" readonly value=@b.data_of_create /></td>
-                    <td><input type="text" name="date_of_modify" readonly value=@b.date_of_modify /></td>
-                    <td><p><a href="/Doc/DowloadDoc?id=@b.id_doc">Скачать</a></p></td>
-                    <td><p><a href="/Doc/DeleteDoc">Удалить</a></p></td>
-                    <td><p><a href="/Doc/EditDoc">Изменить</a></p></td>
-                </tr>
-            }
-        </table>
+        <div class="container-fluid container-fullw bg-white">
+            <center>
+                <a class="btn btn-wide btn-success" href="/Doc/AddDoc">Добавить документ</a>
+                <a class="btn btn-wide btn-primary" href="/Doc/ViewDoc">Все</a>
+                <a class="btn btn-wide btn-primary" href="/Doc/ViewSentDoc">Отправленные</a>
+                <a class="btn btn-wide btn-success" href="/Doc/ViewReceivedDoc">Полученные</a>
+            </center>
+            <div class="col-md-12">
+                <table class="table table-hover" id="sample-table-1">
+                    <thead>
+                        <tr>
+                            <th class="center">Наименование</th>
+                            <th>Описание</th>
+                            <th class="hidden-xs">Дата создания</th>
+                            <th>Дата изменения</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var b in ViewBag.listDoc)
+                        {
+                            <tr>
+                                <td class="center"><a href="/Doc/DocDetails?id=@b.id_doc">@b.name_doc</a></td>
+                                <td class="hidden-xs">@b.description</td>
+                                <td>@b.data_of_create</td>
+                                <td>@b.date_of_modify</td>
+                                <td class="hidden-xs"><i class="fa fa-cloud-download"></i> <a href="/Doc/DowloadDoc?id=@b.id_doc">Скачать</a></td>
+                                <td class="hidden-xs"><i class="fa fa-remove"></i> <a href="/Doc/DeleteDoc?id=@b.id_doc">Удалить</a></td>
+                                <td class="hidden-xs"><i class="fa fa-cog"></i> <a href="/Doc/EditDoc?id=@b.id_doc">Изменить</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+<div class="row">
+    @Html.Action("Index", "BigChat")
+</div>
