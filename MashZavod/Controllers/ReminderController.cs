@@ -93,8 +93,7 @@ namespace MashZavod.Controllers
                     int id_sender = 0;
                     if (user_sender == null)
                     {
-                        ModelState.AddModelError("", "Вы не можете добавлять напоминания");
-                        return View("Index", model);
+                        return RedirectToAction("Index", "Reminder");
                     }
 
                     id_sender = user_sender.id_users;
@@ -104,8 +103,7 @@ namespace MashZavod.Controllers
                     int id_recipient = 0;
                     if (user_recipient == null)
                     {
-                        ModelState.AddModelError("", "Пользователя, которому адресовано напоминание, не существует");
-                        return View("Index", model);
+                        return RedirectToAction("Index", "Reminder");
                     }
 
                     id_recipient = user_recipient.id_users;
@@ -145,7 +143,6 @@ namespace MashZavod.Controllers
 
                 if (reminder == null)
                 {
-                    ModelState.AddModelError("", "Такого напоминания не существует");
                     return RedirectToAction("Index", "Reminder");
                 }
 
@@ -158,7 +155,6 @@ namespace MashZavod.Controllers
                 //Проверяем принадлежит ли поручение пользователю
                 if (reminder.IdRecipient != id_recipient)
                 {
-                    ModelState.AddModelError("", "У вас нет доступа к данному напоминанию");
                     return RedirectToAction("Index", "Reminder");
                 }
 
@@ -280,8 +276,7 @@ namespace MashZavod.Controllers
                     int id_sender = 0;
                     if (user_sender == null)
                     {
-                        ModelState.AddModelError("", "Вы не можете добавлять напоминания");
-                        return View("Index", model);
+                        return PartialView("ReminderPart");
                     }
 
                     id_sender = user_sender.id_users;
@@ -291,8 +286,7 @@ namespace MashZavod.Controllers
                     int id_recipient = 0;
                     if (user_recipient == null)
                     {
-                        ModelState.AddModelError("", "Пользователя, которому адресовано напоминание, не существует");
-                        return View("Index", model);
+                        return PartialView("ReminderPart");
                     }
 
                     id_recipient = user_recipient.id_users;
@@ -346,6 +340,85 @@ namespace MashZavod.Controllers
             };
             ViewBag.ReminderViewModel = reminderViewModel;
             ViewBag.IdDocument = model.IdDocument;
+            return PartialView("ReminderPart");
+        }
+
+        /// <summary>
+        /// Функция, позволяющая скрыть напоминание
+        /// </summary>
+        /// <param name="id">Идентификатор напоминания</param>
+        [HttpGet]
+        public ActionResult HideReminderPartial(int id, int id_doc)
+        {
+            //Если пользователь не авторизован - отправляем на страницу авторизации
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Account");
+
+            //Первоначальные определения для формирования модели представления
+            List<ReminderModel> reminderModels = new List<ReminderModel>();
+            bool isReminderModels = false;
+
+            //Начинаем изменение состояния напоминания
+            using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
+            {
+                //проверяем есть ли такое напоминание
+                Reminders reminder = db.Reminders.FirstOrDefault(u => u.Id == id);
+
+                if (reminder == null)
+                {
+                    return PartialView("ReminderPart");
+                }
+
+                //Получение идентификатора получателя
+                users user_recipient = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
+                int id_recipient = 0;
+                if (user_recipient != null)
+                    id_recipient = user_recipient.id_users;
+
+                //Проверяем принадлежит ли поручение пользователю
+                if (reminder.IdRecipient != id_recipient)
+                {
+                    return PartialView("ReminderPart");
+                }
+
+                reminder.Visible = false;
+                db.SaveChanges();
+
+                //Получение идентификатора пользователя
+                users user = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
+                int id_user = 0;
+                if (user != null)
+                    id_user = user.id_users;
+
+                //Формирование списка напоминаний
+                if (id_user != 0)
+                {
+                    //Извлечение полного списка напоминаний для пользователя
+                    List<Reminders> tmpReminders = db.Reminders.Where(u => u.IdRecipient == id_user && u.Visible == true && u.IdDocument == id_doc).ToList();
+                    if (tmpReminders.Count > 0)
+                    {
+                        isReminderModels = true;
+                        foreach (Reminders element in tmpReminders)
+                        {
+                            reminderModels.Add(new ReminderModel()
+                            {
+                                Id = element.Id,
+                                DateReminder = element.DateReminder,
+                                Text = element.Text,
+                                Login = db.users.FirstOrDefault(u => u.id_users == element.IdSender).Login
+                            });
+                        }
+                    }
+                }
+            }
+            //Формирование конечной модели
+            ReminderViewModel reminderViewModel = new ReminderViewModel()
+            {
+                IsReminderModels = isReminderModels,
+                ReminderModels = reminderModels
+            };
+            ViewBag.ReminderViewModel = reminderViewModel;
+            ViewBag.IdDocument = id_doc;
             return PartialView("ReminderPart");
         }
     }

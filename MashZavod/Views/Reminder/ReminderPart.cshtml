@@ -17,12 +17,12 @@
         {
             foreach (var elem in ViewBag.ReminderViewModel.ReminderModels)
             {
-                <tr>
-                    <td style="padding-right:10px">@elem.Text</td>
-                    <td style="padding-right:10px">@elem.Login</td>
-                    <td style="padding-right:10px">@elem.DateReminder</td>
-                    <td style="padding-right:10px"><i class="fa fa-cog"></i> <a href="Reminder/HideReminder?id=@elem.Id">Скрыть</a></td>
-                </tr>
+        <tr>
+            <td style="padding-right:10px">@elem.Text</td>
+            <td style="padding-right:10px">@elem.Login</td>
+            <td style="padding-right:10px">@elem.DateReminder</td>
+            <td style="padding-right:10px"><i class="fa fa-cog"></i> <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results2" href="/Reminder/HideReminderPartial?id=@elem.Id&id_doc=@ViewBag.IdDocument">Скрыть</a></td>
+        </tr>
             }
         }
         else

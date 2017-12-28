@@ -117,7 +117,7 @@ namespace MashZavod.Controllers
                     if (user_sender == null)
                     {
                         ModelState.AddModelError("", "Вы не можете добавлять поручения");
-                        return View("Index", model);
+                        return RedirectToAction("Index", "Mission", model);
                     }
 
                     id_sender = user_sender.id_users;
@@ -128,7 +128,7 @@ namespace MashZavod.Controllers
                     if (user_recipient == null)
                     {
                         ModelState.AddModelError("", "Пользователя, которому адресовано поручение, не существует");
-                        return View("Index", model);
+                        return RedirectToAction("Index", "Mission", model);
                     }
 
                     id_recipient = user_recipient.id_users;
