@@ -11,28 +11,25 @@
         @using (Html.BeginForm("Reload", "Doc", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
         {
+
+            <input type="hidden" name="id_doc" value=@ViewBag.docEdit.id_doc />
             <table>
-                <tr>
-                    <!-- добавление файла -->
-                    <td><p>Выберите файл для загрузки: </p></td>
-                    <td><input type="file" name="upload" accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" /></td>
-                </tr>
                 <tr>
                     <!--ввод названия документа (если пустое, берется название файла)-->
                     <td><p>Введите название документа (не более 50 символов): </p></td>
-                    <td><input type="text" maxlength="50" placeholder="Название документа" name="name_doc" /> </td>
+                    <td><input type="text" maxlength="50" placeholder="Название документа" name="name_doc" value=@ViewBag.docEdit.name_doc /></td>
                 </tr>
                 <tr>
                     <!--ввод описания документа (если пустое, берется первые 150 или меньше (если документ короткий) символов)-->
                     <td><p>Введите описание документа (не более 150 символов):</p></td>
                     <td>
-                        <textarea rows="5" cols="50" maxlength="150" placeholder="Описание документа" name="description"></textarea>
+                        <textarea rows="5" cols="50" maxlength="150" placeholder="Описание документа" name="description">@ViewBag.docEdit.description</textarea>
                     </td>
                 </tr>
                 <tr>
                     <td><p>Получатель</p></td>
                     <td>
-                        <input type="text" maxlength="50" placeholder="Логин получателя или подразделения" name="Login" />
+                        <input type="text" maxlength="50" placeholder="Логин получателя или подразделения" name="Login" value=@ViewBag.logUser />
                     </td>
 
                 </tr>
@@ -42,5 +39,6 @@
     </div>
 </body>
 </html>
+
 
 
