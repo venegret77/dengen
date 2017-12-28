@@ -15,7 +15,7 @@ namespace MashZavod.Controllers
         // GET: News
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("News", "News");
         }
 
         private List<string> GetTags()
