@@ -69,10 +69,6 @@ namespace MashZavod.Controllers
                     // сохраняем файл в папку Files в проекте
                     upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
                 }
-                
-                // сохраняем файл в папку Files в проекте
-             //   upload.SaveAs(Server.MapPath("~/Files/" + upload.FileName));
-                /*заменить на id пользователя*/
                 modelDoc.author = db.users.FirstOrDefault(u => u.Login == User.Identity.Name).id_users;
 
                 modelDoc.data_of_create = DateTime.Now;
@@ -99,19 +95,10 @@ namespace MashZavod.Controllers
                 /*при привязки одной модели к другой происходит вылет*/
 
                 /*добавление в бд и сохранение*/
-                //   db.doc.Add(modelDoc);
-                // db.SaveChanges();
-                //    modelInfoDoc.id_doc = modelDoc.id_doc;
-                // modelInfoDoc.doc = modelDoc;
-                //         modelDoc.infoFileDoc.Add(modelInfoDoc);
                 db.doc.Add(modelDoc);
-                //   db.SaveChanges();
                 modelDoc.id_doc = modelDoc.id_doc;
-                // db.infoFileDoc.Add(modelDoc);
                 db.SaveChanges();
                 return RedirectToAction("ViewDoc", "Doc");
-                //   string n = modelDoc.infoFileDoc.ElementAtOrDefault(0).name_doc;
-                //    modelInfoDoc.name_doc = modelDoc.infoFileDoc.Last().name_doc;
             }
 
             return RedirectToAction("AddDoc");
@@ -211,26 +198,14 @@ namespace MashZavod.Controllers
             {
                 return RedirectToAction("ViewDoc", "Doc");
             }
-
-
-         //   List<Comments> commentList = new List<Comments>();
-          //  int y = 0;
-           // users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
-          //  if (us != null)
-           //     y = us.id_users;
             var req_doc = db.Comments;
             foreach (var el in req_doc)
             {
                 if (el.id_doc == modelDoc.id_doc)
                 {
                     db.Comments.Remove(el);
-               //     commentList.Add(el);
                 }
             }
-          //  req_doc = db.edit;
-
-
-
             System.IO.File.Delete(modelDoc.url);
             /*удалить все данные из других таблиц, которые связаны с doc*/
             db.doc.Remove(modelDoc);
@@ -269,40 +244,49 @@ namespace MashZavod.Controllers
             {
                 return RedirectToAction("ViewDoc", "Doc");
             }
-            doc defaultDoc = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc);
-
-            if (modelDoc.name_doc != defaultDoc.name_doc)
+          //  doc defaultDoc = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc);
+            string nd = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).name_doc;
+            string desc = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).description;
+            string tx = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).text_doc;
+            string url = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).url;
+            int aut = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).author.Value;
+            int rec = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).recipient.Value;
+            DateTime create = db.doc.FirstOrDefault(u => u.id_doc == modelDoc.id_doc).data_of_create.Value;
+            if (modelDoc.name_doc == null)
             {
-                defaultDoc.name_doc = modelDoc.name_doc;
+                modelDoc.name_doc = System.IO.Path.GetFileName(url);
             }
-            if (modelDoc.description != defaultDoc.description)
+            modelDoc.text_doc = tx;
+            modelDoc.url = url;
+            modelDoc.author = aut;
+            modelDoc.data_of_create = create;
+            modelDoc.date_of_modify = DateTime.Now;
+            modelDoc.recipient = rec;
+            if ((modelDoc.description == String.Empty || modelDoc.description == null) && tx != null)
             {
-                defaultDoc.description = modelDoc.description;
+                if (tx.Length >= 150)
+                {
+                    char[] textchar = new char[150];
+                    tx.CopyTo(0, textchar, 0, 150);
+                    modelDoc.description = new string(textchar);
+                }
+                else
+                {
+                    char[] textchar = new char[tx.Length];
+                    tx.CopyTo(0, textchar, 0, tx.Length);
+                    modelDoc.description = new string(textchar);
+                }
             }
-            //   recipient.id_users = null;
             if (db.users.FirstOrDefault(u => u.Login == recipient.Login) != null)
             {
                 recipient.id_users = db.users.FirstOrDefault(u => u.Login == recipient.Login).id_users;
-                if (recipient.id_users != defaultDoc.recipient && recipient.id_users != 0)
+                if (recipient.id_users != modelDoc.recipient && recipient.id_users != 0)
                 {
-                    defaultDoc.recipient = recipient.id_users;
-                }
-
-                //else
-
+                    modelDoc.recipient = recipient.id_users;
+                }                
             }
-            //  db.doc.(defaultDoc.id_doc) = defaultDoc;
-            //db.doc.Remove(defa+ultDoc);
-            //   db.doc.
             db.SaveChanges();
             return RedirectToAction("ViewDoc", "Doc");
-            /*  if (recipient.Login!=null)
-              {
-
-              }*/
-
-
-
         }
 
         /* [HttpPost]
