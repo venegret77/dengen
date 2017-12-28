@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -320,6 +320,7 @@
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\RemindersModels\ReminderModel.cs" />
     <Compile Include="Models\RemindersModels\ReminderModelAdd.cs" />
+    <Compile Include="Models\RemindersModels\ReminderPartialModelAdd.cs" />
     <Compile Include="Models\RemindersModels\ReminderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -423,6 +424,7 @@
     <Content Include="Views\Shared\CommPartial.cshtml" />
     <Content Include="Views\Doc\DocDetails.cshtml" />
     <Content Include="Views\Doc\SearchDoc.cshtml" />
+    <Content Include="Views\Reminder\ReminderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -458,7 +460,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>46134</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:46134/</IISUrl>
+          <IISUrl>https://localhost:44301/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44301/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

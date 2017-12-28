@@ -1,114 +1,131 @@
 ﻿@{
     Layout = null;
 }
-    <div class="sidebar app-aside" id="sidebar">
-        <div class="sidebar-container perfect-scrollbar">
-            <nav>
-                <div class="navbar-title">
-                    <span>Навигация</span>
-                </div>
-                <ul class="main-navigation-menu">
-                    <li class="open">
-                        <a href="../Home/Index">
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <i class="ti-home"></i>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title">Главная</span>
-                                </div>
+
+<style>
+    #sidebar {
+        margin-top: 0px;
+        position:fixed;
+        top:0;
+    }
+</style>
+<div class="sidebar app-aside" id="sidebar">
+    <div class="sidebar-container perfect-scrollbar">
+        <nav>
+            <div class="navbar-title">
+                <h4>Меню</h4>
+            </div>
+            <ul class="main-navigation-menu">
+                <li class="open">
+                    <a href="../Home/Index">
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-home"></i>
                             </div>
-                        </a>
-                    </li>
-                    <li class="open">
-                        <a href="../News/News">
-                            <!--///////////////////////////////////////////////////-->
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <i class="ti-home"></i>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title">Новости</span>
-                                </div>
+                            <div class="item-inner">
+                                <span class="title">Главная</span>
                             </div>
-                        </a>
-                    </li>
-                    <li class="open">
-                        <a href="../Doc/ViewDoc">
-                            <!--///////////////////////////////////////////////////-->
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <i class="ti-home"></i>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title">Документы</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="open">
-                        <a href="../Reminder">
-                            <!--///////////////////////////////////////////////////-->
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <i class="ti-home"></i>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title">Напоминания</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="open">
-                        <a href="../Mission">
-                            <!--///////////////////////////////////////////////////-->
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <i class="ti-home"></i>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title">Поручения</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="open">
-                        <a href="../Account/Logout">
-                            <!--///////////////////////////////////////////////////-->
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <i class="ti-home"></i>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title">Выйти</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="navbar-title">
-                    <span>Меню для админа</span>
-                </div>
-                <ul class="folders">
-                    <li>
-                        <a href="#">
-                            <div class="item-content">
-                                <div class="item-media">
-                                    <span class="fa-stack"> <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
-                                </div>
-                                <div class="item-inner">
-                                    <span class="title"> Админка </span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="wrapper">
-                    <a href="documentation.html" class="button-o">
-                        <i class="ti-help"></i>
-                        <span>Документация</span>
+                        </div>
                     </a>
-                </div>
-            </nav>
-        </div>
+                </li>
+                <li class="open">
+                    <a href="../News/News">
+                        <!--///////////////////////////////////////////////////-->
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-home"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title">Новости</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="open">
+                    <a href="../Doc/ViewDoc">
+                        <!--///////////////////////////////////////////////////-->
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-home"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title">Документы</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="open">
+                    <a href="../Reminder">
+                        <!--///////////////////////////////////////////////////-->
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-home"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title">Напоминания</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="open">
+                    <a href="../Mission">
+                        <!--///////////////////////////////////////////////////-->
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-home"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title">Поручения</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="open">
+                    <a href="../Account/Logout">
+                        <!--///////////////////////////////////////////////////-->
+                        <div class="item-content">
+                            <div class="item-media">
+                                <i class="ti-home"></i>
+                            </div>
+                            <div class="item-inner">
+                                <span class="title">Выйти</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                @if (Context.User.Identity.Name == "Admin")
+                {
+                    <li class="active open">
+                        <a href="../Account/Register">
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <span class="title">Добавить пользователя </span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="active open">
+                        <a href="../News/Tags">
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <span class="title">Добавить теги</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+            <img src="~/Content/ффф.gif" style="margin-left:25px;width:200px;" />
+        </nav>
+        
     </div>
+</div>
+

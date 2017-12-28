@@ -26,5 +26,10 @@ namespace MashZavod.Models.MissionsModels
         /// Список исходящих поручений
         /// </summary>
         public List<MissionModel> OutMissionModels { get; set; }
+
+        /// <summary>
+        /// Список пользователей для вывода
+        /// </summary>
+        public List<string> Users { get; set; }
     }
 }

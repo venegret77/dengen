@@ -22,14 +22,23 @@
                             <div class="panel-heading">
                                 <h5 class="panel-title">Добавить новое поручение</h5>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body1">
                                 <form class="form-inline" method="post" action="/Mission/Add">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 Login
                                             </div>
-                                            <input type="text" placeholder=" " name="Login" class="form-control">
+                                            <input type="text" placeholder=" " name="Login" class="form-control" list="logins">
+                                            <datalist id="logins">
+                                                @if (ViewBag.MissionViewModel != null)
+                                                {
+                                                    foreach (var elem in ViewBag.MissionViewModel.Users)
+                                                    {
+                                                        <option>@elem</option>
+                                                    }
+                                                }
+                                            </datalist>
                                         </div>
                                     </div><br /><br />
                                     <div class="form-group">
@@ -126,8 +135,5 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="row">
-        @Html.Action("Index", "BigChat")
     </div>
 </div>

@@ -27,6 +27,7 @@ namespace MashZavod.Controllers
             bool isInModel = false;
             List<MissionModel> outModel = new List<MissionModel>();
             bool isOutModel = false;
+            List<string> usersModel = new List<string>();
 
             //Получаем данные из БД
             using (database_murom_factory2Entities1 db = new database_murom_factory2Entities1())
@@ -76,6 +77,9 @@ namespace MashZavod.Controllers
                         }
                     }
                 }
+                //Извлечение полного списка пользователей
+                foreach (users elem in db.users)
+                    usersModel.Add(elem.Login);
             }
 
             //Формирование конечной модели
@@ -84,7 +88,8 @@ namespace MashZavod.Controllers
                 InMissionModels = inModel,
                 IsInMissionModels = isInModel,
                 OutMissionModels = outModel,
-                IsOutMissionModels = isOutModel
+                IsOutMissionModels = isOutModel,
+                Users = usersModel
             };
             ViewBag.MissionViewModel = missionViewModel;
             return View();

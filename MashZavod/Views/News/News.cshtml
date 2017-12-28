@@ -1,12 +1,15 @@
-﻿<div ui-view="" class="wrap-content container fade-in-up ng-scope" id="container" style="">
-    <div ui-view="" class="fade-in-up ng-scope">
-        <section id="page-title" class="ng-scope">
-            <div class="row">
+﻿@Html.Partial("nav")
+
+<div class="app-content">
+    <div class="main-content">
+        <div class="wrap-content container" id="container">
+            <section id="page-title" class="ng-scope">
                 <div class="col-sm-8">
                     <h1 class="mainTitle ng-scope">Новости</h1>
                 </div>
-            </div>
-            <br>
+                <br>
+
+            </section>
             <center>
                 @{
                     System.Random rand = new System.Random();
@@ -16,48 +19,49 @@
                 string[] str = { "default", "primary", "info", "warning", "danger" };
                 int color = rand.Next(0, 4);
                 string res = str[color];
-                    <div class="btn btn-wide btn-@res">@elem.Tag</div>
+                    <div style="margin-top:5px; "margin-right:5px;" class="btn btn-wide btn-@res">@elem.Tag</div>
                 }
             </center>
-	    </section>
-        <div class="container-fluid container-fullw bg-white ng-scope">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="timeline">
-                        <div class="timeline">
-                            <div class="spine"></div>
-                            <ul class="columns">
-                                 @foreach (var elem in ViewBag.listNews)
-                                {
-                                    <li>
-                                        <div class="timeline_element partition-white" style="width:90%;">
-                                            <div class="timeline_date">
-                                                <div>
-                                                    <div class="inline-block">
-                                                        <span class="day text-bold">@elem.PubDate.Day</span>
-                                                    </div>
-                                                    <div class="inline-block">
-                                                        <span class="block week-day text-extra-large">@System.Globalization.CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat.GetDayName(elem.PubDate.DayOfWeek)</span>
-                                                        <span class="block month text-large text-light">@System.Globalization.CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat.GetMonthName(@elem.PubDate.Month) @elem.PubDate.Year @elem.PubDate.TimeOfDay</span>
+
+            <div class="container-fluid container-fullw bg-white ng-scope">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="timeline">
+                            <div class="timeline">
+                                <div class="spine"></div>
+                                <ul class="columns">
+                                    @foreach (var elem in ViewBag.listNews)
+                                    {
+                                        <li>
+                                            <div class="timeline_element partition-white" style="width:90%;">
+                                                <div class="timeline_date">
+                                                    <div>
+                                                        <div class="inline-block">
+                                                            <span class="day text-bold">@elem.PubDate.Day</span>
+                                                        </div>
+                                                        <div class="inline-block">
+                                                            <span class="block week-day text-extra-large">@System.Globalization.CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat.GetDayName(elem.PubDate.DayOfWeek)</span>
+                                                            <span class="block month text-large text-light">@System.Globalization.CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat.GetMonthName(@elem.PubDate.Month) @elem.PubDate.Year @elem.PubDate.TimeOfDay</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                                 <div class="timeline_content">
                                                     <b20 style="font-size:16pt;">
-                                                    @elem.Title
+                                                        @elem.Title
                                                     </b20>
                                                     <br><br>
                                                     @elem.Description
                                                 </div>
                                                 <div class="readmore">
-                                                <a href="@elem.Link" class="btn btn-primary btn-o btn-wide">
-                                                    Узнать больше<i class="fa fa-arrow-circle-right"></i>
-                                                </a>
+                                                    <a href="@elem.Link" class="btn btn-primary btn-o btn-wide">
+                                                        Узнать больше<i class="fa fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,3 +69,5 @@
         </div>
     </div>
 </div>
+
+

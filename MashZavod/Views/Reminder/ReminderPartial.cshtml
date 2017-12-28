@@ -1,0 +1,50 @@
+﻿@model MashZavod.Models.RemindersModels.ReminderPartialModelAdd
+@{
+    Layout = null;
+    ViewBag.Title = "Напоминания";
+}
+                                <h5 class="panel-title">Добавить новое напоминание</h5>
+                            <div class="panel-body">
+                                <form method="post" data-ajax-update="#results2" id="form0" data-ajax="true" data-ajax-mode="replace" action="/Reminder/AddPartial">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                Логин
+                                            </div>
+                                            <input type="hidden" name="IdDocument" value="@ViewBag.IdDocument" />
+                                            <input type="text" placeholder=" " name="Login" class="form-control" list="logins">
+                                            <datalist id="logins">
+                                                @if (ViewBag.ReminderViewModel != null)
+                                                {
+                                                    foreach (var elem in ViewBag.ReminderViewModel.Users)
+                                                    {
+                                                        <option>@elem</option>
+                                                    }
+                                                }
+                                            </datalist>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                Напоминание
+                                            </div>
+                                            <input type="text" placeholder=" " name="Text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <input class="btn btn-success" type="submit" value="Добавить" />
+                                </form>
+                            </div>
+            <div id="results2">
+            </div>
+
+<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results2" id="ActionLink2" href="/Reminder/PartialListReminders/@ViewBag.IdDocument" style="visibility:hidden;">ActionLink</a>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script type="text/javascript">
+    function refresh2() {
+        $("#ActionLink2").click();
+        setTimeout(refresh2, 2000);
+    }
+
+    setTimeout(refresh2, 10)
+</script>

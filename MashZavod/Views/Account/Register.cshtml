@@ -1,22 +1,8 @@
 ﻿@model MashZavod.Models.AccountRegisterModel
 @{
-    Layout = null;
     ViewBag.Title = "Регистрация";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
+@Html.Partial("nav")
 
     @using (Html.BeginForm())
     {
@@ -82,7 +68,7 @@
 
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <input type="number" class="form-control" name="Phone" placeholder="Телефон">
+                                    <input type="text" class="form-control" name="Phone" placeholder="Телефон">
                                     <i class="fa fa-envelope"></i>
                                 </span>
                             </div>
@@ -98,5 +84,3 @@
             </div>
         </div>
     }
-</body>
-</html>

@@ -1,10 +1,78 @@
 ﻿@{ 
     Layout = null;
 }
+<style>
+    .panel-primary {
+        background: white;
+        border: 1px solid grey;
+        color: black;
+    }
+    li  {
+        list-style-type: none;
+        padding:10px;
+    }
+
+    .chat {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .chat li {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dotted #B3A9A9;
+        }
+
+            .chat li.left .chat-body {
+                margin-left: 60px;
+            }
+
+            .chat li.right .chat-body {
+                margin-right: 60px;
+            }
+
+
+            .chat li .chat-body p {
+                margin: 0;
+                color: #777777;
+            }
+
+        .panel .slidedown .glyphicon, .chat .glyphicon {
+            margin-right: 5px;
+        }
+
+    .panel-body1 {
+        overflow-y: scroll;
+        height: 400px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+
+    .panel-primary {
+       
+    }
+
+    #collapseOne {
+        visibility: visible;
+    }
+</style>
 <div class="chatik">
-    <div class="col-md-5">
         <div class="panel panel-primary">
-            <div class="panel-body" id="results">
+            <div class="panel-body1" id="results">
                 @Html.Action("GP", "Comments", new { id = ViewBag.Id })
             </div>
             <form action="/Comments/Indexw" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="form0" method="post">
@@ -19,19 +87,19 @@
                 </div>
             </form>
         </div>
-    </div>
+   
 </div>
-<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="ActionLink" href="/Comments/GetPartial" style="visibility:hidden;">ActionLink</a>
+<a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" id="ActionLink" href="/Comments/GP/@ViewBag.Id" style="visibility:hidden;">ActionLink</a>
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
 <script type="text/javascript">
     function refresh() {
         $("#ActionLink").click();
-        setTimeout(refresh, 3000);
+        setTimeout(refresh, 1000);
     }
 
     Scroll()
-    setTimeout(refresh, 3000)
+    setTimeout(refresh, 1000)
 
     function Scroll() {
         var win = $('#results');

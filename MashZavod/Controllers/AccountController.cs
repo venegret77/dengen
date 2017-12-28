@@ -107,9 +107,6 @@ namespace MashZavod.Controllers
                     FormsAuthentication.SetAuthCookie(model.Login, false);
                     string name = User.Identity.Name;
                     //Если Логин принадлежит суперпользователю
-                    if (model.Login == "Admin")
-                        return RedirectToAction("AdminIndex", "Admin");
-                    else
                         return RedirectToAction("Index", "Home");
                 }
                 else

@@ -16,5 +16,10 @@ namespace MashZavod.Models.RemindersModels
         /// Список напоминаний
         /// </summary>
         public List<ReminderModel> ReminderModels { get; set; }
+
+        /// <summary>
+        /// Список пользователей для вывода
+        /// </summary>
+        public List<string> Users { get; set; }
     }
 }

@@ -26,7 +26,27 @@
                 });
             </script>
 
-          
+            <div class="row" style="position: fixed;right:20px;bottom:20px; z-index:1;">
+                <div id="idrow">
+                    @Html.Action("Index", "BigChat")
+                </div>
+                <a id="id_href" class="btn btn-wide btn-success" onclick="func23()" style="position:relative; bottom:-14px;">Скрыть чат</a>
+            </div>
+
+            <script>
+                function func23() {
+                    var el = document.getElementById('idrow');
+                    var link = document.getElementById('id_href');
+                    if (el.style.display != "none") {
+                        el.style.display = "none";
+                        link.innerText = "Раскрыть чат";
+                    }
+                    else {
+                        el.style.display = "block";
+                        link.innerText = "Скрыть чат";
+                    }
+                }
+            </script>
         </footer>
 
         @Scripts.Render("~/bundles/jquery")

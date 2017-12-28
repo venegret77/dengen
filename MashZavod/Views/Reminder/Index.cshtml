@@ -24,17 +24,23 @@
                             <div class="panel-heading">
                                 <h5 class="panel-title">Добавить новое напоминание</h5>
                             </div>
-                            <div class="row" style="position:relative;right:-350px;bottom:-750px;">
-                                @Html.Action("Index", "BigChat")
-                            </div>
-                            <div class="panel-body">
+                            <div class="panel-body1">
                                 <form role="form" class="form-inline" method="post" action="/Reminder/Add">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-addon">
-                                                Login
+                                                Логин
                                             </div>
-                                            <input type="text" placeholder=" " name="Login" class="form-control">
+                                            <input type="text" placeholder=" " name="Login" class="form-control" list="logins">
+                                            <datalist id="logins">
+                                                @if (ViewBag.ReminderViewModel != null)
+                                                {
+                                                    foreach (var elem in ViewBag.ReminderViewModel.Users)
+                                                    {
+                                                        <option>@elem</option>
+                                                    }
+                                                }
+                                            </datalist>
                                         </div>
                                     </div><br /><br />
                                     <div class="form-group">

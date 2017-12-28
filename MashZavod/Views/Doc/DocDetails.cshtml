@@ -1,46 +1,95 @@
-﻿@Html.ValidationSummary(true)
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    @Html.Partial("nav")
+
+    @Html.ValidationSummary(true)
     <!--блок информации о документа из таблицы doc-->
-    <div> 
-        <table class="table table-hover" id="sample-table-2">
-            <thead>
-                <tr>
-                    <th class="center">Наименование</th>
-                    <th>Описание</th>
-                    <th>Отправитель</th>
-                    <th>Получатель</th>
-                    <th class="hidden-xs">Дата создания</th>
-                    <th>Дата изменения</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
-                <!-- <td><p>@ViewBag.document.author</p></td>-->
-                <!-- <td><p>@ViewBag.document.recipient</p></td>-->
-                <tr>
-                    <td class="center">@ViewBag.document.name_doc</td>
-                    <td class="hidden-xs">@ViewBag.document.description</td>
-                    <td class="hidden-xs">@ViewBag.author</td>
-                    <td class="hidden-xs">@ViewBag.recipient</td>
-                    <td>@ViewBag.document.data_of_create</td>
-                    <td>@ViewBag.document.date_of_modify</td>
-                    <td class="hidden-xs"><i class="fa fa-cloud-download"></i> <a href="/Doc/DowloadDoc?id=@ViewBag.document.id_doc">Скачать</a></td>
-                    <td class="hidden-xs"><i class="fa fa-remove"></i> <a href="/Doc/DeleteDoc?id=@ViewBag.document.id_doc">Удалить</a></td>
-                    <td class="hidden-xs"><i class="fa fa-cog"></i> <a href="/Doc/EditDoc?id=@ViewBag.document.id_doc">Изменить</a></td>
-                </tr>
+    <div class="app-content">
+        <div class="main-content">
+            <div class="wrap-content container" id="container">
+                <div class="row">
+                    <table class="table table-hover" id="sample-table-2">
+                        <thead>
+                            <tr>
+                                <th class="center">Наименование</th>
+                                <th>Описание</th>
+                                <th>Отправитель</th>
+                                <th>Получатель</th>
+                                <th class="hidden-xs">Дата создания</th>
+                                <th>Дата изменения</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--<td><input type="text" maxlength="50" name="name_doc" readonly value=@ViewBag.listName></td>-->
+                            <!--<td><p>@ViewBag.document.author</p></td>-->
+                            <!-- <td><p>@ViewBag.document.recipient</p></td>-->
+                            <tr>
+                                <td class="center">@ViewBag.document.name_doc</td>
+                                <td class="hidden-xs">@ViewBag.document.description</td>
+                                <td class="hidden-xs">@ViewBag.author</td>
+                                <td class="hidden-xs">@ViewBag.recipient</td>
+                                <td>@ViewBag.document.data_of_create</td>
+                                <td>@ViewBag.document.date_of_modify</td>
+                                <td class="hidden-xs"><i class="fa fa-cloud-download"></i> <a href="/Doc/DowloadDoc?id=@ViewBag.document.id_doc">Скачать</a></td>
+                                <td class="hidden-xs"><i class="fa fa-remove"></i> <a href="/Doc/DeleteDoc?id=@ViewBag.document.id_doc">Удалить</a></td>
+                                <td class="hidden-xs"><i class="fa fa-cog"></i> <a href="/Doc/EditDoc?id=@ViewBag.document.id_doc">Изменить</a></td>
+                            </tr>
 
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
 
+                </div><br />
+                <div class="row">
+                    <div class="col-md-5">
+                        @Html.Action("Index", "Comments", new { id = ViewBag.document.id_doc })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.Action("PartialIndex", "Reminder", new { id = ViewBag.document.id_doc })
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--блок напоминаний-->
-    <div>
 
-    </div>
-    @Html.Action("Index", "Comments", new { id = ViewBag.document.id_doc })
-    <div>
+                <!--блок напоминаний-->
+   
 
-    </div>
 
+                <footer>
+                    <script>
+                        jQuery(document).ready(function () {
+                            Main.init();
+                            Index.init();
+                        });
+                    </script>
+
+                </footer>
+
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+
+</body>
+</html>
