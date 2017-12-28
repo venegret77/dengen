@@ -109,7 +109,7 @@ namespace MashZavod.Controllers
             ViewBag.document = modelDoc;
             return RedirectToAction("Bufer", "Doc");
         }
-        //временное отображение
+        //отображение отдельного документа
         [HttpGet]
         public ActionResult DocDetails(int id)
         {
@@ -185,11 +185,31 @@ namespace MashZavod.Controllers
         [HttpGet]
         public ActionResult DeleteDoc(int id)
         {
+            
             doc modelDoc = db.doc.FirstOrDefault(u => u.id_doc == id);
             if (modelDoc == null)
             {
                 return RedirectToAction("ViewDoc", "Doc");
             }
+
+
+         //   List<Comments> commentList = new List<Comments>();
+          //  int y = 0;
+           // users us = db.users.FirstOrDefault(u => u.Login == User.Identity.Name);
+          //  if (us != null)
+           //     y = us.id_users;
+            var req_doc = db.Comments;
+            foreach (var el in req_doc)
+            {
+                if (el.id_doc == modelDoc.id_doc)
+                {
+                    db.Comments.Remove(el);
+               //     commentList.Add(el);
+                }
+            }
+          //  req_doc = db.edit;
+
+
 
             System.IO.File.Delete(modelDoc.url);
             /*удалить все данные из других таблиц, которые связаны с doc*/
