@@ -25,16 +25,15 @@
                                             <div class="timeline_date">
                                                 <div>
                                                     <div class="inline-block">
-                                                        <span class="day text-bold">1</span>
+                                                        <span class="day text-bold">@elem.PubDate.Day</span>
                                                     </div>
                                                     <div class="inline-block">
-                                                        <span class="block week-day text-extra-large">@elem.PubDate.DayOfWeek</span>
-                                                        <span class="block month text-large text-light">@elem.PubDate</span>
+                                                        <span class="block week-day text-extra-large">@System.Globalization.CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat.GetDayName(elem.PubDate.DayOfWeek)</span>
+                                                        <span class="block month text-large text-light">@System.Globalization.CultureInfo.GetCultureInfo("ru-RU").DateTimeFormat.GetMonthName(@elem.PubDate.Month) @elem.PubDate.Year @elem.PubDate.TimeOfDay</span>
                                                     </div>
                                                 </div>
                                             </div>
                                                 <div class="timeline_title">
-                                                    <i class="fa fa-check fa-2x pull-left fa-border"></i>
                                                     <h4 class="light-text no-margin padding-5">@elem.Title</h4>
                                                 </div>
                                                 <div class="timeline_content">
